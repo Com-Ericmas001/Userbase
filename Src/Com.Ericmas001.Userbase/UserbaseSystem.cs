@@ -36,8 +36,13 @@ namespace Com.Ericmas001.Userbase
 
         public static int IdFromUsername(string username)
         {
-            using(var context = m_ContextGenerator.Invoke())
+            using (var context = m_ContextGenerator.Invoke())
                 return Controller.IdFromUsername(context, username);
+        }
+
+        public static bool UsernameExists(string username)
+        {
+            return IdFromUsername(username) != 0;
         }
     }
 }

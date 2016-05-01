@@ -5,23 +5,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Com.Ericmas001.Userbase.Test
 {
     [TestClass]
-    public class IdFromUsernameTest
+    public class UsernameExistsTest
     {
         [TestMethod]
-        public void WithNoUserReturnsZero()
+        public void WithNoUserReturnsFalse()
         {
             // Arrange
             UserbaseSystem.Init(Values.Salt, contextGenerator:() => Values.Context );
 
             // Act
-            var result = UserbaseSystem.IdFromUsername(Values.UsernameSpongeBob);
+            var result = UserbaseSystem.UsernameExists(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
-        public void WithInvalidUserReturnsZero()
+        public void WithInvalidUserReturnsFalse()
         {
             // Arrange
             UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
@@ -32,13 +32,13 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = UserbaseSystem.IdFromUsername(Values.UsernameDora);
+            var result = UserbaseSystem.UsernameExists(Values.UsernameDora);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.IsFalse(result);
         }
         [TestMethod]
-        public void WithValidUserReturnsId()
+        public void WithValidUserReturnsTrue()
         {
             // Arrange
             UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
@@ -50,11 +50,10 @@ namespace Com.Ericmas001.Userbase.Test
 
 
             // Act
-            var result = UserbaseSystem.IdFromUsername(Values.UsernameSpongeBob);
+            var result = UserbaseSystem.UsernameExists(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.AreNotEqual(0, result);
-            Assert.AreEqual(Values.UserSpongeBob.IdUser, result);
+            Assert.IsTrue(result);
         }
     }
 }

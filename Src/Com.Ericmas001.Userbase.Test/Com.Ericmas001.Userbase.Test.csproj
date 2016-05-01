@@ -66,6 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="UsernameExistsTest.cs" />
     <Compile Include="IdFromUsernameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\UserbaseDbContextExtensions.cs" />
