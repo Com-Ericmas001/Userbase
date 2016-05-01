@@ -66,6 +66,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="IdFromEmailTest.cs" />
+    <Compile Include="EmailExistsTest.cs" />
     <Compile Include="UsernameExistsTest.cs" />
     <Compile Include="IdFromUsernameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

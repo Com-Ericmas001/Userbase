@@ -44,5 +44,16 @@ namespace Com.Ericmas001.Userbase
         {
             return IdFromUsername(username) != 0;
         }
+
+        public static int IdFromEmail(string email)
+        {
+            using (var context = m_ContextGenerator.Invoke())
+                return Controller.IdFromEmail(context, email);
+        }
+
+        public static bool EmailExists(string email)
+        {
+            return IdFromEmail(email) != 0;
+        }
     }
 }

@@ -12,5 +12,9 @@ namespace Com.Ericmas001.Userbase
         {
             return context.Users.SingleOrDefault(x => x.Active && x.Name.Equals(username, StringComparison.InvariantCultureIgnoreCase))?.IdUser ?? 0;
         }
+        public int IdFromEmail(UserbaseDbContext context, string email)
+        {
+            return context.Users.SingleOrDefault(x => x.Active && x.UserAuthentication.RecoveryEmail.Equals(email, StringComparison.InvariantCultureIgnoreCase))?.IdUser ?? 0;
+        }
     }
 }
