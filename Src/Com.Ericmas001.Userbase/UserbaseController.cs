@@ -19,5 +19,10 @@ namespace Com.Ericmas001.Userbase
         {
             return new ConnectUserDbTask(context).WithToken(username, token);
         }
+
+        public ConnectUserResponse ValidateCredentials(UserbaseDbContext context, string username, string password)
+        {
+            return new ConnectUserDbTask(context).WithPassword(username, password);
+        }
     }
 }

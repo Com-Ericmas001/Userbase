@@ -5,6 +5,7 @@ using System.Text;
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Responses;
 using Com.Ericmas001.Userbase.Responses.Models;
+using Com.Ericmas001.Userbase.Util;
 
 namespace Com.Ericmas001.Userbase.DbTasks
 {
@@ -16,9 +17,6 @@ namespace Com.Ericmas001.Userbase.DbTasks
         }
         public ConnectUserResponse WithToken(string username, Guid token)
         {
-
-            var toks = Context.UserTokens.ToArray();
-
             int idUser = UserbaseSystem.Controller.IdFromUsername(Context, username);
 
             //Doesn't exist
@@ -34,7 +32,17 @@ namespace Com.Ericmas001.Userbase.DbTasks
         }
         public ConnectUserResponse WithPassword(string username, string password)
         {
-            throw new NotImplementedException();
+            int idUser = UserbaseSystem.Controller.IdFromUsername(Context, username);
+
+            //Doesn't exist
+            if (idUser == 0)
+                return new ConnectUserResponse { Success = false };
+
+            //Invalid Password
+            if (!BCrypt.CheckPassword(UserbaseSystem.SaltPassword(password), Context.UserAuthentications.Single(x => x.IdUser == idUser).Password))
+                return new ConnectUserResponse { Success = false };
+            
+            return new ConnectUserResponse { Success = true, IdUser = idUser, Token = CreateToken(idUser) };
         }
 
         private ConnectionToken TokenIsValid(int idUser, Guid token)
@@ -49,6 +57,14 @@ namespace Com.Ericmas001.Userbase.DbTasks
         private UserToken GetTokenFromId(int idUser, Guid token)
         {
             return Context.UserTokens.SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
+        }
+
+        private Token CreateToken(int idUser)
+        {
+            var token = new ConnectionToken();
+            Context.UserTokens.Add(new UserToken { Token = token.Id, Expiration = token.ValidUntil, IdUser = idUser});
+            Context.SaveChanges();
+            return token;
         }
     }
 }

@@ -28,6 +28,12 @@ namespace Com.Ericmas001.Userbase
             set { m_Controller = value; }
         }
 
+        internal static string SaltPassword(string unsaltedPassword)
+        {
+            return $"{m_Salt}{unsaltedPassword}";
+
+        }
+
         public static void Init(string salt, IUserbaseController controller = null, Func<UserbaseDbContext> contextGenerator = null, string connString = null)
         {
             Controller = controller ?? new UserbaseController();
@@ -56,6 +62,12 @@ namespace Com.Ericmas001.Userbase
         public static bool EmailExists(string email)
         {
             return IdFromEmail(email) != 0;
+        }
+
+        public static ConnectUserResponse ValidateCredentials(string username, string password)
+        {
+            using (var context = m_ContextGenerator.Invoke())
+                return Controller.ValidateCredentials(context, username, password);
         }
 
         public static ConnectUserResponse ValidateToken(string username, Guid token)

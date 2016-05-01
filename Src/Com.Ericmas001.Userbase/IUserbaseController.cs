@@ -7,7 +7,7 @@ namespace Com.Ericmas001.Userbase
     {
         int IdFromUsername(UserbaseDbContext context, string username);
         int IdFromEmail(UserbaseDbContext context, string email);
-
         ConnectUserResponse ValidateToken(UserbaseDbContext context, string username, Guid token);
+        ConnectUserResponse ValidateCredentials(UserbaseDbContext context, string username, string password);
     }
 }
