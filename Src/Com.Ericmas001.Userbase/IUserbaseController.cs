@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Com.Ericmas001.Userbase.Responses;
 
 namespace Com.Ericmas001.Userbase
 {
@@ -9,5 +7,7 @@ namespace Com.Ericmas001.Userbase
     {
         int IdFromUsername(UserbaseDbContext context, string username);
         int IdFromEmail(UserbaseDbContext context, string email);
+
+        ConnectUserResponse ValidateToken(UserbaseDbContext context, string username, Guid token);
     }
 }

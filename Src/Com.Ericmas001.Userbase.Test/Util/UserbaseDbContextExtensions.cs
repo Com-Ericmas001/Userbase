@@ -10,7 +10,7 @@ namespace Com.Ericmas001.Userbase.Test.Util
     {
         public static void SetUpMocks(this UserbaseDbContext context)
         {
-            var mockUsers = new MockDbSet<User>(new List<User>().AsQueryable());
+            var mockUsers = new MockDbSet<User>(new List<User>().AsQueryable(), (i, user) => OnAdd(i,user,context) );
             context.Users = mockUsers.Object;
 
             var mockUserTokens = new MockDbSet<UserToken>(new List<UserToken>().AsQueryable());
@@ -24,6 +24,16 @@ namespace Com.Ericmas001.Userbase.Test.Util
 
             var mockUserAuthentications = new MockDbSet<UserAuthentication>(new List<UserAuthentication>().AsQueryable());
             context.UserAuthentications = mockUserAuthentications.Object;
+        }
+
+        private static void OnAdd(int i, User user, UserbaseDbContext context)
+        {
+            foreach (var userToken in user.UserTokens)
+            {
+                userToken.IdUser = user.IdUser;
+                if (!context.UserTokens.Contains(userToken))
+                    context.UserTokens.Add(userToken);
+            }
         }
     }
 }

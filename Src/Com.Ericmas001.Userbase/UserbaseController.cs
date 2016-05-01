@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Com.Ericmas001.Userbase.Entities;
+using Com.Ericmas001.Userbase.DbTasks;
+using Com.Ericmas001.Userbase.Responses;
 
 namespace Com.Ericmas001.Userbase
 {
@@ -10,11 +8,16 @@ namespace Com.Ericmas001.Userbase
     {
         public int IdFromUsername(UserbaseDbContext context, string username)
         {
-            return context.Users.SingleOrDefault(x => x.Active && x.Name.Equals(username, StringComparison.InvariantCultureIgnoreCase))?.IdUser ?? 0;
+            return new ObtainUserIdDbTask(context).FromUsername(username);
         }
         public int IdFromEmail(UserbaseDbContext context, string email)
         {
-            return context.Users.SingleOrDefault(x => x.Active && x.UserAuthentication.RecoveryEmail.Equals(email, StringComparison.InvariantCultureIgnoreCase))?.IdUser ?? 0;
+            return new ObtainUserIdDbTask(context).FromEmail(email);
+        }
+
+        public ConnectUserResponse ValidateToken(UserbaseDbContext context, string username, Guid token)
+        {
+            return new ConnectUserDbTask(context).WithToken(username, token);
         }
     }
 }

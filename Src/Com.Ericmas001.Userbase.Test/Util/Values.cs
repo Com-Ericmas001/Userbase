@@ -49,8 +49,8 @@ namespace Com.Ericmas001.Userbase.Test.Util
         public static string EmailDora => "dora@backpack.org";
         public static string EmailNoArobas => "doraAndbackpack.org";
 
-        public static UserToken ExpiredToken => new UserToken { Expiration = DateTime.Now.AddMinutes(-1) };
-        public static UserToken ValidToken => new UserToken { Expiration = DateTime.Now.AddMinutes(1) };
+        public static UserToken ExpiredToken => new UserToken { IdUserToken = 21, Expiration = DateTime.Now.AddMinutes(-1), Token = new Guid()};
+        public static UserToken ValidToken => new UserToken { IdUserToken = 84, Expiration = DateTime.Now.AddMinutes(1), Token = new Guid() };
 
         public static UserRecoveryToken ExpiredRecoveryToken => new UserRecoveryToken { Expiration = DateTime.Now.AddMinutes(-1) };
         public static UserRecoveryToken ValidRecoveryToken => new UserRecoveryToken { Expiration = DateTime.Now.AddMinutes(1) };

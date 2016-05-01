@@ -66,6 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ValidateTokenTest.cs" />
     <Compile Include="IdFromEmailTest.cs" />
     <Compile Include="EmailExistsTest.cs" />
     <Compile Include="UsernameExistsTest.cs" />

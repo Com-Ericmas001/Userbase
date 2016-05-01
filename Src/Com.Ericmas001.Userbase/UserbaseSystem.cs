@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Com.Ericmas001.Userbase.Responses;
+using Com.Ericmas001.Userbase.Responses.Models;
 
 namespace Com.Ericmas001.Userbase
 {
@@ -15,7 +17,7 @@ namespace Com.Ericmas001.Userbase
 
         private static IUserbaseController m_Controller;
 
-        private static IUserbaseController Controller
+        internal static IUserbaseController Controller
         {
             get
             {
@@ -54,6 +56,12 @@ namespace Com.Ericmas001.Userbase
         public static bool EmailExists(string email)
         {
             return IdFromEmail(email) != 0;
+        }
+
+        public static ConnectUserResponse ValidateToken(string username, Guid token)
+        {
+            using (var context = m_ContextGenerator.Invoke())
+                return Controller.ValidateToken(context, username, token);
         }
     }
 }
