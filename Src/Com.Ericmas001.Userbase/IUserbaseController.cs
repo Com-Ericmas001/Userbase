@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Com.Ericmas001.Userbase
 {
-    public class Class1
+    public interface IUserbaseController
     {
+        int IdFromUsername(UserbaseDbContext context, string username);
     }
 }
