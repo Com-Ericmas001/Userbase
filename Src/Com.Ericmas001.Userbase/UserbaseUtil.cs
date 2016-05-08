@@ -22,7 +22,7 @@ namespace Com.Ericmas001.Userbase
             return new ConnectionToken(ut.Token, ut.Expiration);
         }
 
-        private static UserToken GetConnectionTokenFromId(UserbaseDbContext context, int idUser, Guid token)
+        public static UserToken GetConnectionTokenFromId(UserbaseDbContext context, int idUser, Guid token)
         {
             return context.UserTokens.SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
         }

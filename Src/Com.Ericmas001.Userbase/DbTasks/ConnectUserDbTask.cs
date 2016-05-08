@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Responses;
 using Com.Ericmas001.Userbase.Util;
 
@@ -37,8 +38,26 @@ namespace Com.Ericmas001.Userbase.DbTasks
             //Invalid Password
             if (!BCrypt.CheckPassword(UserbaseSystem.SaltPassword(password), Context.UserAuthentications.Single(x => x.IdUser == idUser).Password))
                 return new ConnectUserResponse { Success = false };
-            
+
             return new ConnectUserResponse { Success = true, IdUser = idUser, Token = UserbaseUtil.CreateConnectionToken(Context, idUser) };
+        }
+        public bool Disconnect(string username, Guid token)
+        {
+            int idUser = UserbaseSystem.IdFromUsername(username, Context);
+
+            //Doesn't exist
+            if (idUser == 0)
+                return false;
+
+            //Invalid token
+            UserToken ut = UserbaseUtil.GetConnectionTokenFromId(Context, idUser, token);
+            if (ut == null)
+                return false;
+
+            ut.Expiration = DateTime.Now.AddSeconds(-1);
+            Context.SaveChanges();
+
+            return true;
         }
     }
 }

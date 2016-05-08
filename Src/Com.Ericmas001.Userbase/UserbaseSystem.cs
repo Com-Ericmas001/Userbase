@@ -93,5 +93,10 @@ namespace Com.Ericmas001.Userbase
         {
             return Execute(context => Controller.ModifyProfile(context, request), existingContext);
         }
+
+        public static bool Disconnect(string username, Guid token, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.Disconnect(context, username, token), existingContext);
+        }
     }
 }

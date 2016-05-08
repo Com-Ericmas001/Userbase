@@ -40,5 +40,10 @@ namespace Com.Ericmas001.Userbase
         {
             return new ModifyUserDbTask(context).ModifyProfile(request);
         }
+
+        public bool Disconnect(UserbaseDbContext context, string username, Guid token)
+        {
+            return new ConnectUserDbTask(context).Disconnect(username, token);
+        }
     }
 }

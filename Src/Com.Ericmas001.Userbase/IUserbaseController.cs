@@ -13,5 +13,6 @@ namespace Com.Ericmas001.Userbase
         ConnectUserResponse CreateUser(UserbaseDbContext context, CreateUserRequest request);
         TokenSuccessResponse ModifyCredentials(UserbaseDbContext context, ModifyCredentialsRequest request);
         TokenSuccessResponse ModifyProfile(UserbaseDbContext context, ModifyProfileRequest request);
+        bool Disconnect(UserbaseDbContext context, string username, Guid token);
     }
 }
