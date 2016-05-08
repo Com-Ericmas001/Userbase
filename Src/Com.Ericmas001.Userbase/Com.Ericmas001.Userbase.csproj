@@ -85,7 +85,6 @@
     <Compile Include="ValidationTasks\EmailValidationTask.cs" />
     <Compile Include="ValidationTasks\DisplayNameValidationTask.cs" />
     <Compile Include="ValidationTasks\UsernameValidationTask.cs" />
-    <Compile Include="ValidationTasks\AbstractValidationTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

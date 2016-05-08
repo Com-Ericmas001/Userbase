@@ -1,5 +1,6 @@
 using Com.Ericmas001.Userbase.Entities;
 using System.Data.Entity;
+// ReSharper disable All
 
 namespace Com.Ericmas001.Userbase
 {

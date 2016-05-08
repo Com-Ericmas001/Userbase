@@ -9,7 +9,7 @@ namespace Com.Ericmas001.Userbase.Test.Util
 {
     public sealed class MockDbSet<T> : Mock<DbSet<T>> where T : class, IEntityWithId
     {
-        private int nextId = 1;
+        private int m_NextId = 1;
         private IQueryable<T> List { get; set; }
 
         public MockDbSet(IQueryable<T> lst, Action<int, T> onAdd = null)
@@ -24,9 +24,9 @@ namespace Com.Ericmas001.Userbase.Test.Util
         private void Add(T elem, Action<int, T> onAdd)
         {
             List = List.Concat(new[] { elem });
-            onAdd?.Invoke(nextId, elem);
+            onAdd?.Invoke(m_NextId, elem);
             if(elem.Id == 0)
-                elem.Id = nextId++;
+                elem.Id = m_NextId++;
             RefreshCollection();
         }
 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Com.Ericmas001.Userbase.ValidationTasks
+﻿namespace Com.Ericmas001.Userbase.ValidationTasks
 {
-    public class EmailValidationTask : AbstractValidationTask<string>
+    public class EmailValidationTask
     {
-        public override bool Validate(string email)
+        public bool Validate(string email)
         {
             try
             {

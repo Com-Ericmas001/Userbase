@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Com.Ericmas001.Userbase.Requests;
+﻿using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

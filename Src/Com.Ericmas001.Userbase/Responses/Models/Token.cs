@@ -1,21 +1,23 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Com.Ericmas001.Userbase.Responses.Models
 {
     public abstract class Token
     {
-        public abstract DateTime CalculateNextExpiration();
-        public Guid Id { get; set; }
+        protected abstract DateTime CalculateNextExpiration();
+        public Guid Id { get; }
 
-        public DateTime ValidUntil { get; set; }
+        public DateTime ValidUntil { get; }
 
-        public Token(Guid id, DateTime validUntil)
+        protected Token(Guid id, DateTime validUntil)
         {
             Id = id;
             ValidUntil = validUntil;
         }
 
-        public Token()
+        [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
+        protected Token()
         {
             Id = Guid.NewGuid();
             ValidUntil = CalculateNextExpiration();

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+// ReSharper disable All
 
 namespace Com.Ericmas001.Userbase.Entities
 {
