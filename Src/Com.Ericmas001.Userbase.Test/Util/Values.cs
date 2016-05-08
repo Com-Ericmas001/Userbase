@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Com.Ericmas001.Userbase.Entities;
+using Com.Ericmas001.Userbase.Requests;
+using Com.Ericmas001.Userbase.Requests.Models;
 using Com.Ericmas001.Userbase.Util;
 
 namespace Com.Ericmas001.Userbase.Test.Util
@@ -55,14 +56,20 @@ namespace Com.Ericmas001.Userbase.Test.Util
         public static UserRecoveryToken ExpiredRecoveryToken => new UserRecoveryToken { Expiration = DateTime.Now.AddMinutes(-1) };
         public static UserRecoveryToken ValidRecoveryToken => new UserRecoveryToken { Expiration = DateTime.Now.AddMinutes(1) };
 
-        //public static UserToRegister UnregisteredDora => new UserToRegister { UserName = UsernameDora, Password = PasswordDora, Email = EmailDora, DisplayName = DisplayNameDora };
-        //public static CredentialsToModify NewCredentialsSpongeBob => new CredentialsToModify { Email = EmailSpongeBobNewOne, Password = PasswordSpongeBobNewOne };
-        //public static ProfileToModify NewProfileSpongeBob => new ProfileToModify { DisplayName = DisplayNameSpongeBobNewOne };
+        public static CreateUserRequest UnregisteredDora => new CreateUserRequest { Authentication = new AuthenticationInfo { Password = PasswordDora, Email = EmailDora }, Profile = new ProfileInfo { DisplayName = DisplayNameDora }, Username = UsernameDora};
+        public static AuthenticationInfo NewCredentialsSpongeBob => new AuthenticationInfo { Email = EmailSpongeBobNewOne, Password = PasswordSpongeBobNewOne };
+        public static ProfileInfo NewProfileSpongeBob => new ProfileInfo { DisplayName = DisplayNameSpongeBobNewOne };
 
         public static User UserSpongeBob => new User { IdUser = 42, Name = UsernameSpongeBob, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordSpongeBob), RecoveryEmail = EmailSpongeBob }, UserProfile = new UserProfile { DisplayName = DisplayNameSpongeBob } };
+        public static User UserDora => new User { IdUser = 84, Name = UsernameDora, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordDora), RecoveryEmail = EmailDora }, UserProfile = new UserProfile { DisplayName = DisplayNameDora } };
         private static string EncryptPassword(string password)
         {
             return BCrypt.HashPassword($"{Salt}{password}", BCrypt.GenerateSalt());
+        }
+
+        public static bool VerifyPassword(string password, User u)
+        {
+            return BCrypt.CheckPassword($"{Salt}{password}", u.UserAuthentication.Password);
         }
     }
 }

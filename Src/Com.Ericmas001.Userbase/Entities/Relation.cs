@@ -4,8 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Com.Ericmas001.Userbase.Entities
 {
     [Table("RelationsOfUser")]
-    public class Relation
+    public class Relation : IEntityWithId
     {
+        public int Id
+        {
+            get { return IdRelation; }
+            set { IdRelation = value; }
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdRelation { get; set; }

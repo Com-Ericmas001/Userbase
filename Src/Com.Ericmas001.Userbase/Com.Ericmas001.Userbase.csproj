@@ -52,11 +52,20 @@
   <ItemGroup>
     <Compile Include="DbTasks\AbstractDbTask.cs" />
     <Compile Include="DbTasks\ConnectUserDbTask.cs" />
+    <Compile Include="DbTasks\ModifyUserDbTask.cs" />
+    <Compile Include="DbTasks\CreateUserDbTask.cs" />
     <Compile Include="DbTasks\ObtainUserIdDbTask.cs" />
+    <Compile Include="Entities\IEntityWithId.cs" />
     <Compile Include="Entities\Relation.cs" />
     <Compile Include="Entities\RelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
     <Compile Include="NotInitializedException.cs" />
+    <Compile Include="Requests\ModifyProfileRequest.cs" />
+    <Compile Include="Requests\ModifyCredentialsRequest.cs" />
+    <Compile Include="Requests\CreateUserRequest.cs" />
+    <Compile Include="Requests\Models\AuthenticationInfo.cs" />
+    <Compile Include="Requests\Models\ProfileInfo.cs" />
+    <Compile Include="Responses\TokenSuccessResponse.cs" />
     <Compile Include="Responses\ConnectUserResponse.cs" />
     <Compile Include="Responses\Models\Token.cs" />
     <Compile Include="Responses\Models\ConnectionToken.cs" />
@@ -70,7 +79,13 @@
     <Compile Include="Entities\UserRecoveryToken.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserToken.cs" />
+    <Compile Include="UserbaseUtil.cs" />
     <Compile Include="Util\BCrypt.cs" />
+    <Compile Include="ValidationTasks\PasswordValidationTask.cs" />
+    <Compile Include="ValidationTasks\EmailValidationTask.cs" />
+    <Compile Include="ValidationTasks\DisplayNameValidationTask.cs" />
+    <Compile Include="ValidationTasks\UsernameValidationTask.cs" />
+    <Compile Include="ValidationTasks\AbstractValidationTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -78,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DbTasks\Models\" />
-    <Folder Include="Requests\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

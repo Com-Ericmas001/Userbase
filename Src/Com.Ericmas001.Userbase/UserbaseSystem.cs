@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Com.Ericmas001.Userbase.DbTasks;
+using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
-using Com.Ericmas001.Userbase.Responses.Models;
 
 namespace Com.Ericmas001.Userbase
 {
@@ -17,7 +15,7 @@ namespace Com.Ericmas001.Userbase
 
         private static IUserbaseController m_Controller;
 
-        internal static IUserbaseController Controller
+        private static IUserbaseController Controller
         {
             get
             {
@@ -42,38 +40,59 @@ namespace Com.Ericmas001.Userbase
             m_Initialized = true;
         }
 
-        public static int IdFromUsername(string username)
+        private static TResponse Execute<TResponse>(Func<UserbaseDbContext, TResponse> thingToDo, UserbaseDbContext existingContext)
         {
+            if (existingContext != null)
+                return thingToDo(existingContext);
+
             using (var context = m_ContextGenerator.Invoke())
-                return Controller.IdFromUsername(context, username);
+                return thingToDo(context);
         }
 
-        public static bool UsernameExists(string username)
+
+        public static int IdFromUsername(string username, UserbaseDbContext existingContext = null)
         {
-            return IdFromUsername(username) != 0;
+            return Execute(context => Controller.IdFromUsername(context, username), existingContext);
         }
 
-        public static int IdFromEmail(string email)
+        public static bool UsernameExists(string username, UserbaseDbContext existingContext = null)
         {
-            using (var context = m_ContextGenerator.Invoke())
-                return Controller.IdFromEmail(context, email);
+            return IdFromUsername(username, existingContext) != 0;
         }
 
-        public static bool EmailExists(string email)
+        public static int IdFromEmail(string email, UserbaseDbContext existingContext = null)
         {
-            return IdFromEmail(email) != 0;
+            return Execute(context => Controller.IdFromEmail(context, email), existingContext);
         }
 
-        public static ConnectUserResponse ValidateCredentials(string username, string password)
+        public static bool EmailExists(string email, UserbaseDbContext existingContext = null)
         {
-            using (var context = m_ContextGenerator.Invoke())
-                return Controller.ValidateCredentials(context, username, password);
+            return IdFromEmail(email, existingContext) != 0;
         }
 
-        public static ConnectUserResponse ValidateToken(string username, Guid token)
+        public static ConnectUserResponse ValidateCredentials(string username, string password, UserbaseDbContext existingContext = null)
         {
-            using (var context = m_ContextGenerator.Invoke())
-                return Controller.ValidateToken(context, username, token);
+            return Execute(context => Controller.ValidateCredentials(context, username, password), existingContext);
+        }
+
+        public static ConnectUserResponse ValidateToken(string username, Guid token, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.ValidateToken(context, username, token), existingContext);
+        }
+
+        public static ConnectUserResponse CreateUser(CreateUserRequest request, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.CreateUser(context, request), existingContext);
+        }
+
+        public static TokenSuccessResponse ModifyCredentials(ModifyCredentialsRequest request, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.ModifyCredentials(context, request), existingContext);
+        }
+
+        public static TokenSuccessResponse ModifyProfile(ModifyProfileRequest request, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.ModifyProfile(context, request), existingContext);
         }
     }
 }

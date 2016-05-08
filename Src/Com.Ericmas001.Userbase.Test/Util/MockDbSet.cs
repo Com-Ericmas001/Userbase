@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Com.Ericmas001.Userbase.Entities;
 using Moq;
 
 namespace Com.Ericmas001.Userbase.Test.Util
 {
-    public sealed class MockDbSet<T> : Mock<DbSet<T>> where T : class
+    public sealed class MockDbSet<T> : Mock<DbSet<T>> where T : class, IEntityWithId
     {
         private int nextId = 1;
         private IQueryable<T> List { get; set; }
@@ -24,7 +25,8 @@ namespace Com.Ericmas001.Userbase.Test.Util
         {
             List = List.Concat(new[] { elem });
             onAdd?.Invoke(nextId, elem);
-            nextId++;
+            if(elem.Id == 0)
+                elem.Id = nextId++;
             RefreshCollection();
         }
 

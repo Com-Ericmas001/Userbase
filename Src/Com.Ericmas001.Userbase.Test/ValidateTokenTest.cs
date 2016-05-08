@@ -1,5 +1,4 @@
 ﻿using System;
-using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Test.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

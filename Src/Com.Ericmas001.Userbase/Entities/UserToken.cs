@@ -5,8 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Com.Ericmas001.Userbase.Entities
 {
     [Table("UserTokens")]
-    public class UserToken
+    public class UserToken : IEntityWithId
     {
+        public int Id
+        {
+            get { return IdUserToken; }
+            set { IdUserToken = value; }
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdUserToken { get; set; }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Com.Ericmas001.Userbase.Entities;
 
 namespace Com.Ericmas001.Userbase.Test.Util

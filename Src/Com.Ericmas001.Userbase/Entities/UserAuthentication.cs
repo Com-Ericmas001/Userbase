@@ -4,8 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Com.Ericmas001.Userbase.Entities
 {
     [Table("UserAuthentications")]
-    public class UserAuthentication
+    public class UserAuthentication : IEntityWithId
     {
+        public int Id
+        {
+            get { return IdUser; }
+            set { IdUser = value; }
+        }
+
         [Key]
         [ForeignKey("User")]
         public int IdUser { get; set; }

@@ -5,8 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Com.Ericmas001.Userbase.Entities
 {
     [Table("RelationTypes")]
-    public class RelationType
+    public class RelationType : IEntityWithId
     {
+        public int Id
+        {
+            get { return IdRelationType; }
+            set { IdRelationType = value; }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RelationType()
         {

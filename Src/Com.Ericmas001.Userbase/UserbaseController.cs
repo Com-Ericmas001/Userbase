@@ -1,5 +1,6 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.DbTasks;
+using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
 
 namespace Com.Ericmas001.Userbase
@@ -23,6 +24,21 @@ namespace Com.Ericmas001.Userbase
         public ConnectUserResponse ValidateCredentials(UserbaseDbContext context, string username, string password)
         {
             return new ConnectUserDbTask(context).WithPassword(username, password);
+        }
+
+        public ConnectUserResponse CreateUser(UserbaseDbContext context, CreateUserRequest request)
+        {
+            return new CreateUserDbTask(context).CreateUser(request);
+        }
+
+        public TokenSuccessResponse ModifyCredentials(UserbaseDbContext context, ModifyCredentialsRequest request)
+        {
+            return new ModifyUserDbTask(context).ModifyCredentials(request);
+        }
+
+        public TokenSuccessResponse ModifyProfile(UserbaseDbContext context, ModifyProfileRequest request)
+        {
+            return new ModifyUserDbTask(context).ModifyProfile(request);
         }
     }
 }
