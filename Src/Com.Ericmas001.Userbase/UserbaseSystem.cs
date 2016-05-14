@@ -123,5 +123,10 @@ namespace Com.Ericmas001.Userbase
         {
             Execute(context => Controller.PurgeRecoveryTokens(context), existingContext);
         }
+
+        public static bool Deactivate(string username, Guid token, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.Deactivate(context, username, token), existingContext);
+        }
     }
 }

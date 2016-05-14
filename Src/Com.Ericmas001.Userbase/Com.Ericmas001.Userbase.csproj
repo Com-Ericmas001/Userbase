@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbTasks\AbstractDbTask.cs" />
+    <Compile Include="DbTasks\UserActivationDbTask.cs" />
     <Compile Include="DbTasks\ConnectUserDbTask.cs" />
     <Compile Include="DbTasks\ModifyUserDbTask.cs" />
     <Compile Include="DbTasks\CreateUserDbTask.cs" />

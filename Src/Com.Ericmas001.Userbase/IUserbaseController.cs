@@ -17,5 +17,6 @@ namespace Com.Ericmas001.Userbase
         void PurgeUsers(UserbaseDbContext context);
         void PurgeConnectionTokens(UserbaseDbContext context);
         void PurgeRecoveryTokens(UserbaseDbContext context);
+        bool Deactivate(UserbaseDbContext context, string username, Guid token);
     }
 }

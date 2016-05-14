@@ -60,5 +60,10 @@ namespace Com.Ericmas001.Userbase
         {
             new ManagementDbTask(context).PurgeRecoveryTokens();
         }
+
+        public bool Deactivate(UserbaseDbContext context, string username, Guid token)
+        {
+            return new UserActivationDbTask(context).Deactivate(username, token);
+        }
     }
 }
