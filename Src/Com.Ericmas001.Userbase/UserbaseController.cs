@@ -45,5 +45,20 @@ namespace Com.Ericmas001.Userbase
         {
             return new ConnectUserDbTask(context).Disconnect(username, token);
         }
+
+        public void PurgeUsers(UserbaseDbContext context)
+        {
+            new ManagementDbTask(context).PurgeUsers();
+        }
+
+        public void PurgeConnectionTokens(UserbaseDbContext context)
+        {
+            new ManagementDbTask(context).PurgeConnectionTokens();
+        }
+
+        public void PurgeRecoveryTokens(UserbaseDbContext context)
+        {
+            new ManagementDbTask(context).PurgeRecoveryTokens();
+        }
     }
 }

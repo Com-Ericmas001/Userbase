@@ -14,5 +14,8 @@ namespace Com.Ericmas001.Userbase
         TokenSuccessResponse ModifyCredentials(UserbaseDbContext context, ModifyCredentialsRequest request);
         TokenSuccessResponse ModifyProfile(UserbaseDbContext context, ModifyProfileRequest request);
         bool Disconnect(UserbaseDbContext context, string username, Guid token);
+        void PurgeUsers(UserbaseDbContext context);
+        void PurgeConnectionTokens(UserbaseDbContext context);
+        void PurgeRecoveryTokens(UserbaseDbContext context);
     }
 }

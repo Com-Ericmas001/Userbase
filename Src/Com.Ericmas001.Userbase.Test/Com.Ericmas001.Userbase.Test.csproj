@@ -71,6 +71,7 @@
     <Compile Include="ModifyCredentialsTest.cs" />
     <Compile Include="DisconnectTest.cs" />
     <Compile Include="ValidateCredentialsTest.cs" />
+    <Compile Include="ManagementTest.cs" />
     <Compile Include="ValidateTokenTest.cs" />
     <Compile Include="IdFromEmailTest.cs" />
     <Compile Include="EmailExistsTest.cs" />

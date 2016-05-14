@@ -47,6 +47,16 @@ namespace Com.Ericmas001.Userbase
             using (var context = m_ContextGenerator.Invoke())
                 return thingToDo(context);
         }
+        private static void Execute(Action<UserbaseDbContext> thingToDo, UserbaseDbContext existingContext)
+        {
+            if (existingContext != null)
+                thingToDo(existingContext);
+            else
+            {
+                using (var context = m_ContextGenerator.Invoke())
+                    thingToDo(context);
+            }
+        }
 
 
         public static int IdFromUsername(string username, UserbaseDbContext existingContext = null)
@@ -97,6 +107,21 @@ namespace Com.Ericmas001.Userbase
         public static bool Disconnect(string username, Guid token, UserbaseDbContext existingContext = null)
         {
             return Execute(context => Controller.Disconnect(context, username, token), existingContext);
+        }
+
+        public static void PurgeUsers(UserbaseDbContext existingContext = null)
+        {
+            Execute(context => Controller.PurgeUsers(context), existingContext);
+        }
+
+        public static void PurgeConnectionTokens(UserbaseDbContext existingContext = null)
+        {
+            Execute(context => Controller.PurgeConnectionTokens(context), existingContext);
+        }
+
+        public static void PurgeRecoveryTokens(UserbaseDbContext existingContext = null)
+        {
+            Execute(context => Controller.PurgeRecoveryTokens(context), existingContext);
         }
     }
 }

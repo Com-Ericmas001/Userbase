@@ -54,6 +54,7 @@
     <Compile Include="DbTasks\ConnectUserDbTask.cs" />
     <Compile Include="DbTasks\ModifyUserDbTask.cs" />
     <Compile Include="DbTasks\CreateUserDbTask.cs" />
+    <Compile Include="DbTasks\ManagementDbTask.cs" />
     <Compile Include="DbTasks\ObtainUserIdDbTask.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
     <Compile Include="Entities\Relation.cs" />
