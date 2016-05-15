@@ -7,14 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.Userbase", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Ericmas001.Userbase.Test", "Com.Ericmas001.Userbase.Test\Com.Ericmas001.Userbase.Test.csproj", "{D47C50AF-5E3F-4070-846A-FD5F321D591D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db", "Db", "{78FD304F-1488-423F-934D-8E9CBCC313AF}"
-	ProjectSection(SolutionItems) = preProject
-		..\Db\create_tables.sql = ..\Db\create_tables.sql
-		..\Db\drop_tables.sql = ..\Db\drop_tables.sql
-		..\Db\Schemas.png = ..\Db\Schemas.png
-		..\Db\Schemas.vsdx = ..\Db\Schemas.vsdx
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
