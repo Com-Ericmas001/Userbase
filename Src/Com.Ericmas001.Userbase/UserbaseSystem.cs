@@ -139,5 +139,10 @@ namespace Com.Ericmas001.Userbase
         {
             return Execute(context => Controller.ResetPassword(context, username, recoveryToken, newPassword), existingContext);
         }
+
+        public static UserSummaryResponse UserSummary(string askingUser, Guid token, string requestedUser, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.UserSummary(context, askingUser, token, requestedUser), existingContext);
+        }
     }
 }

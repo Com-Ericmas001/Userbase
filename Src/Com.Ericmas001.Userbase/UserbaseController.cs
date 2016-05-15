@@ -76,5 +76,10 @@ namespace Com.Ericmas001.Userbase
         {
             return new PasswordRecoveryDbTask(context).ResetPassword(username, recoveryToken, newPassword);
         }
+
+        public UserSummaryResponse UserSummary(UserbaseDbContext context, string askingUser, Guid token, string requestedUser)
+        {
+            return new UserSummaryDbTask(context).Summary(askingUser, token, requestedUser);
+        }
     }
 }

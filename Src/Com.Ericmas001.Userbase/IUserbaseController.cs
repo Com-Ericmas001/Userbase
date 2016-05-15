@@ -21,5 +21,6 @@ namespace Com.Ericmas001.Userbase
         bool Deactivate(UserbaseDbContext context, string username, Guid token);
         bool SendRecoveryToken(UserbaseDbContext context, string username, IEmailSender smtp);
         ConnectUserResponse ResetPassword(UserbaseDbContext context, string username, Guid recoveryToken, string newPassword);
+        UserSummaryResponse UserSummary(UserbaseDbContext context, string askingUser, Guid token, string requestedUser);
     }
 }
