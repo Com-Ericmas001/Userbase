@@ -8,6 +8,7 @@ namespace Com.Ericmas001.Userbase.Entities
     [Table("UserRecoveryTokens")]
     public class UserRecoveryToken : IEntityWithId
     {
+        [NotMapped]
         public int Id
         {
             get { return IdUserRecoveryToken; }

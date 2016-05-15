@@ -7,6 +7,7 @@ namespace Com.Ericmas001.Userbase.Entities
     [Table("UserAuthentications")]
     public class UserAuthentication : IEntityWithId
     {
+        [NotMapped]
         public int Id
         {
             get { return IdUser; }

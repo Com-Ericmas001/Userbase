@@ -7,6 +7,7 @@ namespace Com.Ericmas001.Userbase.Entities
     [Table("UserProfiles")]
     public class UserProfile : IEntityWithId
     {
+        [NotMapped]
         public int Id
         {
             get { return IdUser; }

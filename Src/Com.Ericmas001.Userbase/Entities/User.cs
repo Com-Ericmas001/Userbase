@@ -8,6 +8,7 @@ namespace Com.Ericmas001.Userbase.Entities
     [Table("Users")]
     public class User : IEntityWithId
     {
+        [NotMapped]
         public int Id
         {
             get { return IdUser; }

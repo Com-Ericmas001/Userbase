@@ -8,6 +8,7 @@ namespace Com.Ericmas001.Userbase.Entities
     [Table("RelationTypes")]
     public class RelationType : IEntityWithId
     {
+        [NotMapped]
         public int Id
         {
             get { return IdRelationType; }
