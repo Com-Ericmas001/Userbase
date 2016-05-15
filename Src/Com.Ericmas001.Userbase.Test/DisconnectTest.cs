@@ -80,7 +80,6 @@ namespace Com.Ericmas001.Userbase.Test
         {
             // Arrange
             var tok = Values.ValidToken;
-            var originalTime = tok.Expiration;
             var u = Values.UserSpongeBob;
             UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
             {
