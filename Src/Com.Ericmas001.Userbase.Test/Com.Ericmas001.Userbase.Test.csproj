@@ -67,6 +67,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CreateUserTest.cs" />
+    <Compile Include="SendRecoveryTokenTest.cs" />
+    <Compile Include="ResetPasswordTest.cs" />
     <Compile Include="ModifyProfileTest.cs" />
     <Compile Include="ModifyCredentialsTest.cs" />
     <Compile Include="DisconnectTest.cs" />

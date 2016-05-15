@@ -1,5 +1,6 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.DbTasks;
+using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
 
@@ -64,6 +65,16 @@ namespace Com.Ericmas001.Userbase
         public bool Deactivate(UserbaseDbContext context, string username, Guid token)
         {
             return new UserActivationDbTask(context).Deactivate(username, token);
+        }
+
+        public bool SendRecoveryToken(UserbaseDbContext context, string username, IEmailSender smtp)
+        {
+            return new PasswordRecoveryDbTask(context).SendRecoveryToken(username, smtp);
+        }
+
+        public ConnectUserResponse ResetPassword(UserbaseDbContext context, string username, Guid recoveryToken, string newPassword)
+        {
+            return new PasswordRecoveryDbTask(context).ResetPassword(username, recoveryToken, newPassword);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
 
@@ -127,6 +128,16 @@ namespace Com.Ericmas001.Userbase
         public static bool Deactivate(string username, Guid token, UserbaseDbContext existingContext = null)
         {
             return Execute(context => Controller.Deactivate(context, username, token), existingContext);
+        }
+
+        public static bool SendRecoveryToken(string username, IEmailSender smtp, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.SendRecoveryToken(context, username, smtp), existingContext);
+        }
+
+        public static ConnectUserResponse ResetPassword(string username, Guid recoveryToken, string newPassword, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.ResetPassword(context, username, recoveryToken, newPassword), existingContext);
         }
     }
 }

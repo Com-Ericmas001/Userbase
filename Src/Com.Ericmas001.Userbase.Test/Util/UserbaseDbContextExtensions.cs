@@ -33,7 +33,14 @@ namespace Com.Ericmas001.Userbase.Test.Util
                 if (!context.UserTokens.Contains(userToken))
                     context.UserTokens.Add(userToken);
             }
-            if(user.UserAuthentication != null)
+            foreach (var userToken in user.UserRecoveryTokens)
+            {
+                userToken.IdUser = user.IdUser;
+                userToken.User = user;
+                if (!context.UserRecoveryTokens.Contains(userToken))
+                    context.UserRecoveryTokens.Add(userToken);
+            }
+            if (user.UserAuthentication != null)
             {
                 user.UserAuthentication.IdUser = user.IdUser;
                 user.UserAuthentication.User = user;

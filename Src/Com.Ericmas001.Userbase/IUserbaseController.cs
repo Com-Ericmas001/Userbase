@@ -1,4 +1,5 @@
 ﻿using System;
+using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
 
@@ -18,5 +19,7 @@ namespace Com.Ericmas001.Userbase
         void PurgeConnectionTokens(UserbaseDbContext context);
         void PurgeRecoveryTokens(UserbaseDbContext context);
         bool Deactivate(UserbaseDbContext context, string username, Guid token);
+        bool SendRecoveryToken(UserbaseDbContext context, string username, IEmailSender smtp);
+        ConnectUserResponse ResetPassword(UserbaseDbContext context, string username, Guid recoveryToken, string newPassword);
     }
 }
