@@ -24,12 +24,12 @@ namespace Com.Ericmas001.Userbase
 
         public static UserToken GetConnectionTokenFromId(UserbaseDbContext context, int idUser, Guid token)
         {
-            return context.UserTokens.SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
+            return context.UserTokens.AsEnumerable().SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
         }
 
         public static UserRecoveryToken GetRecoveryTokenFromId(UserbaseDbContext context, int idUser, Guid token)
         {
-            return context.UserRecoveryTokens.SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
+            return context.UserRecoveryTokens.AsEnumerable().SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
         }
 
         public static Token CreateConnectionToken(UserbaseDbContext context, int idUser)
