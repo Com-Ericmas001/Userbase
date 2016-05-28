@@ -1,4 +1,4 @@
 # Userbase
 EntityFramework DLL for managing user
 
-<p align=center><img src=https://github.com/Ericmas001/Userbase/raw/master/Db/Schemas.png /></p>
+<p align=center><img src=https://raw.githubusercontent.com/Com-Ericmas001/Userbase/master/Src/Com.Ericmas001.Userbase/Scripts/Schemas.png /></p>
