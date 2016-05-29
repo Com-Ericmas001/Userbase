@@ -61,8 +61,8 @@
     <Compile Include="DbTasks\ManagementDbTask.cs" />
     <Compile Include="DbTasks\ObtainUserIdDbTask.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
-    <Compile Include="Entities\Relation.cs" />
-    <Compile Include="Entities\RelationType.cs" />
+    <Compile Include="Entities\UserRelation.cs" />
+    <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
     <Compile Include="NotInitializedException.cs" />
     <Compile Include="Requests\ModifyProfileRequest.cs" />

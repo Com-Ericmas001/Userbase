@@ -15,8 +15,8 @@ namespace Com.Ericmas001.Userbase
         {
         }
 
-        public virtual DbSet<Relation> Relations { get; set; }
-        public virtual DbSet<RelationType> RelationTypes { get; set; }
+        public virtual DbSet<UserRelation> Relations { get; set; }
+        public virtual DbSet<UserRelationType> RelationTypes { get; set; }
         public virtual DbSet<UserAuthentication> UserAuthentications { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<UserRecoveryToken> UserRecoveryTokens { get; set; }
@@ -25,9 +25,9 @@ namespace Com.Ericmas001.Userbase
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<RelationType>()
-                .HasMany(e => e.Relations)
-                .WithRequired(e => e.RelationType)
+            modelBuilder.Entity<UserRelationType>()
+                .HasMany(e => e.UserRelations)
+                .WithRequired(e => e.UserRelationType)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserAuthentication>()

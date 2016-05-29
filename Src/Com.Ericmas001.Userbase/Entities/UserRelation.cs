@@ -4,27 +4,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Com.Ericmas001.Userbase.Entities
 {
-    [Table("RelationsOfUser")]
-    public class Relation : IEntityWithId
+    [Table("UserRelations")]
+    public class UserRelation : IEntityWithId
     {
         [NotMapped]
         public int Id
         {
-            get { return IdRelation; }
-            set { IdRelation = value; }
+            get { return IdUserRelation; }
+            set { IdUserRelation = value; }
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdRelation { get; set; }
+        public int IdUserRelation { get; set; }
 
         public int IdUserOwner { get; set; }
 
         public int IdUserLinked { get; set; }
 
-        public int IdRelationType { get; set; }
+        public int IdUserRelationType { get; set; }
 
-        public virtual RelationType RelationType { get; set; }
+        public virtual UserRelationType UserRelationType { get; set; }
 
         public virtual User UserOwner { get; set; }
 
