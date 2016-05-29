@@ -61,6 +61,8 @@
     <Compile Include="DbTasks\ManagementDbTask.cs" />
     <Compile Include="DbTasks\ObtainUserIdDbTask.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
+    <Compile Include="Entities\UserAccessType.cs" />
+    <Compile Include="Entities\UserSetting.cs" />
     <Compile Include="Entities\UserRelation.cs" />
     <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />

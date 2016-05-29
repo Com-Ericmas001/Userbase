@@ -30,6 +30,11 @@ namespace Com.Ericmas001.Userbase
                 .WithRequired(e => e.UserRelationType)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<UserAccessType>()
+                .HasMany(e => e.UserSettingListFriends)
+                .WithRequired(e => e.UserAccessTypeListFriends)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<UserAuthentication>()
                 .Property(e => e.Password)
                 .IsFixedLength();
@@ -63,6 +68,10 @@ namespace Com.Ericmas001.Userbase
             modelBuilder.Entity<UserProfile>()
                 .HasRequired(e => e.User)
                 .WithOptional(e => e.UserProfile);
+
+            modelBuilder.Entity<UserSetting>()
+                .HasRequired(e => e.User)
+                .WithOptional(e => e.UserSetting);
         }
     }
 }

@@ -44,6 +44,8 @@ namespace Com.Ericmas001.Userbase.Entities
 
         public virtual UserProfile UserProfile { get; set; }
 
+        public virtual UserSetting UserSetting { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserToken> UserTokens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
