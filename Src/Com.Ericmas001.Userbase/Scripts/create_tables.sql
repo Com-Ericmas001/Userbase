@@ -1,35 +1,3 @@
-/****** Object:  Table [Relations]    Script Date: 2015-12-12 09:54:42 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [Relations](
-	[IdRelation] [int] IDENTITY(1,1) NOT NULL,
-	[IdUserOwner] [int] NOT NULL,
-	[IdUserLinked] [int] NOT NULL,
-	[IdRelationType] [int] NOT NULL,
- CONSTRAINT [PK_Relations] PRIMARY KEY CLUSTERED 
-(
-	[IdRelation] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [RelationTypes]    Script Date: 2015-12-12 09:54:42 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [RelationTypes](
-	[IdRelationType] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_RelationTypes] PRIMARY KEY CLUSTERED 
-(
-	[IdRelationType] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
 /****** Object:  Table [UserAuthentications]    Script Date: 2015-12-12 09:54:42 ******/
 SET ANSI_NULLS ON
 GO
@@ -57,6 +25,38 @@ CREATE TABLE [UserProfiles](
  CONSTRAINT [PK_UserProfiles] PRIMARY KEY CLUSTERED 
 (
 	[IdUser] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [Relations]    Script Date: 2015-12-12 09:54:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [UserRelations](
+	[IdUserRelation] [int] IDENTITY(1,1) NOT NULL,
+	[IdUserOwner] [int] NOT NULL,
+	[IdUserLinked] [int] NOT NULL,
+	[IdUserRelationType] [int] NOT NULL,
+ CONSTRAINT [PK_UserRelations] PRIMARY KEY CLUSTERED 
+(
+	[IdUserRelation] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [RelationTypes]    Script Date: 2015-12-12 09:54:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [UserRelationTypes](
+	[IdUserRelationType] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_UserRelationTypes] PRIMARY KEY CLUSTERED 
+(
+	[IdUserRelationType] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -111,29 +111,14 @@ CREATE TABLE [UserRecoveryTokens](
 ) ON [PRIMARY]
 
 GO
-SET IDENTITY_INSERT [RelationTypes] ON 
+SET IDENTITY_INSERT [UserRelationTypes] ON 
 
 GO
-INSERT [RelationTypes] ([IdRelationType], [Name]) VALUES (1, N'Friend')
+INSERT [UserRelationTypes] ([IdUserRelationType], [Name]) VALUES (1, N'Friend')
 GO
-INSERT [RelationTypes] ([IdRelationType], [Name]) VALUES (2, N'Blocked')
+INSERT [UserRelationTypes] ([IdUserRelationType], [Name]) VALUES (2, N'Blocked')
 GO
-SET IDENTITY_INSERT [RelationTypes] OFF
-GO
-ALTER TABLE [Relations]  WITH CHECK ADD  CONSTRAINT [FK_Relations_RelationTypes] FOREIGN KEY([IdRelationType])
-REFERENCES [RelationTypes] ([IdRelationType])
-GO
-ALTER TABLE [Relations] CHECK CONSTRAINT [FK_Relations_RelationTypes]
-GO
-ALTER TABLE [Relations]  WITH CHECK ADD  CONSTRAINT [FK_Relations_Users] FOREIGN KEY([IdUserOwner])
-REFERENCES [Users] ([IdUser])
-GO
-ALTER TABLE [Relations] CHECK CONSTRAINT [FK_Relations_Users]
-GO
-ALTER TABLE [Relations]  WITH CHECK ADD  CONSTRAINT [FK_Relations_Users1] FOREIGN KEY([IdUserLinked])
-REFERENCES [Users] ([IdUser])
-GO
-ALTER TABLE [Relations] CHECK CONSTRAINT [FK_Relations_Users1]
+SET IDENTITY_INSERT [UserRelationTypes] OFF
 GO
 ALTER TABLE [UserAuthentications]  WITH CHECK ADD  CONSTRAINT [FK_UserAuthentications_Users] FOREIGN KEY([IdUser])
 REFERENCES [Users] ([IdUser])
@@ -144,6 +129,21 @@ ALTER TABLE [UserProfiles]  WITH CHECK ADD  CONSTRAINT [FK_UserProfiles_Users] F
 REFERENCES [Users] ([IdUser])
 GO
 ALTER TABLE [UserProfiles] CHECK CONSTRAINT [FK_UserProfiles_Users]
+GO
+ALTER TABLE [UserRelations]  WITH CHECK ADD  CONSTRAINT [FK_UserRelations_UserRelationTypes] FOREIGN KEY([IdUserRelationType])
+REFERENCES [UserRelationTypes] ([IdUserRelationType])
+GO
+ALTER TABLE [UserRelations] CHECK CONSTRAINT [FK_UserRelations_UserRelationTypes]
+GO
+ALTER TABLE [UserRelations]  WITH CHECK ADD  CONSTRAINT [FK_UserRelations_Users] FOREIGN KEY([IdUserOwner])
+REFERENCES [Users] ([IdUser])
+GO
+ALTER TABLE [UserRelations] CHECK CONSTRAINT [FK_UserRelations_Users]
+GO
+ALTER TABLE [UserRelations]  WITH CHECK ADD  CONSTRAINT [FK_UserRelations_Users1] FOREIGN KEY([IdUserLinked])
+REFERENCES [Users] ([IdUser])
+GO
+ALTER TABLE [UserRelations] CHECK CONSTRAINT [FK_UserRelations_Users1]
 GO
 ALTER TABLE [UserTokens]  WITH CHECK ADD  CONSTRAINT [FK_UserTokens_Users] FOREIGN KEY([IdUser])
 REFERENCES [Users] ([IdUser])

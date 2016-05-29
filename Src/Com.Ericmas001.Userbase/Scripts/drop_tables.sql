@@ -1,26 +1,35 @@
-ALTER TABLE [ericmas001].[Sets] DROP CONSTRAINT [FK_Sets_SetCategories]
+ALTER TABLE [UserRecoveryTokens] DROP CONSTRAINT [FK_UserRecoveryTokens_Users]
 GO
-ALTER TABLE [ericmas001].[SetCategories] DROP CONSTRAINT [FK_SetCategories_CollectionTypes]
+ALTER TABLE [UserTokens] DROP CONSTRAINT [FK_UserTokens_Users]
 GO
-ALTER TABLE [Cards] DROP CONSTRAINT [FK_Cards_Sets]
+ALTER TABLE [UserRelations] DROP CONSTRAINT [FK_UserRelations_Users1]
 GO
-ALTER TABLE [CardAlternateNames] DROP CONSTRAINT [FK_CardAlternateNames_Cards]
+ALTER TABLE [UserRelations] DROP CONSTRAINT [FK_UserRelations_Users]
 GO
-/****** Object:  Table [StagingCardsToModify]   Script Date: 2015-12-12 09:53:45 ******/
-DROP TABLE [StagingCardsToModify]
+ALTER TABLE [UserRelations] DROP CONSTRAINT [FK_UserRelations_UserRelationTypes]
 GO
-/****** Object:  Table [Sets]    Script Date: 2015-12-12 09:53:45 ******/
-DROP TABLE [ericmas001].[Sets]
+ALTER TABLE [UserProfiles] DROP CONSTRAINT [FK_UserProfiles_Users]
 GO
-/****** Object:  Table [ericmas001].[SetCategories]    Script Date: 2015-12-12 09:53:46 ******/
-DROP TABLE [ericmas001].[SetCategories]
+ALTER TABLE [UserAuthentications] DROP CONSTRAINT [FK_UserAuthentications_Users]
 GO
-/****** Object:  Table [ericmas001].[CollectionTypes]    Script Date: 2015-12-12 09:53:45 ******/
-DROP TABLE [ericmas001].[CollectionTypes]
+/****** Object:  Table [UserRecoveryTokens]    Script Date: 2015-12-12 09:53:44 ******/
+DROP TABLE UserRecoveryTokens
 GO
-/****** Object:  Table [ericmas001].[Cards]    Script Date: 2015-12-12 09:53:46 ******/
-DROP TABLE [ericmas001].[Cards]
+/****** Object:  Table [UserTokens]    Script Date: 2015-12-12 09:53:44 ******/
+DROP TABLE [UserTokens]
 GO
-/****** Object:  Table [ericmas001].[CardAlternateNames]    Script Date: 2015-12-12 09:53:46 ******/
-DROP TABLE [ericmas001].[CardAlternateNames]
+/****** Object:  Table [Users]    Script Date: 2015-12-12 09:53:44 ******/
+DROP TABLE [Users]
+GO
+/****** Object:  Table [RelationTypes]    Script Date: 2015-12-12 09:53:45 ******/
+DROP TABLE [UserRelationTypes]
+GO
+/****** Object:  Table [Relations]    Script Date: 2015-12-12 09:53:45 ******/
+DROP TABLE [UserRelations]
+GO
+/****** Object:  Table [UserProfiles]    Script Date: 2015-12-12 09:53:44 ******/
+DROP TABLE [UserProfiles]
+GO
+/****** Object:  Table [UserAuthentications]    Script Date: 2015-12-12 09:53:45 ******/
+DROP TABLE [UserAuthentications]
 GO
