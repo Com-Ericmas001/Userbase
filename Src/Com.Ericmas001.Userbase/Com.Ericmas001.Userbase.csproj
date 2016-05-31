@@ -87,7 +87,6 @@
     <Compile Include="Entities\UserRecoveryToken.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserToken.cs" />
-    <Compile Include="UserbaseUtil.cs" />
     <Compile Include="Util\BCrypt.cs" />
     <Compile Include="ValidationTasks\PasswordValidationTask.cs" />
     <Compile Include="ValidationTasks\EmailValidationTask.cs" />

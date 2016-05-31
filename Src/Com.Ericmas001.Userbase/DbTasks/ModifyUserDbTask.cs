@@ -2,6 +2,7 @@
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
+using Com.Ericmas001.Userbase.Util;
 using Com.Ericmas001.Userbase.ValidationTasks;
 
 namespace Com.Ericmas001.Userbase.DbTasks
@@ -45,7 +46,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
             {
                 if (!new PasswordValidationTask().Validate(request.Authentication.Password))
                     return InvalidResponse;
-                u.UserAuthentication.Password = UserbaseUtil.EncryptPassword(request.Authentication.Password);
+                u.UserAuthentication.Password = BCrypt.EncryptPassword(request.Authentication.Password);
             }
 
             if (!string.IsNullOrEmpty(request.Authentication.Email))

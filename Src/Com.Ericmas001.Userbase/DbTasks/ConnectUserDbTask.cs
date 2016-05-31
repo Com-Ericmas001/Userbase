@@ -2,6 +2,7 @@
 using System.Linq;
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Responses;
+using Com.Ericmas001.Userbase.Responses.Models;
 using Com.Ericmas001.Userbase.Util;
 
 namespace Com.Ericmas001.Userbase.DbTasks
@@ -21,7 +22,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
                 return new ConnectUserResponse { Success = false };
 
             //Invalid token
-            var tok = UserbaseUtil.ConnectionTokenIsValid(Context,idUser, token);
+            var tok = ConnectionTokenIsValid(idUser, token);
             if (tok == null)
                 return new ConnectUserResponse { Success = false, IdUser = idUser };
 
@@ -39,7 +40,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
             if (!BCrypt.CheckPassword(UserbaseSystem.SaltPassword(password), Context.UserAuthentications.Single(x => x.IdUser == idUser).Password))
                 return new ConnectUserResponse { Success = false };
 
-            return new ConnectUserResponse { Success = true, IdUser = idUser, Token = UserbaseUtil.CreateConnectionToken(Context, idUser) };
+            return new ConnectUserResponse { Success = true, IdUser = idUser, Token = CreateConnectionToken(idUser) };
         }
         public bool Disconnect(string username, Guid token)
         {
@@ -50,7 +51,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
                 return false;
 
             //Invalid token
-            UserToken ut = UserbaseUtil.GetConnectionTokenFromId(Context, idUser, token);
+            UserToken ut = UserToken.FromId(Context, idUser, token);
             if (ut == null)
                 return false;
 
@@ -58,6 +59,24 @@ namespace Com.Ericmas001.Userbase.DbTasks
             Context.SaveChanges();
 
             return true;
+        }
+
+        private Token CreateConnectionToken(int idUser)
+        {
+            var token = new ConnectionToken();
+            Context.UserTokens.Add(new UserToken { Token = token.Id, Expiration = token.ValidUntil, IdUser = idUser });
+            Context.SaveChanges();
+            return token;
+        }
+
+        private ConnectionToken ConnectionTokenIsValid(int idUser, Guid token)
+        {
+            UserToken ut = UserToken.FromId(Context, idUser, token);
+            if (ut == null)
+                return null;
+            ut.Expiration = ConnectionToken.NextExpiration;
+            Context.SaveChanges();
+            return new ConnectionToken(ut.Token, ut.Expiration);
         }
     }
 }

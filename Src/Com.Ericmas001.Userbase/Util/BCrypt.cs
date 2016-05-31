@@ -61,6 +61,10 @@ namespace Com.Ericmas001.Userbase.Util
     /// </remarks>
     public class BCrypt
     {
+        public static string EncryptPassword(string password)
+        {
+            return HashPassword(UserbaseSystem.SaltPassword(password), GenerateSalt());
+        }
 
         private const int GENSALT_DEFAULT_LOG2_ROUNDS = 10;
         private const int BCRYPT_SALT_LEN = 16;
@@ -808,6 +812,5 @@ namespace Com.Ericmas001.Userbase.Util
         {
             return StringComparer.Ordinal.Compare(hashed, HashPassword(plaintext, hashed)) == 0;
         }
-
     }
 }

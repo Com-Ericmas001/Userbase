@@ -18,7 +18,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
             if (idUser == 0)
                 return false;
 
-            UserToken ut = UserbaseUtil.GetConnectionTokenFromId(Context, idUser, token);
+            UserToken ut = UserToken.FromId(Context, idUser, token);
             if (ut == null)
                 return false;
 
