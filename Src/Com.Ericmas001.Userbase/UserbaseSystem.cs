@@ -1,4 +1,5 @@
 ﻿using System;
+using Com.Ericmas001.Security.Cryptography;
 using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Responses;
@@ -59,6 +60,10 @@ namespace Com.Ericmas001.Userbase
             }
         }
 
+        public static string EncryptPassword(string password)
+        {
+            return BCrypt.HashPassword(UserbaseSystem.SaltPassword(password), BCrypt.GenerateSalt());
+        }
 
         public static int IdFromUsername(string username, UserbaseDbContext existingContext = null)
         {

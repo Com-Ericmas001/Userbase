@@ -4,7 +4,6 @@ using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Responses;
 using Com.Ericmas001.Userbase.Responses.Models;
-using Com.Ericmas001.Userbase.Util;
 using Com.Ericmas001.Userbase.ValidationTasks;
 
 namespace Com.Ericmas001.Userbase.DbTasks
@@ -53,7 +52,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
             User u = Context.Users.Single(x => x.IdUser == idUser);
 
             urt.Expiration = DateTime.Now.AddSeconds(-1);
-            u.UserAuthentication.Password = BCrypt.EncryptPassword(newPassword);
+            u.UserAuthentication.Password = UserbaseSystem.EncryptPassword(newPassword);
             Context.SaveChanges();
 
             return UserbaseSystem.ValidateCredentials(username, newPassword, Context);
