@@ -5,24 +5,17 @@ EntityFramework DLL for managing user
 <table align="center" width="100%">
     <tbody>
         <tr>
-            <td width="46%" align="right">
+            <td rowspan>.Net</td>
+            <td align="center">
             <a href="https://www.nuget.org/packages/Com.Ericmas001.Userbase/" target="_blank">
-            <img src="http://www.newtonsoft.com/Content/Images/nuget-logo.png" alt="NuGet" class="center-block" />
+            Com.Ericmas001.Userbase <br />
+            <img src="https://raw.githubusercontent.com/NuGet/Home/master/resources/nuget.png" alt="NuGet" width=150 />
             </a>
             </td>
-            <td width="46%" align="right">
+            <td align="left">
                 <div class="nuget-badge">
-                    PM&gt; Install-Package Com.Ericmas001.Userbase
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="8%" align="center">
-                or
-            </td>
-            <td width="46%" align="left">
-                <div class="vs-package-management">
-                    Install via VS <a href="https://docs.nuget.org/consume/package-manager-dialog" target="_blank">Package Management</a> window.
+                    <b>PM&gt; Install-Package Com.Ericmas001.Userbase</b> <br />
+                    or Install via VS <a href="https://docs.nuget.org/consume/package-manager-dialog" target="_blank">Package Management</a> window.
                 </div>
             </td>
         </tr>
