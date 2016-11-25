@@ -1,4 +1,5 @@
 # Com.Ericmas001.Userbase
+[![com-ericmas001 MyGet Build Status](https://www.myget.org/BuildSource/Badge/com-ericmas001?identifier=a0f8aa04-cacc-4114-90e0-285c055d6e28)](https://www.myget.org/)
 EntityFramework DLL for managing user
 
 ###Current Version: 0.4.0 *(2015-06-11)*
