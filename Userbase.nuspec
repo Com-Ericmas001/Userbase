@@ -20,9 +20,9 @@
     </metadata>
     <files>
     	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Com.Ericmas001.Userbase.dll" target="lib\net40\" />
-    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\create_tables.sql" target="lib\Scripts\" />
-    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\drop_tables.sql" target="lib\Scripts\" />
-    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\Schemas.png" target="lib\Scripts\" />
-    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\Schemas.vsdx" target="lib\Scripts\" />
+    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\create_tables.sql" target="Scripts\" />
+    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\drop_tables.sql" target="Scripts\" />
+    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\Schemas.png" target="Scripts\" />
+    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Scripts\Schemas.vsdx" target="Scripts\" />
   </files>
 </package>

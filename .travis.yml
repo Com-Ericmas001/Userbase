@@ -5,4 +5,4 @@ install:
   - nuget restore Src/Userbase.sln
 script:
   - xbuild /p:Configuration=Release Src/Userbase.sln
-  - nunit-console Src/Com.Ericmas001.Userbase.Tests/bin/Release/Com.Ericmas001.Userbase.Tests.dll
+  - nunit-console Src/Com.Ericmas001.Userbase.Test/bin/Release/Com.Ericmas001.Userbase.Test.dll
