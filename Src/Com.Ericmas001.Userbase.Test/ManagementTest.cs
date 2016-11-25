@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestClass]
+    [TestFixture]
     public class ManagementTest
     {
 
-        [TestMethod]
+        [Test]
         public void PurgeConnectionTokens()
         {
             // Arrange
@@ -30,7 +30,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.AreEqual(validToken, model.UserTokens.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void PurgeRecoveryTokens()
         {
             // Arrange
@@ -52,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.AreEqual(validRecoveryToken, model.UserRecoveryTokens.Single());
         }
 
-        [TestMethod]
+        [Test]
         public void PurgeUsers()
         {
             // Arrange

@@ -2,12 +2,12 @@
 using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Responses.Models;
 using Com.Ericmas001.Userbase.Test.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Moq;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestClass]
+    [TestFixture]
     public class SendRecoveryTokenTest
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -20,7 +20,7 @@ namespace Com.Ericmas001.Userbase.Test
             }
         }
 
-        [TestMethod]
+        [Test]
         public void EmptyUsersReturnsFalse()
         {
             // Arrange
@@ -32,7 +32,7 @@ namespace Com.Ericmas001.Userbase.Test
             // Assert
             Assert.IsFalse(result);
         }
-        [TestMethod]
+        [Test]
         public void ValidUsernameReturnsTrue()
         {
             // Arrange

@@ -1,12 +1,12 @@
 ﻿using Com.Ericmas001.Userbase.Test.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestClass]
+    [TestFixture]
     public class ValidateCredentialsTest
     {
-        [TestMethod]
+        [Test]
         public void WithNoUserReturnsFalse()
         {
             // Arrange
@@ -19,7 +19,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsFalse(result.Success);
         }
 
-        [TestMethod]
+        [Test]
         public void WithInvalidUserReturnsFalse()
         {
             // Arrange
@@ -36,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             // Assert
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUserWrongPasswordReturnsFalse()
         {
             // Arrange
@@ -53,7 +53,7 @@ namespace Com.Ericmas001.Userbase.Test
             // Assert
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUserValidPasswordReturnsTrue()
         {
             // Arrange

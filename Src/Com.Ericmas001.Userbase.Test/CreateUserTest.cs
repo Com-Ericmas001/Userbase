@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestClass]
+    [TestFixture]
     public class CreateUserTest
     {
-        [TestMethod]
+        [Test]
         public void WithExistingUsernameReturnsNull()
         {
             // Arrange
@@ -25,7 +25,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithNotFoundUsernameButInvalidUsernameReturnsNull()
         {
             // Arrange
@@ -46,7 +46,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithNotFoundUsernameButInvalidDisplayNameReturnsNull()
         {
             // Arrange
@@ -67,7 +67,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithNotFoundUsernameButInvalidPasswordReturnsNull()
         {
             // Arrange
@@ -88,7 +88,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithNotFoundUsernameButInvalidEmailReturnsNull()
         {
             // Arrange
@@ -109,7 +109,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithNotFoundUsernameButExistingEmailReturnsNull()
         {
             // Arrange
@@ -130,7 +130,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithNotFoundUsername()
         {
             var model = Values.Context;

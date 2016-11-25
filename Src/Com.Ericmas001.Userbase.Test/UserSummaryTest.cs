@@ -1,13 +1,13 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Test.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestClass]
+    [TestFixture]
     public class UserSummaryTest
     {
-        [TestMethod]
+        [Test]
         public void WithInvalidUsernameReturnsFalse()
         {
             // Arrange
@@ -20,7 +20,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUsernameButNoTokenReturnsFalse()
         {
             // Arrange
@@ -38,7 +38,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -58,7 +58,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -79,7 +79,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUsernameValidNotExpiredTokenButInvalidRequestedUsernameReturnsFalse()
         {
             // Arrange
@@ -100,7 +100,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNull(result.Token);
             Assert.IsFalse(result.Success);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUsernameValidNotExpiredToken()
         {
             // Arrange

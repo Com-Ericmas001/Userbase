@@ -1,12 +1,12 @@
 ﻿using Com.Ericmas001.Userbase.Test.Util;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestClass]
+    [TestFixture]
     public class EmailExistsTest
     {
-        [TestMethod]
+        [Test]
         public void WithNoUserReturnsFalse()
         {
             // Arrange
@@ -19,7 +19,7 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void WithInvalidUserReturnsFalse()
         {
             // Arrange
@@ -36,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             // Assert
             Assert.IsFalse(result);
         }
-        [TestMethod]
+        [Test]
         public void WithValidUserReturnsTrue()
         {
             // Arrange
