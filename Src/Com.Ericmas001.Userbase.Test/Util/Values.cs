@@ -50,6 +50,12 @@ namespace Com.Ericmas001.Userbase.Test.Util
         public static string EmailDora => "dora@backpack.org";
         public static string EmailNoArobas => "doraAndbackpack.org";
 
+
+        public static int GroupAdminId => 1;
+        public static string GroupAdminName => "Admin";
+        public static int GroupDummyId => 2;
+        public static string GroupDummyName => "Dumb";
+
         public static UserToken ExpiredToken => new UserToken { IdUserToken = 21, Expiration = DateTime.Now.AddMinutes(-1), Token = new Guid()};
         public static UserToken ValidToken => new UserToken { IdUserToken = 84, Expiration = DateTime.Now.AddMinutes(1), Token = new Guid() };
 
@@ -60,8 +66,12 @@ namespace Com.Ericmas001.Userbase.Test.Util
         public static AuthenticationInfo NewCredentialsSpongeBob => new AuthenticationInfo { Email = EmailSpongeBobNewOne, Password = PasswordSpongeBobNewOne };
         public static ProfileInfo NewProfileSpongeBob => new ProfileInfo { DisplayName = DisplayNameSpongeBobNewOne };
 
-        public static User UserSpongeBob => new User { IdUser = 42, Name = UsernameSpongeBob, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordSpongeBob), RecoveryEmail = EmailSpongeBob }, UserProfile = new UserProfile { DisplayName = DisplayNameSpongeBob } };
-        public static User UserDora => new User { IdUser = 84, Name = UsernameDora, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordDora), RecoveryEmail = EmailDora }, UserProfile = new UserProfile { DisplayName = DisplayNameDora } };
+        public static User UserSpongeBob => new User { IdUser = 42, Name = UsernameSpongeBob, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordSpongeBob), RecoveryEmail = EmailSpongeBob }, UserProfile = new UserProfile { DisplayName = DisplayNameSpongeBob }, UserGroups = new List<UserGroup>{ new UserGroup { UserGroupType = GroupTypeAdmin } , new UserGroup { UserGroupType = GroupTypeDumb } } };
+        public static User UserDora => new User { IdUser = 84, Name = UsernameDora, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordDora), RecoveryEmail = EmailDora }, UserProfile = new UserProfile { DisplayName = DisplayNameDora }, UserGroups = new List<UserGroup> { new UserGroup { UserGroupType = GroupTypeDumb } } };
+
+        public static UserGroupType GroupTypeAdmin => new UserGroupType { Id = GroupAdminId, Name = GroupAdminName };
+        public static UserGroupType GroupTypeDumb => new UserGroupType { Id = GroupDummyId, Name = GroupDummyName };
+
         private static string EncryptPassword(string password)
         {
             return BCrypt.HashPassword($"{Salt}{password}", BCrypt.GenerateSalt());

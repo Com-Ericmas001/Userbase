@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
 using NUnit.Framework;
 
@@ -123,6 +124,9 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.IsNotNull(result.Token);
             Assert.IsTrue(tok.Expiration > originalTime);
             Assert.AreEqual(Values.DisplayNameDora, result.DisplayName);
+            Assert.AreEqual(1, result.Groups.Count);
+            Assert.AreEqual(Values.GroupDummyId, result.Groups.First().Key);
+            Assert.AreEqual(Values.GroupDummyName, result.Groups.First().Value);
         }
     }
 }

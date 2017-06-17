@@ -14,6 +14,10 @@ ALTER TABLE [dbo].[UserRecoveryTokens] DROP CONSTRAINT [FK_UserRecoveryTokens_Us
 GO
 ALTER TABLE [dbo].[UserProfiles] DROP CONSTRAINT [FK_UserProfiles_Users]
 GO
+ALTER TABLE [dbo].[UserGroups] DROP CONSTRAINT [FK_UserGroups_Users]
+GO
+ALTER TABLE [dbo].[UserGroups] DROP CONSTRAINT [FK_UserGroups_UserGroupTypes]
+GO
 ALTER TABLE [dbo].[UserAuthentications] DROP CONSTRAINT [FK_UserAuthentications_Users]
 GO
 ALTER TABLE [dbo].[Users] DROP CONSTRAINT [DF_Users_Active]
@@ -38,6 +42,12 @@ DROP TABLE [dbo].[UserRecoveryTokens]
 GO
 /****** Object:  Table [dbo].[UserProfiles]    Script Date: 2016-05-29 09:34:45 ******/
 DROP TABLE [dbo].[UserProfiles]
+GO
+/****** Object:  Table [dbo].[UserGroupTypes]    Script Date: 2016-05-29 09:34:45 ******/
+DROP TABLE [dbo].[UserGroupTypes]
+GO
+/****** Object:  Table [dbo].[[UserGroups]]    Script Date: 2016-05-29 09:34:45 ******/
+DROP TABLE [dbo].[UserGroups]
 GO
 /****** Object:  Table [dbo].[UserAuthentications]    Script Date: 2016-05-29 09:34:45 ******/
 DROP TABLE [dbo].[UserAuthentications]

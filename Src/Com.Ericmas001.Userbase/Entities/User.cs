@@ -18,6 +18,7 @@ namespace Com.Ericmas001.Userbase.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            UserGroups = new HashSet<UserGroup>();
             RelationsOfUser = new HashSet<UserRelation>();
             RelationsToThisUser = new HashSet<UserRelation>();
             UserTokens = new HashSet<UserToken>();
@@ -50,5 +51,7 @@ namespace Com.Ericmas001.Userbase.Entities
         public virtual ICollection<UserToken> UserTokens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRecoveryToken> UserRecoveryTokens { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroup> UserGroups { get; set; }
     }
 }

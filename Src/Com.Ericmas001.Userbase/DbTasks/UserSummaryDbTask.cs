@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Responses;
@@ -24,14 +25,15 @@ namespace Com.Ericmas001.Userbase.DbTasks
             if (u == null)
                 return InvalidResponse;
 
-            return new UserSummaryResponse {DisplayName = u.UserProfile.DisplayName, Success = true, Token = connection.Token};
+            return new UserSummaryResponse {DisplayName = u.UserProfile.DisplayName, Success = true, Token = connection.Token, Groups = u.UserGroups.ToDictionary(x => x.IdUserGroupType, x => x.UserGroupType.Name)};
         }
 
         private UserSummaryResponse InvalidResponse => new UserSummaryResponse
         {
             Token = null,
             Success = false,
-            DisplayName = null
+            DisplayName = null,
+            Groups = new Dictionary<int, string>()
         };
     }
 }

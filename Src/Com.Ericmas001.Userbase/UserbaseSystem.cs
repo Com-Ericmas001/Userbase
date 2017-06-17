@@ -62,7 +62,7 @@ namespace Com.Ericmas001.Userbase
 
         public static string EncryptPassword(string password)
         {
-            return BCrypt.HashPassword(UserbaseSystem.SaltPassword(password), BCrypt.GenerateSalt());
+            return BCrypt.HashPassword(SaltPassword(password), BCrypt.GenerateSalt());
         }
 
         public static int IdFromUsername(string username, UserbaseDbContext existingContext = null)

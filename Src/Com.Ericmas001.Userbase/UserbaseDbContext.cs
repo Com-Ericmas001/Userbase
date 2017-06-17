@@ -15,8 +15,11 @@ namespace Com.Ericmas001.Userbase
         {
         }
 
-        public virtual DbSet<UserRelation> Relations { get; set; }
-        public virtual DbSet<UserRelationType> RelationTypes { get; set; }
+        public virtual DbSet<UserSetting> UserSettings { get; set; }
+        public virtual DbSet<UserRelation> UserRelations { get; set; }
+        public virtual DbSet<UserRelationType> UserRelationTypes { get; set; }
+        public virtual DbSet<UserGroup> UserGroups { get; set; }
+        public virtual DbSet<UserGroupType> UserGroupTypes { get; set; }
         public virtual DbSet<UserAuthentication> UserAuthentications { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<UserRecoveryToken> UserRecoveryTokens { get; set; }
@@ -25,6 +28,16 @@ namespace Com.Ericmas001.Userbase
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserAccessType>()
+                .HasMany(e => e.UserSettingListFriends)
+                .WithRequired(e => e.UserAccessTypeListFriends)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UserGroupType>()
+                .HasMany(e => e.UserGroups)
+                .WithRequired(e => e.UserGroupType)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<UserRelationType>()
                 .HasMany(e => e.UserRelations)
                 .WithRequired(e => e.UserRelationType)
@@ -58,6 +71,11 @@ namespace Com.Ericmas001.Userbase
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.UserRecoveryTokens)
+                .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.UserGroups)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 

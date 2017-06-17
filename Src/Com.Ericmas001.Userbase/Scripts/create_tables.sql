@@ -30,6 +30,37 @@ CREATE TABLE [dbo].[UserAuthentications](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[UserGroups]    Script Date: 2016-05-29 09:34:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserGroups](
+	[IdUserGroup] [int] IDENTITY(1,1) NOT NULL,
+	[IdUser] [int] NOT NULL,
+	[IdGroupType] [int] NOT NULL,
+ CONSTRAINT [PK_UserGroup] PRIMARY KEY CLUSTERED 
+(
+	[IdUserGroup] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
+/****** Object:  Table [dbo].[UserGroupTypes]    Script Date: 2016-05-29 09:34:45 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].UserGroupTypes(
+	[IdUserGroupType] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL
+ CONSTRAINT [PK_UserGroupTypes] PRIMARY KEY CLUSTERED 
+(
+	[IdUserGroupType] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
 /****** Object:  Table [dbo].[UserProfiles]    Script Date: 2016-05-29 09:34:47 ******/
 SET ANSI_NULLS ON
 GO
@@ -164,12 +195,29 @@ INSERT [dbo].[UserRelationTypes] ([IdUserRelationType], [Name]) VALUES (2, N'Blo
 GO
 SET IDENTITY_INSERT [dbo].[UserRelationTypes] OFF
 GO
+SET IDENTITY_INSERT [dbo].[UserGroupTypes] ON 
+
+GO
+INSERT [dbo].[UserGroupTypes] ([IdUserGroupType], [Name]) VALUES (1, N'Admin')
+GO
+SET IDENTITY_INSERT [dbo].[UserGroupTypes] OFF
+GO
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Active]  DEFAULT ((1)) FOR [Active]
 GO
 ALTER TABLE [dbo].[UserAuthentications]  WITH CHECK ADD  CONSTRAINT [FK_UserAuthentications_Users] FOREIGN KEY([IdUser])
 REFERENCES [dbo].[Users] ([IdUser])
 GO
 ALTER TABLE [dbo].[UserAuthentications] CHECK CONSTRAINT [FK_UserAuthentications_Users]
+GO
+ALTER TABLE [dbo].[UserGroups]  WITH CHECK ADD  CONSTRAINT [FK_UserGroups_UserGroupTypes] FOREIGN KEY([IdUserGroupType])
+REFERENCES [dbo].[UserGroupTypes] ([IdUserGroupType])
+GO
+ALTER TABLE [dbo].[UserGroups] CHECK CONSTRAINT [FK_UserGroups_UserGroupTypes]
+GO
+ALTER TABLE [dbo].[UserGroups]  WITH CHECK ADD  CONSTRAINT [FK_UserGroups_Users] FOREIGN KEY([IdUser])
+REFERENCES [dbo].[Users] ([IdUser])
+GO
+ALTER TABLE [dbo].[UserGroups] CHECK CONSTRAINT [FK_UserGroups_Users]
 GO
 ALTER TABLE [dbo].[UserProfiles]  WITH CHECK ADD  CONSTRAINT [FK_UserProfiles_Users] FOREIGN KEY([IdUser])
 REFERENCES [dbo].[Users] ([IdUser])
