@@ -149,5 +149,10 @@ namespace Com.Ericmas001.Userbase
         {
             return Execute(context => Controller.UserSummary(context, askingUser, token, requestedUser), existingContext);
         }
+
+        public static ListUsersResponse ListUsers(string username, Guid token, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.ListUsers(context, username, token), existingContext);
+        }
     }
 }

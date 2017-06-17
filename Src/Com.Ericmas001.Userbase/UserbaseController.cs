@@ -81,5 +81,10 @@ namespace Com.Ericmas001.Userbase
         {
             return new UserSummaryDbTask(context).Summary(askingUser, token, requestedUser);
         }
+
+        public ListUsersResponse ListUsers(UserbaseDbContext context, string user, Guid token)
+        {
+            return new ListUsersDbTask(context).All(user, token);
+        }
     }
 }

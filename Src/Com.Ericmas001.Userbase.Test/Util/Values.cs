@@ -26,6 +26,8 @@ namespace Com.Ericmas001.Userbase.Test.Util
         public static string UsernameDora => "dora";
         public static string UsernameTooShort => "Po";
         public static string UsernameInvalidChar => "Bling$Bling";
+        public static int IdUserSpongeBob => 42;
+        public static int IdUserDora => 84;
 
         public static string CommandDumb => "DumbCommand";
         public static string CommandPurge => "PurgeToken";
@@ -66,7 +68,7 @@ namespace Com.Ericmas001.Userbase.Test.Util
         public static AuthenticationInfo NewCredentialsSpongeBob => new AuthenticationInfo { Email = EmailSpongeBobNewOne, Password = PasswordSpongeBobNewOne };
         public static ProfileInfo NewProfileSpongeBob => new ProfileInfo { DisplayName = DisplayNameSpongeBobNewOne };
 
-        public static User UserSpongeBob => new User { IdUser = 42, Name = UsernameSpongeBob, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordSpongeBob), RecoveryEmail = EmailSpongeBob }, UserProfile = new UserProfile { DisplayName = DisplayNameSpongeBob }, UserGroups = new List<UserGroup>{ new UserGroup { UserGroupType = GroupTypeAdmin } , new UserGroup { UserGroupType = GroupTypeDumb } } };
+        public static User UserSpongeBob => new User { IdUser = IdUserSpongeBob, Name = UsernameSpongeBob, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordSpongeBob), RecoveryEmail = EmailSpongeBob }, UserProfile = new UserProfile { DisplayName = DisplayNameSpongeBob }, UserGroups = new List<UserGroup>{ new UserGroup { UserGroupType = GroupTypeAdmin } , new UserGroup { UserGroupType = GroupTypeDumb } } };
         public static User UserDora => new User { IdUser = 84, Name = UsernameDora, UserTokens = new List<UserToken>(), UserAuthentication = new UserAuthentication { Password = EncryptPassword(PasswordDora), RecoveryEmail = EmailDora }, UserProfile = new UserProfile { DisplayName = DisplayNameDora }, UserGroups = new List<UserGroup> { new UserGroup { UserGroupType = GroupTypeDumb } } };
 
         public static UserGroupType GroupTypeAdmin => new UserGroupType { Id = GroupAdminId, Name = GroupAdminName };

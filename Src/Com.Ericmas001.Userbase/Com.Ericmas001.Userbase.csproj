@@ -36,11 +36,9 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -56,6 +54,7 @@
   <ItemGroup>
     <Compile Include="DbTasks\AbstractDbTask.cs" />
     <Compile Include="DbTasks\Models\IEmailSender.cs" />
+    <Compile Include="DbTasks\ListUsersDbTask.cs" />
     <Compile Include="DbTasks\UserSummaryDbTask.cs" />
     <Compile Include="DbTasks\PasswordRecoveryDbTask.cs" />
     <Compile Include="DbTasks\UserActivationDbTask.cs" />
@@ -78,6 +77,8 @@
     <Compile Include="Requests\CreateUserRequest.cs" />
     <Compile Include="Requests\Models\AuthenticationInfo.cs" />
     <Compile Include="Requests\Models\ProfileInfo.cs" />
+    <Compile Include="Responses\Models\UserModel.cs" />
+    <Compile Include="Responses\ListUsersResponse.cs" />
     <Compile Include="Responses\UserSummaryResponse.cs" />
     <Compile Include="Responses\TokenSuccessResponse.cs" />
     <Compile Include="Responses\ConnectUserResponse.cs" />
