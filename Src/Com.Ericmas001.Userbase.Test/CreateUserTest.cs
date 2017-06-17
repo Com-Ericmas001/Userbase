@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class CreateUserTest
     {
-        [Test]
+        [Fact]
         public void WithExistingUsernameReturnsNull()
         {
             // Arrange
@@ -22,10 +22,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(Values.UnregisteredDora);
             
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithNotFoundUsernameButInvalidUsernameReturnsNull()
         {
             // Arrange
@@ -43,10 +43,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(userToRegister);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithNotFoundUsernameButInvalidDisplayNameReturnsNull()
         {
             // Arrange
@@ -64,10 +64,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(userToRegister);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithNotFoundUsernameButInvalidPasswordReturnsNull()
         {
             // Arrange
@@ -85,10 +85,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(userToRegister);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithNotFoundUsernameButInvalidEmailReturnsNull()
         {
             // Arrange
@@ -106,10 +106,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(userToRegister);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithNotFoundUsernameButExistingEmailReturnsNull()
         {
             // Arrange
@@ -127,10 +127,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(userToRegister);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithNotFoundUsername()
         {
             var model = Values.Context;
@@ -145,15 +145,15 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.CreateUser(Values.UnregisteredDora);
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(result.Success);
-            Assert.AreEqual(2, model.Users.Count());
+            Assert.NotNull(result.Token);
+            Assert.True(result.Success);
+            Assert.Equal(2, model.Users.Count());
             var dora = model.Users.SingleOrDefault(x => x.Name == Values.UsernameDora);
-            Assert.IsNotNull(dora);
-            Assert.AreEqual(Values.UsernameDora, dora.Name);
-            Assert.AreEqual(Values.DisplayNameDora, dora.UserProfile.DisplayName);
-            Assert.AreEqual(Values.EmailDora, dora.UserAuthentication.RecoveryEmail);
-            Assert.IsTrue(Values.VerifyPassword(Values.PasswordDora, dora));
+            Assert.NotNull(dora);
+            Assert.Equal(Values.UsernameDora, dora.Name);
+            Assert.Equal(Values.DisplayNameDora, dora.UserProfile.DisplayName);
+            Assert.Equal(Values.EmailDora, dora.UserAuthentication.RecoveryEmail);
+            Assert.True(Values.VerifyPassword(Values.PasswordDora, dora));
         }
     }
 }

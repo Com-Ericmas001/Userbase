@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class UserSummaryTest
     {
-        [Test]
+        [Fact]
         public void WithInvalidUsernameReturnsFalse()
         {
             // Arrange
@@ -18,10 +18,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButNoTokenReturnsFalse()
         {
             // Arrange
@@ -36,10 +36,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -56,10 +56,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -77,10 +77,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameValidNotExpiredTokenButInvalidRequestedUsernameReturnsFalse()
         {
             // Arrange
@@ -98,10 +98,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameValidNotExpiredToken()
         {
             // Arrange
@@ -121,12 +121,12 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(tok.Expiration > originalTime);
-            Assert.AreEqual(Values.DisplayNameDora, result.DisplayName);
-            Assert.AreEqual(1, result.Groups.Count);
-            Assert.AreEqual(Values.GroupDummyId, result.Groups.First().Key);
-            Assert.AreEqual(Values.GroupDummyName, result.Groups.First().Value);
+            Assert.NotNull(result.Token);
+            Assert.True(tok.Expiration > originalTime);
+            Assert.Equal(Values.DisplayNameDora, result.DisplayName);
+            Assert.Equal(1, result.Groups.Count);
+            Assert.Equal(Values.GroupDummyId, result.Groups.First().Key);
+            Assert.Equal(Values.GroupDummyName, result.Groups.First().Value);
         }
     }
 }

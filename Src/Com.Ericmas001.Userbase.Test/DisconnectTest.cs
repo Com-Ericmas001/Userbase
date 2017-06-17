@@ -1,13 +1,13 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class DisconnectTest
     {
-        [Test]
+        [Fact]
         public void WithInvalidUsernameReturnsFalse()
         {
             // Arrange
@@ -17,9 +17,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButNoTokenReturnsFalse()
         {
             // Arrange
@@ -34,9 +34,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -53,9 +53,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -73,9 +73,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.Disconnect(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameValidNotExpiredToken()
         {
             // Arrange
@@ -94,8 +94,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.Disconnect(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.IsTrue(result);
-            Assert.IsTrue(tok.Expiration < DateTime.Now);
+            Assert.True(result);
+            Assert.True(tok.Expiration < DateTime.Now);
         }
     }
 }

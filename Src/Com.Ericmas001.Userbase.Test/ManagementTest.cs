@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class ManagementTest
     {
 
-        [Test]
+        [Fact]
         public void PurgeConnectionTokens()
         {
             // Arrange
@@ -27,10 +27,10 @@ namespace Com.Ericmas001.Userbase.Test
             UserbaseSystem.PurgeConnectionTokens();
 
             // Assert
-            Assert.AreEqual(validToken, model.UserTokens.Single());
+            Assert.Equal(validToken, model.UserTokens.Single());
         }
 
-        [Test]
+        [Fact]
         public void PurgeRecoveryTokens()
         {
             // Arrange
@@ -49,10 +49,10 @@ namespace Com.Ericmas001.Userbase.Test
             UserbaseSystem.PurgeRecoveryTokens();
 
             // Assert
-            Assert.AreEqual(validRecoveryToken, model.UserRecoveryTokens.Single());
+            Assert.Equal(validRecoveryToken, model.UserRecoveryTokens.Single());
         }
 
-        [Test]
+        [Fact]
         public void PurgeUsers()
         {
             // Arrange
@@ -72,7 +72,7 @@ namespace Com.Ericmas001.Userbase.Test
             UserbaseSystem.PurgeUsers();
 
             // Assert
-            Assert.AreEqual(activeUser, model.Users.Single());
+            Assert.Equal(activeUser, model.Users.Single());
         }
     }
 }

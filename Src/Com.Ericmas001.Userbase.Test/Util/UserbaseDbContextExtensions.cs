@@ -100,8 +100,11 @@ namespace Com.Ericmas001.Userbase.Test.Util
         {
             if (grp.UserGroupType != null)
             {
+                grp.IdUserGroupType = grp.UserGroupType.IdUserGroupType;
+
                 if(!grp.UserGroupType.UserGroups.Contains(grp))
                     grp.UserGroupType.UserGroups.Add(grp);
+            
 
                 if (!context.UserGroupTypes.Contains(grp.UserGroupType))
                     context.UserGroupTypes.Add(grp.UserGroupType);

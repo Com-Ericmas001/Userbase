@@ -1,12 +1,12 @@
 ﻿using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class IdFromEmailTest
     {
-        [Test]
+        [Fact]
         public void WithNoUserReturnsZero()
         {
             // Arrange
@@ -16,10 +16,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.IdFromEmail(Values.EmailSpongeBob);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.Equal(0, result);
         }
 
-        [Test]
+        [Fact]
         public void WithInvalidUserReturnsZero()
         {
             // Arrange
@@ -34,9 +34,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.IdFromEmail(Values.EmailDora);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.Equal(0, result);
         }
-        [Test]
+        [Fact]
         public void WithValidUserReturnsId()
         {
             // Arrange
@@ -52,8 +52,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.IdFromEmail(Values.EmailSpongeBob);
 
             // Assert
-            Assert.AreNotEqual(0, result);
-            Assert.AreEqual(Values.UserSpongeBob.IdUser, result);
+            Assert.NotEqual(0, result);
+            Assert.Equal(Values.UserSpongeBob.IdUser, result);
         }
     }
 }

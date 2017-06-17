@@ -1,13 +1,13 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class ResetPasswordTest
     {
-        [Test]
+        [Fact]
         public void EmptyUsersReturnsFalse()
         {
             // Arrange
@@ -17,10 +17,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid(), Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameButNoTokenReturnsFalse()
         {
             // Arrange
@@ -35,10 +35,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid(), Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameButInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -55,10 +55,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid(), Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameButExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -76,10 +76,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredTokenInvalidNewPasswordReturnsFalse()
         {
             // Arrange
@@ -97,10 +97,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordInvalidChar);
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredToken()
         {
             // Arrange
@@ -120,9 +120,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(tok.Expiration < originalTime);
-            Assert.IsTrue(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
+            Assert.NotNull(result.Token);
+            Assert.True(tok.Expiration < originalTime);
+            Assert.True(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
         }
     }
 }

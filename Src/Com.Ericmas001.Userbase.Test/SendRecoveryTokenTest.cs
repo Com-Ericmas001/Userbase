@@ -2,12 +2,12 @@
 using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Responses.Models;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 using Moq;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class SendRecoveryTokenTest
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -20,7 +20,7 @@ namespace Com.Ericmas001.Userbase.Test
             }
         }
 
-        [Test]
+        [Fact]
         public void EmptyUsersReturnsFalse()
         {
             // Arrange
@@ -30,9 +30,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.SendRecoveryToken(Values.UsernameSpongeBob,new DummyEmailSender());
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameReturnsTrue()
         {
             // Arrange
@@ -49,8 +49,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.SendRecoveryToken(Values.UsernameSpongeBob, mockDummyEmailSender.Object);
 
             // Assert
-            Assert.IsTrue(result);
-            Assert.AreEqual(1, user.UserRecoveryTokens.Count);
+            Assert.True(result);
+            Assert.Equal(1, user.UserRecoveryTokens.Count);
             mockDummyEmailSender.Verify(m => m.SendToken(It.IsAny<RecoveryToken>(), It.IsAny<string>()), Times.Once);
         }
     }

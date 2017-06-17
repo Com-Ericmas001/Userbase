@@ -1,14 +1,14 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class ModifyCredentialsTest
     {
-        [Test]
+        [Fact]
         public void EmptyUsersReturnsFalse()
         {
             // Arrange
@@ -23,10 +23,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameButNoTokenReturnsFalse()
         {
             // Arrange
@@ -46,10 +46,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameButInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -71,10 +71,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameButExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -97,10 +97,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredTokenInvalidNewPasswordReturnsFalse()
         {
             // Arrange
@@ -126,10 +126,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredTokenInvalidNewEmailReturnsFalse()
         {
             // Arrange
@@ -155,10 +155,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredTokenExistingNewEmailReturnsFalse()
         {
             // Arrange
@@ -185,10 +185,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredToken()
         {
             // Arrange
@@ -213,12 +213,12 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(tok.Expiration > originalTime);
-            Assert.AreEqual(Values.EmailSpongeBobNewOne, u.UserAuthentication.RecoveryEmail);
-            Assert.IsTrue(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
+            Assert.NotNull(result.Token);
+            Assert.True(tok.Expiration > originalTime);
+            Assert.Equal(Values.EmailSpongeBobNewOne, u.UserAuthentication.RecoveryEmail);
+            Assert.True(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredTokenNotChangingPassword()
         {
             // Arrange
@@ -246,12 +246,12 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(tok.Expiration > originalTime);
-            Assert.AreEqual(Values.EmailSpongeBobNewOne, u.UserAuthentication.RecoveryEmail);
-            Assert.IsTrue(Values.VerifyPassword(Values.PasswordSpongeBob, u));
+            Assert.NotNull(result.Token);
+            Assert.True(tok.Expiration > originalTime);
+            Assert.Equal(Values.EmailSpongeBobNewOne, u.UserAuthentication.RecoveryEmail);
+            Assert.True(Values.VerifyPassword(Values.PasswordSpongeBob, u));
         }
-        [Test]
+        [Fact]
         public void ValidUsernameValidNotExpiredTokenNotChangingEmail()
         {
             // Arrange
@@ -279,10 +279,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(tok.Expiration > originalTime);
-            Assert.AreEqual(Values.EmailSpongeBob, u.UserAuthentication.RecoveryEmail);
-            Assert.IsTrue(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
+            Assert.NotNull(result.Token);
+            Assert.True(tok.Expiration > originalTime);
+            Assert.Equal(Values.EmailSpongeBob, u.UserAuthentication.RecoveryEmail);
+            Assert.True(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class UsernameExistsTest
     {
-        [Test]
+        [Fact]
         public void WithNoUserReturnsFalse()
         {
             // Arrange
@@ -16,10 +16,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UsernameExists(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
 
-        [Test]
+        [Fact]
         public void WithInvalidUserReturnsFalse()
         {
             // Arrange
@@ -34,9 +34,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UsernameExists(Values.UsernameDora);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
-        [Test]
+        [Fact]
         public void WithValidUserReturnsTrue()
         {
             // Arrange
@@ -52,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.UsernameExists(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.True(result);
         }
     }
 }

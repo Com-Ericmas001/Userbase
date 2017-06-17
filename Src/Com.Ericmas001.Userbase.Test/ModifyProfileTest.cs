@@ -1,14 +1,14 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Requests;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class ModifyProfileTest
     {
-        [Test]
+        [Fact]
         public void WithInvalidUsernameReturnsFalse()
         {
             // Arrange
@@ -23,10 +23,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButNoTokenReturnsFalse()
         {
             // Arrange
@@ -46,10 +46,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -71,10 +71,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -97,10 +97,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameValidNotExpiredTokenButInvalidDisplayNameReturnsFalse()
         {
             // Arrange
@@ -126,10 +126,10 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNull(result.Token);
-            Assert.IsFalse(result.Success);
+            Assert.Null(result.Token);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUsernameValidNotExpiredToken()
         {
             // Arrange
@@ -153,9 +153,9 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Assert
-            Assert.IsNotNull(result.Token);
-            Assert.IsTrue(tok.Expiration > originalTime);
-            Assert.AreEqual(Values.DisplayNameSpongeBobNewOne, u.UserProfile.DisplayName);
+            Assert.NotNull(result.Token);
+            Assert.True(tok.Expiration > originalTime);
+            Assert.Equal(Values.DisplayNameSpongeBobNewOne, u.UserProfile.DisplayName);
         }
     }
 }

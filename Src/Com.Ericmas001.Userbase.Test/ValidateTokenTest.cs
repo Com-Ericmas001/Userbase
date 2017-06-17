@@ -1,13 +1,13 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class ValidateTokenTest
     {
-        [Test]
+        [Fact]
         public void WithNoUserReturnsFalse()
         {
             // Arrange
@@ -17,10 +17,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
 
-        [Test]
+        [Fact]
         public void WithInvalidUserReturnsFalse()
         {
             // Arrange
@@ -35,9 +35,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateToken(Values.UsernameDora, Values.ValidToken.Token);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUserNoTokensReturnsFalse()
         {
             // Arrange
@@ -52,9 +52,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUserInvalidTokenReturnsFalse()
         {
             // Arrange
@@ -71,9 +71,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateToken(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUserExpiredTokenReturnsFalse()
         {
             // Arrange
@@ -91,9 +91,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateToken(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUserValidTokenReturnsTrue()
         {
             // Arrange
@@ -112,9 +112,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateToken(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.IsTrue(result.Success);
-            Assert.AreEqual(tok.Token, result.Token.Id);
-            Assert.IsTrue(expiration < result.Token.ValidUntil);
+            Assert.True(result.Success);
+            Assert.Equal(tok.Token, result.Token.Id);
+            Assert.True(expiration < result.Token.ValidUntil);
         }
     }
 }

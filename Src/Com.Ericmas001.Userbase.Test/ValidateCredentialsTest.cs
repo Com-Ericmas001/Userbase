@@ -1,12 +1,12 @@
 ﻿using Com.Ericmas001.Userbase.Test.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [TestFixture]
+    [Collection("Com.Ericmas001.Userbase.Test")]
     public class ValidateCredentialsTest
     {
-        [Test]
+        [Fact]
         public void WithNoUserReturnsFalse()
         {
             // Arrange
@@ -16,10 +16,10 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateCredentials(Values.UsernameSpongeBob, Values.PasswordSpongeBob);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
 
-        [Test]
+        [Fact]
         public void WithInvalidUserReturnsFalse()
         {
             // Arrange
@@ -34,9 +34,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateCredentials(Values.UsernameDora, Values.PasswordDora);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUserWrongPasswordReturnsFalse()
         {
             // Arrange
@@ -51,9 +51,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateCredentials(Values.UsernameSpongeBob, Values.PasswordDumb);
 
             // Assert
-            Assert.IsFalse(result.Success);
+            Assert.False(result.Success);
         }
-        [Test]
+        [Fact]
         public void WithValidUserValidPasswordReturnsTrue()
         {
             // Arrange
@@ -68,7 +68,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = UserbaseSystem.ValidateCredentials(Values.UsernameSpongeBob, Values.PasswordSpongeBob);
 
             // Assert
-            Assert.IsTrue(result.Success);
+            Assert.True(result.Success);
         }
     }
 }
