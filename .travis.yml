@@ -1,8 +1,8 @@
 language: csharp
 solution: Src/Userbase.sln
 install:
-  - sudo apt-get install nunit-console
   - nuget restore Src/Userbase.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Src/Userbase.sln
-  - nunit-console Src/Com.Ericmas001.Userbase.Test/bin/Release/Com.Ericmas001.Userbase.Test.dll
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe Src/Com.Ericmas001.Userbase.Test/bin/Release/Com.Ericmas001.Userbase.Test.dll
