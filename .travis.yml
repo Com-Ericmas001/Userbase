@@ -1,8 +1,8 @@
 language: csharp
-solution: Src/Userbase.sln
 before_install:
   - sudo apt-get install nunit-console
 before_script:
   - nuget restore Src/Userbase.sln
-after_script:
-  - nunit-console Src/Com.Ericmas001.Userbase.Test/bin/Release/Com.Ericmas001.Userbase.Test.dll
+script:
+  - xbuild /p:Configuration=Release Src/Userbase.sln
+  - nunit3-console Src/Com.Ericmas001.Userbase.Test/bin/Release/Com.Ericmas001.Userbase.Test.dll
