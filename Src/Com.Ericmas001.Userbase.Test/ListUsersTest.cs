@@ -81,27 +81,6 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.False(result.Success);
         }
         [Fact]
-        public void WithValidUsernameValidNotExpiredTokenButInvalidRequestedUsernameReturnsFalse()
-        {
-            // Arrange
-            var tok = Values.ValidToken;
-            var u = Values.UserSpongeBob;
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-            {
-                var model = Values.Context;
-                u.UserTokens.Add(tok);
-                model.Users.Add(u);
-                return model;
-            });
-
-            // Act
-            var result = UserbaseSystem.ListUsers(Values.UsernameSpongeBob, tok.Token);
-
-            // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
-        }
-        [Fact]
         public void WithValidUsernameValidNotExpiredToken()
         {
             // Arrange
