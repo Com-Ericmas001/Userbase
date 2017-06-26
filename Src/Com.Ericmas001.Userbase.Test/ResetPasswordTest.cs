@@ -14,7 +14,7 @@ namespace Com.Ericmas001.Userbase.Test
             UserbaseSystem.Init(Values.Salt, contextGenerator: () => Values.Context);
 
             // Act
-            var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid(), Values.PasswordSpongeBobNewOne);
+            var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);
@@ -32,7 +32,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid(), Values.PasswordSpongeBobNewOne);
+            var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);
@@ -52,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid(), Values.PasswordSpongeBobNewOne);
+            var result = UserbaseSystem.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);

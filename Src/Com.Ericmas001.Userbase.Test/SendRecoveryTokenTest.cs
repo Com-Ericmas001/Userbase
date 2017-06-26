@@ -14,7 +14,7 @@ namespace Com.Ericmas001.Userbase.Test
         [SuppressMessage("ReSharper", "ClassWithVirtualMembersNeverInherited.Global")]
         public class DummyEmailSender : IEmailSender
         {
-            public virtual void SendToken(RecoveryToken token, string email)
+            public virtual void SendToken(RecoveryToken token, string username, string email)
             {
                 //Do nothing, 'cause you're dummy !
             }
@@ -51,7 +51,7 @@ namespace Com.Ericmas001.Userbase.Test
             // Assert
             Assert.True(result);
             Assert.Equal(1, user.UserRecoveryTokens.Count);
-            mockDummyEmailSender.Verify(m => m.SendToken(It.IsAny<RecoveryToken>(), It.IsAny<string>()), Times.Once);
+            mockDummyEmailSender.Verify(m => m.SendToken(It.IsAny<RecoveryToken>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
     }
 }

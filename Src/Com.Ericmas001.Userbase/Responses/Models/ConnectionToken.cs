@@ -2,7 +2,7 @@
 
 namespace Com.Ericmas001.Userbase.Responses.Models
 {
-    public class ConnectionToken : Token
+    public class ConnectionToken : Token<Guid>
     {
         public static DateTime NextExpiration => new ConnectionToken().CalculateNextExpiration();
         protected override DateTime CalculateNextExpiration() => DateTime.Now.AddMinutes(10);
@@ -13,6 +13,11 @@ namespace Com.Ericmas001.Userbase.Responses.Models
 
         public ConnectionToken()
         {
+        }
+
+        protected override Guid GenerateNewToken()
+        {
+            return Guid.NewGuid();
         }
     }
 }

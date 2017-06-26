@@ -6,6 +6,6 @@ namespace Com.Ericmas001.Userbase.Responses
     {
         public bool Success { get; set; }
 
-        public Token Token { get; set; }
+        public ConnectionToken Token { get; set; }
     }
 }

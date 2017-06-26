@@ -140,7 +140,7 @@ namespace Com.Ericmas001.Userbase
             return Execute(context => Controller.SendRecoveryToken(context, username, smtp), existingContext);
         }
 
-        public static ConnectUserResponse ResetPassword(string username, Guid recoveryToken, string newPassword, UserbaseDbContext existingContext = null)
+        public static ConnectUserResponse ResetPassword(string username, string recoveryToken, string newPassword, UserbaseDbContext existingContext = null)
         {
             return Execute(context => Controller.ResetPassword(context, username, recoveryToken, newPassword), existingContext);
         }

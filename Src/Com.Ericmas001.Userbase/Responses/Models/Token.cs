@@ -7,14 +7,14 @@ namespace Com.Ericmas001.Userbase.Responses.Models
 {
     [XmlInclude(typeof(ConnectionToken))]
     [XmlInclude(typeof(RecoveryToken))]
-    public abstract class Token
+    public abstract class Token<TToken>
     {
         protected abstract DateTime CalculateNextExpiration();
-        public Guid Id { get; set; }
+        public TToken Id { get; set; }
 
         public DateTime ValidUntil { get; set; }
 
-        protected Token(Guid id, DateTime validUntil)
+        protected Token(TToken id, DateTime validUntil)
         {
             Id = id;
             ValidUntil = validUntil;
@@ -23,8 +23,10 @@ namespace Com.Ericmas001.Userbase.Responses.Models
         [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
         protected Token()
         {
-            Id = Guid.NewGuid();
+            Id = GenerateNewToken();
             ValidUntil = CalculateNextExpiration();
         }
+
+        protected abstract TToken GenerateNewToken();
     }
 }

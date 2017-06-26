@@ -72,7 +72,7 @@ namespace Com.Ericmas001.Userbase
             return new PasswordRecoveryDbTask(context).SendRecoveryToken(username, smtp);
         }
 
-        public ConnectUserResponse ResetPassword(UserbaseDbContext context, string username, Guid recoveryToken, string newPassword)
+        public ConnectUserResponse ResetPassword(UserbaseDbContext context, string username, string recoveryToken, string newPassword)
         {
             return new PasswordRecoveryDbTask(context).ResetPassword(username, recoveryToken, newPassword);
         }

@@ -23,7 +23,8 @@ namespace Com.Ericmas001.Userbase.Entities
 
         public int IdUser { get; set; }
 
-        public Guid Token { get; set; }
+        [StringLength(100)]
+        public string Token { get; set; }
 
         public DateTime Expiration { get; set; }
 
@@ -33,7 +34,7 @@ namespace Com.Ericmas001.Userbase.Entities
 
 
 
-        public static UserRecoveryToken FromId(UserbaseDbContext context, int idUser, Guid token)
+        public static UserRecoveryToken FromId(UserbaseDbContext context, int idUser, string token)
         {
             return context.UserRecoveryTokens.AsEnumerable().SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
         }

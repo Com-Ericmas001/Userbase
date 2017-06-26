@@ -61,7 +61,7 @@ namespace Com.Ericmas001.Userbase.DbTasks
             return true;
         }
 
-        private Token CreateConnectionToken(int idUser)
+        private ConnectionToken CreateConnectionToken(int idUser)
         {
             var token = new ConnectionToken();
             Context.UserTokens.Add(new UserToken { Token = token.Id, Expiration = token.ValidUntil, IdUser = idUser });

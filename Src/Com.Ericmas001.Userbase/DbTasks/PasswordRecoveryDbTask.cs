@@ -29,12 +29,12 @@ namespace Com.Ericmas001.Userbase.DbTasks
             u.UserRecoveryTokens.Add(new UserRecoveryToken { Token = token.Id, Expiration = token.ValidUntil });
             Context.SaveChanges();
 
-            smtp.SendToken(token, u.UserAuthentication.RecoveryEmail);
+            smtp.SendToken(token, username, u.UserAuthentication.RecoveryEmail);
 
             return true;
         }
 
-        public ConnectUserResponse ResetPassword(string username, Guid recoveryToken, string newPassword)
+        public ConnectUserResponse ResetPassword(string username, string recoveryToken, string newPassword)
         {
             int idUser = UserbaseSystem.IdFromUsername(username, Context);
 
