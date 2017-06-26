@@ -86,5 +86,15 @@ namespace Com.Ericmas001.Userbase
         {
             return new ListUsersDbTask(context).All(user, token);
         }
+
+        public TokenSuccessResponse AddUserToGroup(UserbaseDbContext context, AddUserToGroupRequest request)
+        {
+            return new UserGroupDbTask(context).AddUserToGroup(request);
+        }
+
+        public TokenSuccessResponse ExcludeUserFromGroup(UserbaseDbContext context, string requestingUsername, Guid token, string userToExclude, int idGroup)
+        {
+            return new UserGroupDbTask(context).ExcludeUserFromGroup(requestingUsername, token, userToExclude, idGroup);
+        }
     }
 }

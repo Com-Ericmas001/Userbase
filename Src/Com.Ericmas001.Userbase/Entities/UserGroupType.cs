@@ -8,6 +8,8 @@ namespace Com.Ericmas001.Userbase.Entities
     [Table("UserGroupTypes")]
     public class UserGroupType : IEntityWithId
     {
+        public const string ADMIN_GRP = "Admin";
+
         [NotMapped]
         public int Id
         {

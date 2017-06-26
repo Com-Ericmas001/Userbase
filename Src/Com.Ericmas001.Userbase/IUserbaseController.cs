@@ -23,5 +23,7 @@ namespace Com.Ericmas001.Userbase
         ConnectUserResponse ResetPassword(UserbaseDbContext context, string username, string recoveryToken, string newPassword);
         UserSummaryResponse UserSummary(UserbaseDbContext context, string askingUser, Guid token, string requestedUser);
         ListUsersResponse ListUsers(UserbaseDbContext context, string user, Guid token);
+        TokenSuccessResponse AddUserToGroup(UserbaseDbContext context, AddUserToGroupRequest request);
+        TokenSuccessResponse ExcludeUserFromGroup(UserbaseDbContext context, string requestingUsername, Guid token, string userToExclude, int idGroup);
     }
 }

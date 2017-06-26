@@ -55,6 +55,7 @@
     <Compile Include="DbTasks\AbstractDbTask.cs" />
     <Compile Include="DbTasks\Models\IEmailSender.cs" />
     <Compile Include="DbTasks\ListUsersDbTask.cs" />
+    <Compile Include="DbTasks\UserGroupDbTask.cs" />
     <Compile Include="DbTasks\UserSummaryDbTask.cs" />
     <Compile Include="DbTasks\PasswordRecoveryDbTask.cs" />
     <Compile Include="DbTasks\UserActivationDbTask.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
     <Compile Include="NotInitializedException.cs" />
+    <Compile Include="Requests\AddUserToGroupRequest.cs" />
     <Compile Include="Requests\ModifyProfileRequest.cs" />
     <Compile Include="Requests\ModifyCredentialsRequest.cs" />
     <Compile Include="Requests\CreateUserRequest.cs" />

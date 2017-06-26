@@ -154,5 +154,15 @@ namespace Com.Ericmas001.Userbase
         {
             return Execute(context => Controller.ListUsers(context, username, token), existingContext);
         }
+
+        public static TokenSuccessResponse AddUserToGroup(AddUserToGroupRequest request, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.AddUserToGroup(context, request), existingContext);
+        }
+
+        public static TokenSuccessResponse ExcludeUserFromGroup(string requestingUsername, Guid token, string userToExclude, int idGroup, UserbaseDbContext existingContext = null)
+        {
+            return Execute(context => Controller.ExcludeUserFromGroup(context, requestingUsername, token, userToExclude, idGroup), existingContext);
+        }
     }
 }
