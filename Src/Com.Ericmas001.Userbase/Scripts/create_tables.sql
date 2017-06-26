@@ -38,7 +38,7 @@ GO
 CREATE TABLE [dbo].[UserGroups](
 	[IdUserGroup] [int] IDENTITY(1,1) NOT NULL,
 	[IdUser] [int] NOT NULL,
-	[IdGroupType] [int] NOT NULL,
+	[IdUserGroupType] [int] NOT NULL,
  CONSTRAINT [PK_UserGroup] PRIMARY KEY CLUSTERED 
 (
 	[IdUserGroup] ASC
