@@ -6,11 +6,7 @@ namespace Com.Ericmas001.Userbase
 {
     public class UserbaseDbContext : DbContext, IUserbaseDbContext
     {
-        public UserbaseDbContext()
-            : base("name=UserbaseDbContext")
-        {
-        }
-        public UserbaseDbContext(string connString)
+        public UserbaseDbContext(string connString = "name=UserbaseDbContext")
             : base(connString)
         {
         }

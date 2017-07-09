@@ -11,13 +11,13 @@ namespace Com.Ericmas001.Userbase.Services
     public class UserConnectionService : IUserConnectionService
     {
         private readonly IUserbaseDbContext m_DbContext;
-        private readonly IUserbaseConfig m_Config;
+        private readonly ISecurityService m_SecurityService;
         private readonly IUserObtentionService m_UserObtentionService;
 
-        public UserConnectionService(IUserbaseDbContext dbContext, IUserbaseConfig config, IUserObtentionService userObtentionService)
+        public UserConnectionService(IUserbaseDbContext dbContext, ISecurityService securityService, IUserObtentionService userObtentionService)
         {
             m_DbContext = dbContext;
-            m_Config = config;
+            m_SecurityService = securityService;
             m_UserObtentionService = userObtentionService;
         }
 
@@ -46,7 +46,7 @@ namespace Com.Ericmas001.Userbase.Services
                 return new ConnectUserResponse { Success = false };
 
             //Invalid Password
-            if (!BCrypt.CheckPassword(m_Config.SaltPassword(password), m_DbContext.UserAuthentications.Single(x => x.IdUser == idUser).Password))
+            if (!BCrypt.CheckPassword(m_SecurityService.SaltPassword(password), m_DbContext.UserAuthentications.Single(x => x.IdUser == idUser).Password))
                 return new ConnectUserResponse { Success = false };
 
             return new ConnectUserResponse { Success = true, IdUser = idUser, Token = CreateToken(idUser) };

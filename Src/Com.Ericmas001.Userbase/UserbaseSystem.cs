@@ -1,168 +1,138 @@
 ﻿using System;
-using Com.Ericmas001.Security.Cryptography;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.Requests;
 using Com.Ericmas001.Userbase.Models.Responses;
+using Com.Ericmas001.Userbase.Services;
+using Com.Ericmas001.Userbase.Services.Interfaces;
+using Microsoft.Practices.Unity;
 
 namespace Com.Ericmas001.Userbase
 {
-    public static class UserbaseSystem
+    public class UserbaseSystem
     {
-        private static bool m_Initialized;
+        private readonly IUnityContainer m_Container;
 
-        private static Func<UserbaseDbContext> m_ContextGenerator;
-
-        public static IUserbaseConfig Config {get; private set; }
-
-        private static IUserbaseController m_Controller;
-
-        private static IUserbaseController Controller
+        public UserbaseSystem(IUnityContainer container = null, string salt = null)
         {
-            get
-            {
-                if (!m_Initialized)
-                    throw new NotInitializedException();
-                return m_Controller;
-            }
-            set { m_Controller = value; }
+            m_Container = container ?? new UnityContainer();
+
+            RegisterTypes(salt ?? string.Empty);
         }
 
-        internal static string SaltPassword(string unsaltedPassword)
+        private void RegisterTypes(string salt)
         {
-            return Config.SaltPassword(unsaltedPassword);
+            m_Container.RegisterType<IUserbaseDbContext, UserbaseDbContext>();
 
+            m_Container.RegisterType<IValidationService, ValidationService>(new ContainerControlledLifetimeManager());
+            m_Container.RegisterType<ISecurityService, SecurityService>(new ContainerControlledLifetimeManager(), new InjectionConstructor(salt));
+
+            m_Container.RegisterType<IManagementService, ManagementService>();
+            m_Container.RegisterType<IUserConnectionService, UserConnectionService>();
+            m_Container.RegisterType<IUserGroupingService, UserGroupingService>();
+            m_Container.RegisterType<IUserInformationService, UserInformationService>();
+            m_Container.RegisterType<IUserManagingService, UserManagingService>();
+            m_Container.RegisterType<IUserObtentionService, UserObtentionService>();
+            m_Container.RegisterType<IUserRecoveryService, UserRecoveryService>();
         }
 
-        public static void Init(string salt, IUserbaseController controller = null, Func<UserbaseDbContext> contextGenerator = null, string connString = null)
+        public int IdFromUsername(string username)
         {
-            Controller = controller ?? new UserbaseController();
-            Config = new UserbaseConfig(salt);
-            m_ContextGenerator = contextGenerator ?? (() => connString == null ? new UserbaseDbContext() : new UserbaseDbContext(connString));
-            m_Initialized = true;
+            return m_Container.Resolve<IUserObtentionService>().FromUsername(username);
         }
 
-        private static TResponse Execute<TResponse>(Func<UserbaseDbContext, TResponse> thingToDo, UserbaseDbContext existingContext)
+        public bool UsernameExists(string username)
         {
-            if (existingContext != null)
-                return thingToDo(existingContext);
-
-            using (var context = m_ContextGenerator.Invoke())
-                return thingToDo(context);
-        }
-        private static void Execute(Action<UserbaseDbContext> thingToDo, UserbaseDbContext existingContext)
-        {
-            if (existingContext != null)
-                thingToDo(existingContext);
-            else
-            {
-                using (var context = m_ContextGenerator.Invoke())
-                    thingToDo(context);
-            }
+            return m_Container.Resolve<IUserObtentionService>().UsernameExists(username);
         }
 
-        public static string EncryptPassword(string password)
+        public int IdFromEmail(string email)
         {
-            return BCrypt.HashPassword(SaltPassword(password), BCrypt.GenerateSalt());
+            return m_Container.Resolve<IUserObtentionService>().FromEmail(email);
         }
 
-        public static int IdFromUsername(string username, UserbaseDbContext existingContext = null)
+        public bool EmailExists(string email)
         {
-            return Execute(context => Controller.IdFromUsername(context, username), existingContext);
+            return m_Container.Resolve<IUserObtentionService>().EmailExists(email);
         }
 
-        public static bool UsernameExists(string username, UserbaseDbContext existingContext = null)
+        public ConnectUserResponse ValidateCredentials(string username, string password)
         {
-            return IdFromUsername(username, existingContext) != 0;
+            return m_Container.Resolve<IUserConnectionService>().ConnectWithPassword(username, password);
         }
 
-        public static int IdFromEmail(string email, UserbaseDbContext existingContext = null)
+        public ConnectUserResponse ValidateToken(string username, Guid token)
         {
-            return Execute(context => Controller.IdFromEmail(context, email), existingContext);
+            return m_Container.Resolve<IUserConnectionService>().ConnectWithToken(username, token);
         }
 
-        public static bool EmailExists(string email, UserbaseDbContext existingContext = null)
+        public ConnectUserResponse CreateUser(CreateUserRequest request)
         {
-            return IdFromEmail(email, existingContext) != 0;
+            return m_Container.Resolve<IUserManagingService>().CreateUser(request);
         }
 
-        public static ConnectUserResponse ValidateCredentials(string username, string password, UserbaseDbContext existingContext = null)
+        public TokenSuccessResponse ModifyCredentials(ModifyCredentialsRequest request)
         {
-            return Execute(context => Controller.ValidateCredentials(context, username, password), existingContext);
+            return m_Container.Resolve<IUserManagingService>().ModifyCredentials(request);
         }
 
-        public static ConnectUserResponse ValidateToken(string username, Guid token, UserbaseDbContext existingContext = null)
+        public TokenSuccessResponse ModifyProfile(ModifyProfileRequest request)
         {
-            return Execute(context => Controller.ValidateToken(context, username, token), existingContext);
+            return m_Container.Resolve<IUserManagingService>().ModifyProfile(request);
         }
 
-        public static ConnectUserResponse CreateUser(CreateUserRequest request, UserbaseDbContext existingContext = null)
+        public bool Disconnect(string username, Guid token)
         {
-            return Execute(context => Controller.CreateUser(context, request), existingContext);
+            return m_Container.Resolve<IUserConnectionService>().Disconnect(username, token);
         }
 
-        public static TokenSuccessResponse ModifyCredentials(ModifyCredentialsRequest request, UserbaseDbContext existingContext = null)
+        public void PurgeUsers(UserbaseDbContext existingContext = null)
         {
-            return Execute(context => Controller.ModifyCredentials(context, request), existingContext);
+            m_Container.Resolve<IManagementService>().PurgeUsers();
         }
 
-        public static TokenSuccessResponse ModifyProfile(ModifyProfileRequest request, UserbaseDbContext existingContext = null)
+        public void PurgeConnectionTokens(UserbaseDbContext existingContext = null)
         {
-            return Execute(context => Controller.ModifyProfile(context, request), existingContext);
+            m_Container.Resolve<IManagementService>().PurgeConnectionTokens();
         }
 
-        public static bool Disconnect(string username, Guid token, UserbaseDbContext existingContext = null)
+        public void PurgeRecoveryTokens(UserbaseDbContext existingContext = null)
         {
-            return Execute(context => Controller.Disconnect(context, username, token), existingContext);
+            m_Container.Resolve<IManagementService>().PurgeRecoveryTokens();
         }
 
-        public static void PurgeUsers(UserbaseDbContext existingContext = null)
+        public bool Deactivate(string username, Guid token)
         {
-            Execute(context => Controller.PurgeUsers(context), existingContext);
+            return m_Container.Resolve<IUserManagingService>().Deactivate(username, token);
         }
 
-        public static void PurgeConnectionTokens(UserbaseDbContext existingContext = null)
+        public bool SendRecoveryToken(string username, IEmailSender smtp)
         {
-            Execute(context => Controller.PurgeConnectionTokens(context), existingContext);
+            return m_Container.Resolve<IUserRecoveryService>().SendRecoveryToken(username, smtp);
         }
 
-        public static void PurgeRecoveryTokens(UserbaseDbContext existingContext = null)
+        public ConnectUserResponse ResetPassword(string username, string recoveryToken, string newPassword)
         {
-            Execute(context => Controller.PurgeRecoveryTokens(context), existingContext);
+            return m_Container.Resolve<IUserRecoveryService>().ResetPassword(username, recoveryToken, newPassword);
         }
 
-        public static bool Deactivate(string username, Guid token, UserbaseDbContext existingContext = null)
+        public UserSummaryResponse UserSummary(string askingUser, Guid token, string requestedUser)
         {
-            return Execute(context => Controller.Deactivate(context, username, token), existingContext);
+            return m_Container.Resolve<IUserInformationService>().UserSummary(askingUser, token, requestedUser);
         }
 
-        public static bool SendRecoveryToken(string username, IEmailSender smtp, UserbaseDbContext existingContext = null)
+        public ListUsersResponse ListUsers(string username, Guid token)
         {
-            return Execute(context => Controller.SendRecoveryToken(context, username, smtp), existingContext);
+            return m_Container.Resolve<IUserInformationService>().ListAllUsers(username, token);
         }
 
-        public static ConnectUserResponse ResetPassword(string username, string recoveryToken, string newPassword, UserbaseDbContext existingContext = null)
+        public TokenSuccessResponse AddUserToGroup(AddUserToGroupRequest request)
         {
-            return Execute(context => Controller.ResetPassword(context, username, recoveryToken, newPassword), existingContext);
+            return m_Container.Resolve<IUserGroupingService>().AddUserToGroup(request);
         }
 
-        public static UserSummaryResponse UserSummary(string askingUser, Guid token, string requestedUser, UserbaseDbContext existingContext = null)
+        public TokenSuccessResponse ExcludeUserFromGroup(string requestingUsername, Guid token, string userToExclude, int idGroup)
         {
-            return Execute(context => Controller.UserSummary(context, askingUser, token, requestedUser), existingContext);
-        }
-
-        public static ListUsersResponse ListUsers(string username, Guid token, UserbaseDbContext existingContext = null)
-        {
-            return Execute(context => Controller.ListUsers(context, username, token), existingContext);
-        }
-
-        public static TokenSuccessResponse AddUserToGroup(AddUserToGroupRequest request, UserbaseDbContext existingContext = null)
-        {
-            return Execute(context => Controller.AddUserToGroup(context, request), existingContext);
-        }
-
-        public static TokenSuccessResponse ExcludeUserFromGroup(string requestingUsername, Guid token, string userToExclude, int idGroup, UserbaseDbContext existingContext = null)
-        {
-            return Execute(context => Controller.ExcludeUserFromGroup(context, requestingUsername, token, userToExclude, idGroup), existingContext);
+            return m_Container.Resolve<IUserGroupingService>().ExcludeUserFromGroup(requestingUsername, token, userToExclude, idGroup);
         }
     }
 }

@@ -10,13 +10,15 @@ namespace Com.Ericmas001.Userbase.Services
     public class UserManagingService : IUserManagingService
     {
         private readonly IUserbaseDbContext m_DbContext;
+        private readonly ISecurityService m_SecurityService;
         private readonly IUserObtentionService m_UserObtentionService;
         private readonly IUserConnectionService m_UserConnectionService;
         private readonly IValidationService m_ValidationService;
 
-        public UserManagingService(IUserbaseDbContext dbContext, IUserObtentionService userObtentionService, IUserConnectionService userConnectionService, IValidationService validationService)
+        public UserManagingService(IUserbaseDbContext dbContext, ISecurityService securityService, IUserObtentionService userObtentionService, IUserConnectionService userConnectionService, IValidationService validationService)
         {
             m_DbContext = dbContext;
+            m_SecurityService = securityService;
             m_UserObtentionService = userObtentionService;
             m_UserConnectionService = userConnectionService;
             m_ValidationService = validationService;
@@ -52,7 +54,7 @@ namespace Com.Ericmas001.Userbase.Services
                 },
                 UserAuthentication = new UserAuthentication
                 {
-                    Password = UserbaseSystem.EncryptPassword(request.Authentication.Password),
+                    Password = m_SecurityService.EncryptPassword(request.Authentication.Password),
                     RecoveryEmail = request.Authentication.Email
                 }
             };
@@ -98,7 +100,7 @@ namespace Com.Ericmas001.Userbase.Services
             {
                 if (!m_ValidationService.ValidatePassword(request.Authentication.Password))
                     return InvalidResponse;
-                u.UserAuthentication.Password = UserbaseSystem.EncryptPassword(request.Authentication.Password);
+                u.UserAuthentication.Password = m_SecurityService.EncryptPassword(request.Authentication.Password);
             }
 
             if (!string.IsNullOrEmpty(request.Authentication.Email))

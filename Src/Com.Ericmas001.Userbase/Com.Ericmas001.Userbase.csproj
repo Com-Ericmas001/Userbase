@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Com.Ericmas001.Userbase</RootNamespace>
     <AssemblyName>Com.Ericmas001.Userbase</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Com.Ericmas001.Security, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -35,10 +38,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -67,7 +82,7 @@
     <Compile Include="Services\UserConnectionService.cs" />
     <Compile Include="Services\UserInformationService.cs" />
     <Compile Include="UserbaseConfig.cs" />
-    <Compile Include="IUserbaseConfig.cs" />
+    <Compile Include="Services\Interfaces\ISecurityService.cs" />
     <Compile Include="Models\IEmailSender.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
     <Compile Include="Entities\UserAccessType.cs" />
@@ -77,7 +92,6 @@
     <Compile Include="Entities\UserRelation.cs" />
     <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
-    <Compile Include="NotInitializedException.cs" />
     <Compile Include="Models\Requests\AddUserToGroupRequest.cs" />
     <Compile Include="Models\Requests\ModifyProfileRequest.cs" />
     <Compile Include="Models\Requests\ModifyCredentialsRequest.cs" />
@@ -94,11 +108,9 @@
     <Compile Include="Models\RecoveryToken.cs" />
     <Compile Include="Services\Interfaces\IUserObtentionService.cs" />
     <Compile Include="Services\UserObtentionService.cs" />
-    <Compile Include="UserbaseController.cs" />
     <Compile Include="IUserbaseDbContext.cs" />
     <Compile Include="UserbaseDbContext.cs" />
     <Compile Include="UserbaseSystem.cs" />
-    <Compile Include="IUserbaseController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Entities\UserRecoveryToken.cs" />

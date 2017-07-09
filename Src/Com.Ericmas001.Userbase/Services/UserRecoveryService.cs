@@ -11,12 +11,14 @@ namespace Com.Ericmas001.Userbase.Services
     public class UserRecoveryService : IUserRecoveryService
     {
         private readonly IUserbaseDbContext m_DbContext;
+        private readonly ISecurityService m_SecurityService;
         private readonly IUserObtentionService m_UserObtentionService;
         private readonly IUserConnectionService m_UserConnectionService;
 
-        public UserRecoveryService(IUserbaseDbContext dbContext, IUserObtentionService userObtentionService, IUserConnectionService userConnectionService)
+        public UserRecoveryService(IUserbaseDbContext dbContext, ISecurityService securityService, IUserObtentionService userObtentionService, IUserConnectionService userConnectionService)
         {
             m_DbContext = dbContext;
+            m_SecurityService = securityService;
             m_UserObtentionService = userObtentionService;
             m_UserConnectionService = userConnectionService;
         }
@@ -58,7 +60,7 @@ namespace Com.Ericmas001.Userbase.Services
             User u = m_DbContext.Users.Single(x => x.IdUser == idUser);
 
             urt.Expiration = DateTime.Now.AddSeconds(-1);
-            u.UserAuthentication.Password = UserbaseSystem.EncryptPassword(newPassword);
+            u.UserAuthentication.Password = m_SecurityService.EncryptPassword(newPassword);
             m_DbContext.SaveChanges();
 
             return m_UserConnectionService.ConnectWithPassword(username, newPassword);
