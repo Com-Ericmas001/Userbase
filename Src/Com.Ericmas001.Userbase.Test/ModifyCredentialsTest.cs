@@ -1,5 +1,5 @@
 ﻿using System;
-using Com.Ericmas001.Userbase.Requests;
+using Com.Ericmas001.Userbase.Models.Requests;
 using Com.Ericmas001.Userbase.Test.Util;
 using Xunit;
 

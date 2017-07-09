@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace Com.Ericmas001.Userbase
 {
-    public class UserbaseDbContext : DbContext
+    public class UserbaseDbContext : DbContext, IUserbaseDbContext
     {
         public UserbaseDbContext()
             : base("name=UserbaseDbContext")
@@ -15,16 +15,16 @@ namespace Com.Ericmas001.Userbase
         {
         }
 
-        public virtual DbSet<UserSetting> UserSettings { get; set; }
-        public virtual DbSet<UserRelation> UserRelations { get; set; }
-        public virtual DbSet<UserRelationType> UserRelationTypes { get; set; }
-        public virtual DbSet<UserGroup> UserGroups { get; set; }
-        public virtual DbSet<UserGroupType> UserGroupTypes { get; set; }
-        public virtual DbSet<UserAuthentication> UserAuthentications { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
-        public virtual DbSet<UserRecoveryToken> UserRecoveryTokens { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserToken> UserTokens { get; set; }
+        public virtual IDbSet<UserSetting> UserSettings { get; set; }
+        public virtual IDbSet<UserRelation> UserRelations { get; set; }
+        public virtual IDbSet<UserRelationType> UserRelationTypes { get; set; }
+        public virtual IDbSet<UserGroup> UserGroups { get; set; }
+        public virtual IDbSet<UserGroupType> UserGroupTypes { get; set; }
+        public virtual IDbSet<UserAuthentication> UserAuthentications { get; set; }
+        public virtual IDbSet<UserProfile> UserProfiles { get; set; }
+        public virtual IDbSet<UserRecoveryToken> UserRecoveryTokens { get; set; }
+        public virtual IDbSet<User> Users { get; set; }
+        public virtual IDbSet<UserToken> UserTokens { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,4 +1,4 @@
-﻿namespace Com.Ericmas001.Userbase.Responses
+﻿namespace Com.Ericmas001.Userbase.Models.Responses
 {
     public class ConnectUserResponse : TokenSuccessResponse
     {

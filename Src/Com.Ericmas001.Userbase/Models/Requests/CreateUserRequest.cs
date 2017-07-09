@@ -1,6 +1,4 @@
-﻿using Com.Ericmas001.Userbase.Requests.Models;
-
-namespace Com.Ericmas001.Userbase.Requests
+﻿namespace Com.Ericmas001.Userbase.Models.Requests
 {
     public class CreateUserRequest
     {

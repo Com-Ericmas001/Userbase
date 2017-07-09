@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Com.Ericmas001.Userbase.Responses;
-using Com.Ericmas001.Userbase.Responses.Models;
+using Com.Ericmas001.Userbase.Models;
+using Com.Ericmas001.Userbase.Models.Responses;
 
 namespace Com.Ericmas001.Userbase.DbTasks
 {

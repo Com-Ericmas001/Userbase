@@ -15,21 +15,25 @@ namespace Com.Ericmas001.Userbase.DbTasks
             {
                 Context.UserProfiles.Remove(u.UserProfile);
                 Context.UserAuthentications.Remove(u.UserAuthentication);
-                Context.UserTokens.RemoveRange(u.UserTokens);
-                Context.UserRecoveryTokens.RemoveRange(u.UserRecoveryTokens);
+                foreach (var tk in u.UserTokens)
+                    Context.UserTokens.Remove(tk);
+                foreach (var tk in u.UserRecoveryTokens)
+                    Context.UserRecoveryTokens.Remove(tk);
                 Context.Users.Remove(u);
             }
         }
 
         public void PurgeConnectionTokens()
         {
-            Context.UserTokens.RemoveRange(Context.UserTokens.Where(x => x.Expiration < DateTime.Now));
+            foreach (var tk in Context.UserTokens.Where(x => x.Expiration < DateTime.Now))
+                Context.UserTokens.Remove(tk);
             Context.SaveChanges();
         }
 
         public void PurgeRecoveryTokens()
         {
-            Context.UserRecoveryTokens.RemoveRange(Context.UserRecoveryTokens.Where(x => x.Expiration < DateTime.Now));
+            foreach (var tk in Context.UserRecoveryTokens.Where(x => x.Expiration < DateTime.Now))
+                Context.UserRecoveryTokens.Remove(tk);
             Context.SaveChanges();
         }
     }

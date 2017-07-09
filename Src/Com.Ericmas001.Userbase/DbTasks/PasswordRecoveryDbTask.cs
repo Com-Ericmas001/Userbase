@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Com.Ericmas001.Userbase.DbTasks.Models;
 using Com.Ericmas001.Userbase.Entities;
-using Com.Ericmas001.Userbase.Responses;
-using Com.Ericmas001.Userbase.Responses.Models;
+using Com.Ericmas001.Userbase.Models;
+using Com.Ericmas001.Userbase.Models.Responses;
 using Com.Ericmas001.Userbase.ValidationTasks;
 
 namespace Com.Ericmas001.Userbase.DbTasks

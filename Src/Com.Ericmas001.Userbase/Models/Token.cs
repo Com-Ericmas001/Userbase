@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml.Serialization;
-// ReSharper disable All
 
-namespace Com.Ericmas001.Userbase.Responses.Models
+namespace Com.Ericmas001.Userbase.Models
 {
     [XmlInclude(typeof(ConnectionToken))]
     [XmlInclude(typeof(RecoveryToken))]

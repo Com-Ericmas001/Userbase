@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Com.Ericmas001.Userbase.Responses.Models
+namespace Com.Ericmas001.Userbase.Models
 {
     public class RecoveryToken : Token<string>
     {

@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Com.Ericmas001.Userbase.DbTasks.Models;
-using Com.Ericmas001.Userbase.Responses.Models;
+using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Test.Util;
 using Xunit;
 using Moq;

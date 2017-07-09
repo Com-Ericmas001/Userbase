@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Com.Ericmas001.Userbase.Responses.Models
+namespace Com.Ericmas001.Userbase.Models
 {
     public class ConnectionToken : Token<Guid>
     {

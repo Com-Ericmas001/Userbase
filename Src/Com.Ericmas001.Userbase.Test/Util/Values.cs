@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Com.Ericmas001.Security.Cryptography;
 using Com.Ericmas001.Userbase.Entities;
-using Com.Ericmas001.Userbase.Requests;
-using Com.Ericmas001.Userbase.Requests.Models;
+using Com.Ericmas001.Userbase.Models.Requests;
+
 // ReSharper disable All
 
 namespace Com.Ericmas001.Userbase.Test.Util

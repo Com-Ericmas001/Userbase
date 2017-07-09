@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Com.Ericmas001.Userbase.Responses.Models
+namespace Com.Ericmas001.Userbase.Models
 {
     public class UserModel
     {

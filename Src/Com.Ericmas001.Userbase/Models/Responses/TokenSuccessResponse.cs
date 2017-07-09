@@ -1,6 +1,4 @@
-﻿using Com.Ericmas001.Userbase.Responses.Models;
-
-namespace Com.Ericmas001.Userbase.Responses
+﻿namespace Com.Ericmas001.Userbase.Models.Responses
 {
     public class TokenSuccessResponse
     {

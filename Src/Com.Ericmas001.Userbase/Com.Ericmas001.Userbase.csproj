@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbTasks\AbstractDbTask.cs" />
-    <Compile Include="DbTasks\Models\IEmailSender.cs" />
+    <Compile Include="Models\IEmailSender.cs" />
     <Compile Include="DbTasks\ListUsersDbTask.cs" />
     <Compile Include="DbTasks\UserGroupDbTask.cs" />
     <Compile Include="DbTasks\UserSummaryDbTask.cs" />
@@ -73,21 +73,22 @@
     <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
     <Compile Include="NotInitializedException.cs" />
-    <Compile Include="Requests\AddUserToGroupRequest.cs" />
-    <Compile Include="Requests\ModifyProfileRequest.cs" />
-    <Compile Include="Requests\ModifyCredentialsRequest.cs" />
-    <Compile Include="Requests\CreateUserRequest.cs" />
-    <Compile Include="Requests\Models\AuthenticationInfo.cs" />
-    <Compile Include="Requests\Models\ProfileInfo.cs" />
-    <Compile Include="Responses\Models\UserModel.cs" />
-    <Compile Include="Responses\ListUsersResponse.cs" />
-    <Compile Include="Responses\UserSummaryResponse.cs" />
-    <Compile Include="Responses\TokenSuccessResponse.cs" />
-    <Compile Include="Responses\ConnectUserResponse.cs" />
-    <Compile Include="Responses\Models\Token.cs" />
-    <Compile Include="Responses\Models\ConnectionToken.cs" />
-    <Compile Include="Responses\Models\RecoveryToken.cs" />
+    <Compile Include="Models\Requests\AddUserToGroupRequest.cs" />
+    <Compile Include="Models\Requests\ModifyProfileRequest.cs" />
+    <Compile Include="Models\Requests\ModifyCredentialsRequest.cs" />
+    <Compile Include="Models\Requests\CreateUserRequest.cs" />
+    <Compile Include="Models\Requests\AuthenticationInfo.cs" />
+    <Compile Include="Models\Requests\ProfileInfo.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\Responses\ListUsersResponse.cs" />
+    <Compile Include="Models\Responses\UserSummaryResponse.cs" />
+    <Compile Include="Models\Responses\TokenSuccessResponse.cs" />
+    <Compile Include="Models\Responses\ConnectUserResponse.cs" />
+    <Compile Include="Models\Token.cs" />
+    <Compile Include="Models\ConnectionToken.cs" />
+    <Compile Include="Models\RecoveryToken.cs" />
     <Compile Include="UserbaseController.cs" />
+    <Compile Include="IUserbaseDbContext.cs" />
     <Compile Include="UserbaseDbContext.cs" />
     <Compile Include="UserbaseSystem.cs" />
     <Compile Include="IUserbaseController.cs" />
@@ -118,6 +119,9 @@
     <None Include="Scripts\Schemas.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

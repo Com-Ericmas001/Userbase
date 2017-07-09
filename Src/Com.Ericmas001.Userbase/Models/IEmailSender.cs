@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Com.Ericmas001.Userbase.Responses.Models;
 
-namespace Com.Ericmas001.Userbase.DbTasks.Models
+namespace Com.Ericmas001.Userbase.Models
 {
     public interface IEmailSender
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Com.Ericmas001.Userbase.Responses
+namespace Com.Ericmas001.Userbase.Models.Responses
 {
     public class UserSummaryResponse : TokenSuccessResponse
     {
