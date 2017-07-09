@@ -11,15 +11,13 @@ namespace Com.Ericmas001.Userbase.Test
         public void WithExistingUsernameReturnsNull()
         {
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate(IUserbaseDbContext model)
             {
-                var model = Values.Context;
                 model.Users.Add(Values.UserDora);
-                return model;
             });
 
             // Act
-            var result = UserbaseSystem.CreateUser(Values.UnregisteredDora);
+            var result = util.System.CreateUser(Values.UnregisteredDora);
             
             // Assert
             Assert.Null(result.Token);
@@ -29,18 +27,16 @@ namespace Com.Ericmas001.Userbase.Test
         public void WithNotFoundUsernameButInvalidUsernameReturnsNull()
         {
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
-                var model = Values.Context;
                 model.Users.Add(Values.UserSpongeBob);
-                return model;
             });
 
             var userToRegister = Values.UnregisteredDora;
             userToRegister.Username = Values.UsernameTooShort;
 
             // Act
-            var result = UserbaseSystem.CreateUser(userToRegister);
+            var result = util.System.CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -50,18 +46,16 @@ namespace Com.Ericmas001.Userbase.Test
         public void WithNotFoundUsernameButInvalidDisplayNameReturnsNull()
         {
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
-                var model = Values.Context;
                 model.Users.Add(Values.UserSpongeBob);
-                return model;
             });
 
             var userToRegister = Values.UnregisteredDora;
             userToRegister.Profile.DisplayName = Values.DisplayNameTooShort;
 
             // Act
-            var result = UserbaseSystem.CreateUser(userToRegister);
+            var result = util.System.CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -71,18 +65,16 @@ namespace Com.Ericmas001.Userbase.Test
         public void WithNotFoundUsernameButInvalidPasswordReturnsNull()
         {
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
-                var model = Values.Context;
                 model.Users.Add(Values.UserSpongeBob);
-                return model;
             });
 
             var userToRegister = Values.UnregisteredDora;
             userToRegister.Authentication.Password = Values.PasswordInvalidChar;
 
             // Act
-            var result = UserbaseSystem.CreateUser(userToRegister);
+            var result = util.System.CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -92,18 +84,16 @@ namespace Com.Ericmas001.Userbase.Test
         public void WithNotFoundUsernameButInvalidEmailReturnsNull()
         {
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
-                var model = Values.Context;
                 model.Users.Add(Values.UserSpongeBob);
-                return model;
             });
 
             var userToRegister = Values.UnregisteredDora;
             userToRegister.Authentication.Email = Values.EmailNoArobas;
 
             // Act
-            var result = UserbaseSystem.CreateUser(userToRegister);
+            var result = util.System.CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -113,18 +103,16 @@ namespace Com.Ericmas001.Userbase.Test
         public void WithNotFoundUsernameButExistingEmailReturnsNull()
         {
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
-                var model = Values.Context;
                 model.Users.Add(Values.UserSpongeBob);
-                return model;
             });
 
             var userToRegister = Values.UnregisteredDora;
             userToRegister.Authentication.Email = Values.EmailSpongeBob;
 
             // Act
-            var result = UserbaseSystem.CreateUser(userToRegister);
+            var result = util.System.CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -133,22 +121,20 @@ namespace Com.Ericmas001.Userbase.Test
         [Fact]
         public void WithNotFoundUsername()
         {
-            var model = Values.Context;
             // Arrange
-            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
                 model.Users.Add(Values.UserSpongeBob);
-                return model;
             });
 
             // Act
-            var result = UserbaseSystem.CreateUser(Values.UnregisteredDora);
+            var result = util.System.CreateUser(Values.UnregisteredDora);
 
             // Assert
             Assert.NotNull(result.Token);
             Assert.True(result.Success);
-            Assert.Equal(2, model.Users.Count());
-            var dora = model.Users.SingleOrDefault(x => x.Name == Values.UsernameDora);
+            Assert.Equal(2, util.Model.Users.Count());
+            var dora = util.Model.Users.SingleOrDefault(x => x.Name == Values.UsernameDora);
             Assert.NotNull(dora);
             Assert.Equal(Values.UsernameDora, dora.Name);
             Assert.Equal(Values.DisplayNameDora, dora.UserProfile.DisplayName);
