@@ -52,18 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbTasks\AbstractDbTask.cs" />
+    <Compile Include="Services\Interfaces\IUserGroupingService.cs" />
+    <Compile Include="Services\Interfaces\IUserRecoveryService.cs" />
+    <Compile Include="Services\Interfaces\IValidationService.cs" />
+    <Compile Include="Services\UserGroupingService.cs" />
+    <Compile Include="Services\UserRecoveryService.cs" />
+    <Compile Include="Services\ValidationService.cs" />
+    <Compile Include="Services\ManagementService.cs" />
+    <Compile Include="Services\Interfaces\IUserConnectionService.cs" />
+    <Compile Include="Services\Interfaces\IManagementService.cs" />
+    <Compile Include="Services\Interfaces\IUserManagingService.cs" />
+    <Compile Include="Services\Interfaces\IUserInformationService.cs" />
+    <Compile Include="Services\UserManagingService.cs" />
+    <Compile Include="Services\UserConnectionService.cs" />
+    <Compile Include="Services\UserInformationService.cs" />
+    <Compile Include="UserbaseConfig.cs" />
+    <Compile Include="IUserbaseConfig.cs" />
     <Compile Include="Models\IEmailSender.cs" />
-    <Compile Include="DbTasks\ListUsersDbTask.cs" />
-    <Compile Include="DbTasks\UserGroupDbTask.cs" />
-    <Compile Include="DbTasks\UserSummaryDbTask.cs" />
-    <Compile Include="DbTasks\PasswordRecoveryDbTask.cs" />
-    <Compile Include="DbTasks\UserActivationDbTask.cs" />
-    <Compile Include="DbTasks\ConnectUserDbTask.cs" />
-    <Compile Include="DbTasks\ModifyUserDbTask.cs" />
-    <Compile Include="DbTasks\CreateUserDbTask.cs" />
-    <Compile Include="DbTasks\ManagementDbTask.cs" />
-    <Compile Include="DbTasks\ObtainUserIdDbTask.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
     <Compile Include="Entities\UserAccessType.cs" />
     <Compile Include="Entities\UserGroupType.cs" />
@@ -87,6 +92,8 @@
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\ConnectionToken.cs" />
     <Compile Include="Models\RecoveryToken.cs" />
+    <Compile Include="Services\Interfaces\IUserObtentionService.cs" />
+    <Compile Include="Services\UserObtentionService.cs" />
     <Compile Include="UserbaseController.cs" />
     <Compile Include="IUserbaseDbContext.cs" />
     <Compile Include="UserbaseDbContext.cs" />
@@ -97,10 +104,6 @@
     <Compile Include="Entities\UserRecoveryToken.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserToken.cs" />
-    <Compile Include="ValidationTasks\PasswordValidationTask.cs" />
-    <Compile Include="ValidationTasks\EmailValidationTask.cs" />
-    <Compile Include="ValidationTasks\DisplayNameValidationTask.cs" />
-    <Compile Include="ValidationTasks\UsernameValidationTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -120,9 +123,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

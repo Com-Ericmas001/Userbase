@@ -34,7 +34,7 @@ namespace Com.Ericmas001.Userbase.Entities
 
 
 
-        public static UserRecoveryToken FromId(UserbaseDbContext context, int idUser, string token)
+        public static UserRecoveryToken FromId(IUserbaseDbContext context, int idUser, string token)
         {
             return context.UserRecoveryTokens.AsEnumerable().SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
         }

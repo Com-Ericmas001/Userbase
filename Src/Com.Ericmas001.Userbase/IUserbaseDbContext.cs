@@ -16,5 +16,7 @@ namespace Com.Ericmas001.Userbase
         IDbSet<UserRecoveryToken> UserRecoveryTokens { get; set; }
         IDbSet<User> Users { get; set; }
         IDbSet<UserToken> UserTokens { get; set; }
+
+        int SaveChanges();
     }
 }

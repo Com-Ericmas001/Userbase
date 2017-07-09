@@ -33,7 +33,7 @@ namespace Com.Ericmas001.Userbase.Entities
 
 
 
-        public static UserToken FromId(UserbaseDbContext context, int idUser, Guid token)
+        public static UserToken FromId(IUserbaseDbContext context, int idUser, Guid token)
         {
             return context.UserTokens.AsEnumerable().SingleOrDefault(t => t.IdUser == idUser && t.Token == token && t.Expiration > DateTime.Now);
         }

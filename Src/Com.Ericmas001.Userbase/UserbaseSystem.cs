@@ -12,7 +12,7 @@ namespace Com.Ericmas001.Userbase
 
         private static Func<UserbaseDbContext> m_ContextGenerator;
 
-        private static string m_Salt;
+        public static IUserbaseConfig Config {get; private set; }
 
         private static IUserbaseController m_Controller;
 
@@ -29,14 +29,14 @@ namespace Com.Ericmas001.Userbase
 
         internal static string SaltPassword(string unsaltedPassword)
         {
-            return $"{m_Salt}{unsaltedPassword}";
+            return Config.SaltPassword(unsaltedPassword);
 
         }
 
         public static void Init(string salt, IUserbaseController controller = null, Func<UserbaseDbContext> contextGenerator = null, string connString = null)
         {
             Controller = controller ?? new UserbaseController();
-            m_Salt = salt;
+            Config = new UserbaseConfig(salt);
             m_ContextGenerator = contextGenerator ?? (() => connString == null ? new UserbaseDbContext() : new UserbaseDbContext(connString));
             m_Initialized = true;
         }
