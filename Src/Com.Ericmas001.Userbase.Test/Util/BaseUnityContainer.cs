@@ -18,6 +18,7 @@ namespace Com.Ericmas001.Userbase.Test.Util
 
             Model = new DummyUserbaseDbContext();
             initDb(Model);
+            Model.SaveChanges();
             container.RegisterInstance<IUserbaseDbContext>(Model);
         }
     }

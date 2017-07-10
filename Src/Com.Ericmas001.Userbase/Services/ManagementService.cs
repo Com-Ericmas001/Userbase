@@ -27,13 +27,13 @@ namespace Com.Ericmas001.Userbase.Services
         }
         public void PurgeConnectionTokens()
         {
-            foreach (var tk in m_DbContext.UserTokens.Where(x => x.Expiration < DateTime.Now))
+            foreach (var tk in m_DbContext.UserTokens.Where(x => x.Expiration < DateTime.Now).AsEnumerable().ToArray())
                 m_DbContext.UserTokens.Remove(tk);
             m_DbContext.SaveChanges();
         }
         public void PurgeRecoveryTokens()
         {
-            foreach (var tk in m_DbContext.UserRecoveryTokens.Where(x => x.Expiration < DateTime.Now))
+            foreach (var tk in m_DbContext.UserRecoveryTokens.Where(x => x.Expiration < DateTime.Now).AsEnumerable().ToArray())
                 m_DbContext.UserRecoveryTokens.Remove(tk);
             m_DbContext.SaveChanges();
         }

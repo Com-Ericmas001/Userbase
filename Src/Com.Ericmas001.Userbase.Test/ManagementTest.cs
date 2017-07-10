@@ -1,78 +1,69 @@
-﻿//using System.Linq;
-//using Com.Ericmas001.Userbase.Test.Util;
-//using Xunit;
+﻿using System.Linq;
+using Com.Ericmas001.Userbase.Test.Util;
+using Xunit;
 
-//namespace Com.Ericmas001.Userbase.Test
-//{
-//    [Collection("Com.Ericmas001.Userbase.Test")]
-//    public class ManagementTest
-//    {
+namespace Com.Ericmas001.Userbase.Test
+{
+    [Collection("Com.Ericmas001.Userbase.Test")]
+    public class ManagementTest
+    {
 
-//        [Fact]
-//        public void PurgeConnectionTokens()
-//        {
-//            // Arrange
+        [Fact]
+        public void PurgeConnectionTokens()
+        {
+            // Arrange
+            var expiredToken = Values.ExpiredToken;
+            var validToken = Values.ValidToken;
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                model.UserTokens.Add(expiredToken);
+                model.UserTokens.Add(validToken);
+            });
 
-//            var model = Values.Context;
-//            var expiredToken = Values.ExpiredToken;
-//            var validToken = Values.ValidToken;
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                model.UserTokens.Add(expiredToken);
-//                model.UserTokens.Add(validToken);
-//                return model;
-//            });
+            // Act
+            util.System.PurgeConnectionTokens();
 
-//            // Act
-//            UserbaseSystem.PurgeConnectionTokens();
+            // Assert
+            Assert.Equal(validToken, util.Model.UserTokens.Single());
+        }
 
-//            // Assert
-//            Assert.Equal(validToken, model.UserTokens.Single());
-//        }
+        [Fact]
+        public void PurgeRecoveryTokens()
+        {
+            // Arrange
+            var expiredRecoveryToken = Values.ExpiredRecoveryToken;
+            var validRecoveryToken = Values.ValidRecoveryToken;
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                model.UserRecoveryTokens.Add(expiredRecoveryToken);
+                model.UserRecoveryTokens.Add(validRecoveryToken);
+            });
 
-//        [Fact]
-//        public void PurgeRecoveryTokens()
-//        {
-//            // Arrange
+            // Act
+            util.System.PurgeRecoveryTokens();
 
-//            var model = Values.Context;
-//            var expiredRecoveryToken = Values.ExpiredRecoveryToken;
-//            var validRecoveryToken = Values.ValidRecoveryToken;
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                model.UserRecoveryTokens.Add(expiredRecoveryToken);
-//                model.UserRecoveryTokens.Add(validRecoveryToken);
-//                return model;
-//            });
+            // Assert
+            Assert.Equal(validRecoveryToken, util.Model.UserRecoveryTokens.Single());
+        }
 
-//            // Act
-//            UserbaseSystem.PurgeRecoveryTokens();
+        [Fact]
+        public void PurgeUsers()
+        {
+            // Arrange
+            var activeUser = Values.UserSpongeBob;
+            var inactiveUser = Values.UserDora;
+            inactiveUser.Active = false;
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                model.Users.Add(activeUser);
+                model.Users.Add(inactiveUser);
+            });
 
-//            // Assert
-//            Assert.Equal(validRecoveryToken, model.UserRecoveryTokens.Single());
-//        }
+            // Act
+            util.System.PurgeUsers();
 
-//        [Fact]
-//        public void PurgeUsers()
-//        {
-//            // Arrange
-
-//            var model = Values.Context;
-//            var activeUser = Values.UserSpongeBob;
-//            var inactiveUser = Values.UserDora;
-//            inactiveUser.Active = false;
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                model.Users.Add(activeUser);
-//                model.Users.Add(inactiveUser);
-//                return model;
-//            });
-
-//            // Act
-//            UserbaseSystem.PurgeUsers();
-
-//            // Assert
-//            Assert.Equal(activeUser, model.Users.Single());
-//        }
-//    }
-//}
+            // Assert
+            Assert.Equal(activeUser, util.Model.Users.Single());
+        }
+    }
+}

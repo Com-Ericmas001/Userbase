@@ -47,6 +47,32 @@ namespace Com.Ericmas001.Userbase.Test.Util
                     if (!UserProfiles.Contains(user.UserProfile))
                         UserProfiles.Add(user.UserProfile);
                 }
+
+                foreach (var token in user.UserTokens)
+                {
+                    token.IdUser = user.Id;
+                    if (!UserTokens.Contains(token))
+                        UserTokens.Add(token);
+                }
+                foreach (var token in user.UserRecoveryTokens)
+                {
+                    token.IdUser = user.Id;
+                    if (!UserRecoveryTokens.Contains(token))
+                        UserRecoveryTokens.Add(token);
+                }
+                foreach (var grp in user.UserGroups)
+                {
+                    grp.IdUser = user.Id;
+                    if (!UserGroups.Contains(grp))
+                        UserGroups.Add(grp);
+                }
+            }
+            foreach (var group in UserGroups)
+            {
+                if (group.Id == 0)
+                    group.Id = nextId++;
+
+                group.IdUserGroupType = group.UserGroupType.IdUserGroupType;
             }
 
             return 0;

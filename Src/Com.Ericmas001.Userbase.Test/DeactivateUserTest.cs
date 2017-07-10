@@ -1,118 +1,108 @@
-﻿//using System;
-//using Com.Ericmas001.Userbase.Test.Util;
-//using Xunit;
+﻿using System;
+using Com.Ericmas001.Userbase.Test.Util;
+using Xunit;
 
-//namespace Com.Ericmas001.Userbase.Test
-//{
-//    [Collection("Com.Ericmas001.Userbase.Test")]
-//    public class DeactivateUserTest
-//    {
-//        [Fact]
-//        public void WithNoUserReturnsFalse()
-//        {
-//            // Arrange
-//            UserbaseSystem.Init(Values.Salt, contextGenerator:() => Values.Context );
+namespace Com.Ericmas001.Userbase.Test
+{
+    [Collection("Com.Ericmas001.Userbase.Test")]
+    public class DeactivateUserTest
+    {
+        [Fact]
+        public void WithNoUserReturnsFalse()
+        {
+            // Arrange
+            var util = new UserbaseSystemUtil(delegate { });
 
-//            // Act
-//            var result = UserbaseSystem.Deactivate(Values.UsernameSpongeBob, Values.ValidToken.Token);
+            // Act
+            var result = util.System.Deactivate(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
-//            // Assert
-//            Assert.False(result);
-//        }
+            // Assert
+            Assert.False(result);
+        }
 
-//        [Fact]
-//        public void WithInvalidUserReturnsFalse()
-//        {
-//            // Arrange
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                var model = Values.Context;
-//                model.Users.Add(Values.UserSpongeBob);
-//                return model;
-//            });
+        [Fact]
+        public void WithInvalidUserReturnsFalse()
+        {
+            // Arrange
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                model.Users.Add(Values.UserSpongeBob);
+            });
 
-//            // Act
-//            var result = UserbaseSystem.Deactivate(Values.UsernameDora, Values.ValidToken.Token);
+            // Act
+            var result = util.System.Deactivate(Values.UsernameDora, Values.ValidToken.Token);
 
-//            // Assert
-//            Assert.False(result);
-//        }
-//        [Fact]
-//        public void WithValidUserNoTokensReturnsFalse()
-//        {
-//            // Arrange
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                var model = Values.Context;
-//                model.Users.Add(Values.UserSpongeBob);
-//                return model;
-//            });
+            // Assert
+            Assert.False(result);
+        }
+        [Fact]
+        public void WithValidUserNoTokensReturnsFalse()
+        {
+            // Arrange
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                model.Users.Add(Values.UserSpongeBob);
+            });
 
-//            // Act
-//            var result = UserbaseSystem.Deactivate(Values.UsernameSpongeBob, Values.ValidToken.Token);
+            // Act
+            var result = util.System.Deactivate(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
-//            // Assert
-//            Assert.False(result);
-//        }
-//        [Fact]
-//        public void WithValidUserInvalidTokenReturnsFalse()
-//        {
-//            // Arrange
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                var model = Values.Context;
-//                var u = Values.UserSpongeBob;
-//                u.UserTokens.Add(Values.ValidToken);
-//                model.Users.Add(u);
-//                return model;
-//            });
+            // Assert
+            Assert.False(result);
+        }
+        [Fact]
+        public void WithValidUserInvalidTokenReturnsFalse()
+        {
+            // Arrange
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                var u = Values.UserSpongeBob;
+                u.UserTokens.Add(Values.ValidToken);
+                model.Users.Add(u);
+            });
 
-//            // Act
-//            var result = UserbaseSystem.Deactivate(Values.UsernameSpongeBob, Guid.NewGuid());
+            // Act
+            var result = util.System.Deactivate(Values.UsernameSpongeBob, Guid.NewGuid());
 
-//            // Assert
-//            Assert.False(result);
-//        }
-//        [Fact]
-//        public void WithValidUserExpiredTokenReturnsFalse()
-//        {
-//            // Arrange
-//            var tok = Values.ExpiredToken;
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                var model = Values.Context;
-//                var u = Values.UserSpongeBob;
-//                u.UserTokens.Add(tok);
-//                model.Users.Add(u);
-//                return model;
-//            });
+            // Assert
+            Assert.False(result);
+        }
+        [Fact]
+        public void WithValidUserExpiredTokenReturnsFalse()
+        {
+            // Arrange
+            var tok = Values.ExpiredToken;
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                var u = Values.UserSpongeBob;
+                u.UserTokens.Add(tok);
+                model.Users.Add(u);
+            });
 
-//            // Act
-//            var result = UserbaseSystem.Deactivate(Values.UsernameSpongeBob, tok.Token);
+            // Act
+            var result = util.System.Deactivate(Values.UsernameSpongeBob, tok.Token);
 
-//            // Assert
-//            Assert.False(result);
-//        }
-//        [Fact]
-//        public void WithValidUserValidTokenReturnsTrue()
-//        {
-//            // Arrange
-//            var tok = Values.ValidToken;
-//            var u = Values.UserSpongeBob;
-//            UserbaseSystem.Init(Values.Salt, contextGenerator: delegate
-//            {
-//                var model = Values.Context;
-//                u.UserTokens.Add(tok);
-//                model.Users.Add(u);
-//                return model;
-//            });
+            // Assert
+            Assert.False(result);
+        }
+        [Fact]
+        public void WithValidUserValidTokenReturnsTrue()
+        {
+            // Arrange
+            var tok = Values.ValidToken;
+            var u = Values.UserSpongeBob;
+            var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
+            {
+                u.UserTokens.Add(tok);
+                model.Users.Add(u);
+            });
 
-//            // Act
-//            var result = UserbaseSystem.Deactivate(Values.UsernameSpongeBob, tok.Token);
+            // Act
+            var result = util.System.Deactivate(Values.UsernameSpongeBob, tok.Token);
 
-//            // Assert
-//            Assert.True(result);
-//            Assert.False(u.Active);
-//        }
-//    }
-//}
+            // Assert
+            Assert.True(result);
+            Assert.False(u.Active);
+        }
+    }
+}
