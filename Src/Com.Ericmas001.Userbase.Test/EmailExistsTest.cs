@@ -3,7 +3,6 @@ using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
 {
-    [Collection("Com.Ericmas001.Userbase.Test")]
     public class EmailExistsTest
     {
         [Fact]
