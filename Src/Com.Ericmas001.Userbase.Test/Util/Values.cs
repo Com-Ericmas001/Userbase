@@ -11,16 +11,6 @@ namespace Com.Ericmas001.Userbase.Test.Util
 
     public static class Values
     {
-        public static UserbaseDbContext Context
-        {
-            get
-            {
-                var model = new UserbaseDbContext();
-                model.SetUpMocks();
-                return model;
-            }
-        }
-
         public static string Salt => "Salt&P3pp3R";
         public static string UsernameSpongeBob => "spongeb0b";
         public static string UsernameDora => "dora";

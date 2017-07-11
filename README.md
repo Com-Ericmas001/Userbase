@@ -2,9 +2,9 @@
 [![Build Status](https://travis-ci.org/Com-Ericmas001/Userbase.svg?branch=master)](https://travis-ci.org/Com-Ericmas001/Userbase)
 [![com-ericmas001 MyGet Build Status](https://www.myget.org/BuildSource/Badge/com-ericmas001?identifier=a0f8aa04-cacc-4114-90e0-285c055d6e28)](https://www.myget.org/)
 
-EntityFramework DLL for managing user
+DLL for managing user using SQL Server, Entity Framework and Unity Containers
 
-###Current Version: 0.4.2 *(2016-11-24)*
+###Current Version: 0.6.0 *(2017-07-11)*
 <table align="center" width="100%">
     <tbody>
         <tr>

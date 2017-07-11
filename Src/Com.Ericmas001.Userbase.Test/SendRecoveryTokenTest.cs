@@ -1,8 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Test.Util;
 using Xunit;
-using Moq;
 
 namespace Com.Ericmas001.Userbase.Test
 {
@@ -12,9 +14,10 @@ namespace Com.Ericmas001.Userbase.Test
         [SuppressMessage("ReSharper", "ClassWithVirtualMembersNeverInherited.Global")]
         public class DummyEmailSender : IEmailSender
         {
+            public List<Tuple<RecoveryToken,string,string>> TokenSent { get; } = new List<Tuple<RecoveryToken, string, string>>();
             public virtual void SendToken(RecoveryToken token, string username, string email)
             {
-                //Do nothing, 'cause you're dummy !
+                TokenSent.Add(new Tuple<RecoveryToken, string, string>(token,username,email));
             }
         }
 
@@ -34,7 +37,7 @@ namespace Com.Ericmas001.Userbase.Test
         public void ValidUsernameReturnsTrue()
         {
             // Arrange
-            var mockDummyEmailSender = new Mock<DummyEmailSender>();
+            var emailSender = new DummyEmailSender();
             var user = Values.UserSpongeBob;
             var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
@@ -42,12 +45,20 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.SendRecoveryToken(Values.UsernameSpongeBob, mockDummyEmailSender.Object);
+            var result = util.System.SendRecoveryToken(Values.UsernameSpongeBob, emailSender);
 
             // Assert
             Assert.True(result);
             Assert.Equal(1, user.UserRecoveryTokens.Count);
-            mockDummyEmailSender.Verify(m => m.SendToken(It.IsAny<RecoveryToken>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+            var token = user.UserRecoveryTokens.Single();
+
+            Assert.Equal(1, emailSender.TokenSent.Count);
+            var sended = emailSender.TokenSent.Single();
+
+            Assert.Equal(token.Token, sended.Item1.Id);
+            Assert.Equal(token.Expiration, sended.Item1.ValidUntil);
+            Assert.Equal(user.Name, sended.Item2);
+            Assert.Equal(user.UserAuthentication.RecoveryEmail, sended.Item3);
         }
     }
 }
