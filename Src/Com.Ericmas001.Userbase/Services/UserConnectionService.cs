@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Com.Ericmas001.Security.Cryptography;
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.Responses;
@@ -46,7 +45,7 @@ namespace Com.Ericmas001.Userbase.Services
                 return new ConnectUserResponse { Success = false };
 
             //Invalid Password
-            if (!BCrypt.CheckPassword(m_SecurityService.SaltPassword(password), m_DbContext.UserAuthentications.Single(x => x.IdUser == idUser).Password))
+            if(!m_SecurityService.VerifyPassword(password, m_DbContext.UserAuthentications.Single(x => x.IdUser == idUser).Password))
                 return new ConnectUserResponse { Success = false };
 
             return new ConnectUserResponse { Success = true, IdUser = idUser, Token = CreateToken(idUser) };

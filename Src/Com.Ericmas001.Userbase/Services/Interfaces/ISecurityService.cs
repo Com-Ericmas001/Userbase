@@ -2,7 +2,8 @@
 {
     public interface ISecurityService
     {
-        string SaltPassword(string unsaltedPassword);
+        bool VerifyPassword(string passwordToTry, string encryptedPassword);
+
         string EncryptPassword(string password);
     }
 }

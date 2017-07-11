@@ -81,7 +81,7 @@
     <Compile Include="Services\UserManagingService.cs" />
     <Compile Include="Services\UserConnectionService.cs" />
     <Compile Include="Services\UserInformationService.cs" />
-    <Compile Include="UserbaseConfig.cs" />
+    <Compile Include="Services\BCryptSecurityService.cs" />
     <Compile Include="Services\Interfaces\ISecurityService.cs" />
     <Compile Include="Models\IEmailSender.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />

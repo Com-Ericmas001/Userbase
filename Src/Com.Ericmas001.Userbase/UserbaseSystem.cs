@@ -24,7 +24,7 @@ namespace Com.Ericmas001.Userbase
             m_Container.RegisterType<IUserbaseDbContext, UserbaseDbContext>();
 
             m_Container.RegisterType<IValidationService, ValidationService>(new ContainerControlledLifetimeManager());
-            m_Container.RegisterType<ISecurityService, SecurityService>(new ContainerControlledLifetimeManager(), new InjectionConstructor(salt));
+            m_Container.RegisterType<ISecurityService, BCryptSecurityService>(new ContainerControlledLifetimeManager(), new InjectionConstructor(salt));
 
             m_Container.RegisterType<IManagementService, ManagementService>();
             m_Container.RegisterType<IUserConnectionService, UserConnectionService>();
