@@ -2,8 +2,8 @@
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.Requests;
 using Com.Ericmas001.Userbase.Models.Responses;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Services;
-using Com.Ericmas001.Userbase.Services.Interfaces;
 using Microsoft.Practices.Unity;
 
 namespace Com.Ericmas001.Userbase
@@ -23,6 +23,7 @@ namespace Com.Ericmas001.Userbase
         {
             m_Container.RegisterType<IUserbaseDbContext, UserbaseDbContext>();
 
+            m_Container.RegisterType<ISendEmailService, ExceptionThrowerEmailService>(new ContainerControlledLifetimeManager());
             m_Container.RegisterType<IValidationService, ValidationService>(new ContainerControlledLifetimeManager());
             m_Container.RegisterType<ISecurityService, BCryptSecurityService>(new ContainerControlledLifetimeManager(), new InjectionConstructor(salt));
 
@@ -105,9 +106,9 @@ namespace Com.Ericmas001.Userbase
             return m_Container.Resolve<IUserManagingService>().Deactivate(username, token);
         }
 
-        public bool SendRecoveryToken(string username, IEmailSender smtp)
+        public bool SendRecoveryToken(string username)
         {
-            return m_Container.Resolve<IUserRecoveryService>().SendRecoveryToken(username, smtp);
+            return m_Container.Resolve<IUserRecoveryService>().SendRecoveryToken(username);
         }
 
         public ConnectUserResponse ResetPassword(string username, string recoveryToken, string newPassword)

@@ -1,4 +1,4 @@
-﻿namespace Com.Ericmas001.Userbase.Services.Interfaces
+﻿namespace Com.Ericmas001.Userbase.Models.ServiceInterfaces
 {
     public interface ISecurityService
     {

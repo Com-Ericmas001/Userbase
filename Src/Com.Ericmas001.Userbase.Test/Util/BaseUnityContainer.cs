@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Microsoft.Practices.Unity;
 
 namespace Com.Ericmas001.Userbase.Test.Util
@@ -11,6 +12,7 @@ namespace Com.Ericmas001.Userbase.Test.Util
     {
         public UserbaseSystem System { get; }
         public IUserbaseDbContext Model { get; }
+        public SendRecoveryTokenTest.DummyEmailSender EmailSender { get; }
         public UserbaseSystemUtil(Action<IUserbaseDbContext> initDb)
         {
             IUnityContainer container = new UnityContainer();
@@ -19,7 +21,10 @@ namespace Com.Ericmas001.Userbase.Test.Util
             Model = new DummyUserbaseDbContext();
             initDb(Model);
             Model.SaveChanges();
-            container.RegisterInstance<IUserbaseDbContext>(Model);
+            container.RegisterInstance(Model);
+
+            EmailSender = new SendRecoveryTokenTest.DummyEmailSender();
+            container.RegisterInstance<ISendEmailService>(EmailSender);
         }
     }
 }

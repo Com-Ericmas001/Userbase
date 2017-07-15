@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionToken.cs" />
-    <Compile Include="IEmailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecoveryToken.cs" />
     <Compile Include="Requests\AddUserToGroupRequest.cs" />
@@ -57,6 +56,16 @@
     <Compile Include="Responses\ListUsersResponse.cs" />
     <Compile Include="Responses\TokenSuccessResponse.cs" />
     <Compile Include="Responses\UserSummaryResponse.cs" />
+    <Compile Include="ServiceInterfaces\IManagementService.cs" />
+    <Compile Include="ServiceInterfaces\ISecurityService.cs" />
+    <Compile Include="ServiceInterfaces\ISendEmailService.cs" />
+    <Compile Include="ServiceInterfaces\IUserConnectionService.cs" />
+    <Compile Include="ServiceInterfaces\IUserGroupingService.cs" />
+    <Compile Include="ServiceInterfaces\IUserInformationService.cs" />
+    <Compile Include="ServiceInterfaces\IUserManagingService.cs" />
+    <Compile Include="ServiceInterfaces\IUserObtentionService.cs" />
+    <Compile Include="ServiceInterfaces\IUserRecoveryService.cs" />
+    <Compile Include="ServiceInterfaces\IValidationService.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>

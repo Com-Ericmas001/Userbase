@@ -4,7 +4,7 @@ using System.Linq;
 using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.Responses;
-using Com.Ericmas001.Userbase.Services.Interfaces;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 
 namespace Com.Ericmas001.Userbase.Services
 {
@@ -14,16 +14,18 @@ namespace Com.Ericmas001.Userbase.Services
         private readonly ISecurityService m_SecurityService;
         private readonly IUserObtentionService m_UserObtentionService;
         private readonly IUserConnectionService m_UserConnectionService;
+        private readonly ISendEmailService m_SendEmailService;
 
-        public UserRecoveryService(IUserbaseDbContext dbContext, ISecurityService securityService, IUserObtentionService userObtentionService, IUserConnectionService userConnectionService)
+        public UserRecoveryService(IUserbaseDbContext dbContext, ISecurityService securityService, IUserObtentionService userObtentionService, IUserConnectionService userConnectionService, ISendEmailService sendEmailService)
         {
             m_DbContext = dbContext;
             m_SecurityService = securityService;
             m_UserObtentionService = userObtentionService;
             m_UserConnectionService = userConnectionService;
+            m_SendEmailService = sendEmailService;
         }
 
-        public bool SendRecoveryToken(string username, IEmailSender smtp)
+        public bool SendRecoveryToken(string username)
         {
             int idUser = m_UserObtentionService.FromUsername(username);
 
@@ -37,7 +39,7 @@ namespace Com.Ericmas001.Userbase.Services
             u.UserRecoveryTokens.Add(new UserRecoveryToken { Token = token.Id, Expiration = token.ValidUntil });
             m_DbContext.SaveChanges();
 
-            smtp.SendToken(token, username, u.UserAuthentication.RecoveryEmail);
+            m_SendEmailService.SendRecoveryToken(token, username, u.UserAuthentication.RecoveryEmail);
 
             return true;
         }

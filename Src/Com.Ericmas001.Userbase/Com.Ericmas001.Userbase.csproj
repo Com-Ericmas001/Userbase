@@ -67,22 +67,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\Interfaces\IUserGroupingService.cs" />
-    <Compile Include="Services\Interfaces\IUserRecoveryService.cs" />
-    <Compile Include="Services\Interfaces\IValidationService.cs" />
+    <Compile Include="Services\ExceptionThrowerEmailService.cs" />
     <Compile Include="Services\UserGroupingService.cs" />
     <Compile Include="Services\UserRecoveryService.cs" />
     <Compile Include="Services\ValidationService.cs" />
     <Compile Include="Services\ManagementService.cs" />
-    <Compile Include="Services\Interfaces\IUserConnectionService.cs" />
-    <Compile Include="Services\Interfaces\IManagementService.cs" />
-    <Compile Include="Services\Interfaces\IUserManagingService.cs" />
-    <Compile Include="Services\Interfaces\IUserInformationService.cs" />
     <Compile Include="Services\UserManagingService.cs" />
     <Compile Include="Services\UserConnectionService.cs" />
     <Compile Include="Services\UserInformationService.cs" />
     <Compile Include="Services\BCryptSecurityService.cs" />
-    <Compile Include="Services\Interfaces\ISecurityService.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
     <Compile Include="Entities\UserAccessType.cs" />
     <Compile Include="Entities\UserGroupType.cs" />
@@ -91,7 +84,6 @@
     <Compile Include="Entities\UserRelation.cs" />
     <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
-    <Compile Include="Services\Interfaces\IUserObtentionService.cs" />
     <Compile Include="Services\UserObtentionService.cs" />
     <Compile Include="IUserbaseDbContext.cs" />
     <Compile Include="UserbaseDbContext.cs" />

@@ -5,7 +5,7 @@ using Com.Ericmas001.Userbase.Entities;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.Requests;
 using Com.Ericmas001.Userbase.Models.Responses;
-using Com.Ericmas001.Userbase.Services.Interfaces;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 
 namespace Com.Ericmas001.Userbase.Services
 {
