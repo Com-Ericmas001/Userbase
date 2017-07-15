@@ -83,7 +83,6 @@
     <Compile Include="Services\UserInformationService.cs" />
     <Compile Include="Services\BCryptSecurityService.cs" />
     <Compile Include="Services\Interfaces\ISecurityService.cs" />
-    <Compile Include="Models\IEmailSender.cs" />
     <Compile Include="Entities\IEntityWithId.cs" />
     <Compile Include="Entities\UserAccessType.cs" />
     <Compile Include="Entities\UserGroupType.cs" />
@@ -92,20 +91,6 @@
     <Compile Include="Entities\UserRelation.cs" />
     <Compile Include="Entities\UserRelationType.cs" />
     <Compile Include="Entities\UserAuthentication.cs" />
-    <Compile Include="Models\Requests\AddUserToGroupRequest.cs" />
-    <Compile Include="Models\Requests\ModifyProfileRequest.cs" />
-    <Compile Include="Models\Requests\ModifyCredentialsRequest.cs" />
-    <Compile Include="Models\Requests\CreateUserRequest.cs" />
-    <Compile Include="Models\Requests\AuthenticationInfo.cs" />
-    <Compile Include="Models\Requests\ProfileInfo.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\Responses\ListUsersResponse.cs" />
-    <Compile Include="Models\Responses\UserSummaryResponse.cs" />
-    <Compile Include="Models\Responses\TokenSuccessResponse.cs" />
-    <Compile Include="Models\Responses\ConnectUserResponse.cs" />
-    <Compile Include="Models\Token.cs" />
-    <Compile Include="Models\ConnectionToken.cs" />
-    <Compile Include="Models\RecoveryToken.cs" />
     <Compile Include="Services\Interfaces\IUserObtentionService.cs" />
     <Compile Include="Services\UserObtentionService.cs" />
     <Compile Include="IUserbaseDbContext.cs" />
@@ -136,6 +121,12 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Com.Ericmas001.Userbase.Models\Com.Ericmas001.Userbase.Models.csproj">
+      <Project>{d5935203-47de-4ee6-920f-1b03e48225b7}</Project>
+      <Name>Com.Ericmas001.Userbase.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

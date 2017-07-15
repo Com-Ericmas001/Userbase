@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Com.Ericmas001.Userbase.Models</id>
+        <version>$version$</version>
+        <title>Com.Ericmas001.Userbase.Models</title>
+        <authors>Ericmas001</authors>
+        <licenseUrl>https://raw.githubusercontent.com/Com-Ericmas001/Userbase/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/Com-Ericmas001/Userbase</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>Com.Ericmas001.Userbase.Models</description>
+        <summary>Com.Ericmas001.Userbase.Models</summary>
+        <releaseNotes>Development Version</releaseNotes>
+        <copyright />
+        <language>en</language>
+        <dependencies />
+    </metadata>
+    <files>
+    	<file src="Src\Com.Ericmas001.Userbase.Models\bin\$configuration$\Com.Ericmas001.Userbase.Models.dll" target="lib\net40\" />
+  </files>
+</package>

@@ -19,7 +19,7 @@ msbuild Src\Userbase.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=ms
 
 mkdir Build
 mkdir Build\lib
-mkdir Build\lib\net40
+mkdir Build\lib\net45
 mkdir Build\Scripts
 
 %nuget% pack "Userbase.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"

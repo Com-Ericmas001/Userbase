@@ -1,13 +1,21 @@
 using Com.Ericmas001.Userbase.Entities;
 using System.Data.Entity;
+using Microsoft.Practices.Unity;
+
 // ReSharper disable All
 
 namespace Com.Ericmas001.Userbase
 {
     public class UserbaseDbContext : DbContext, IUserbaseDbContext
     {
-        public UserbaseDbContext(string connString = "name=UserbaseDbContext")
+        public UserbaseDbContext(string connString)
             : base(connString)
+        {
+        }
+
+        [InjectionConstructor]
+        public UserbaseDbContext()
+            : base("name=UserbaseDbContext")
         {
         }
 

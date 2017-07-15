@@ -119,6 +119,10 @@
     <Compile Include="Util\Values.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Com.Ericmas001.Userbase.Models\Com.Ericmas001.Userbase.Models.csproj">
+      <Project>{d5935203-47de-4ee6-920f-1b03e48225b7}</Project>
+      <Name>Com.Ericmas001.Userbase.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Com.Ericmas001.Userbase\Com.Ericmas001.Userbase.csproj">
       <Project>{1ebd4868-86b9-42b5-8759-cbe227f70c65}</Project>
       <Name>Com.Ericmas001.Userbase</Name>
