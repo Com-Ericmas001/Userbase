@@ -16,6 +16,6 @@
         <dependencies />
     </metadata>
     <files>
-    	<file src="Src\Com.Ericmas001.Userbase.Models\bin\$configuration$\Com.Ericmas001.Userbase.Models.dll" target="lib\net40\" />
+    	<file src="Src\Com.Ericmas001.Userbase\bin\$configuration$\Com.Ericmas001.Userbase.Models.dll" target="lib\net40\" />
   </files>
 </package>
