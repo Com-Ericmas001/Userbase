@@ -14,8 +14,8 @@ if "%nuget%" == "" (
 	set nuget=nuget
 )
 
-call %NuGet% restore DataItems.sln -NonInteractive
-msbuild DataItems.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
+call %NuGet% restore Userbase.sln -NonInteractive
+msbuild Userbase.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
 
 mkdir Build
 mkdir Build\lib
