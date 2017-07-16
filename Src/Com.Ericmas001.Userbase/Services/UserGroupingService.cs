@@ -61,7 +61,9 @@ namespace Com.Ericmas001.Userbase.Services
             if (userToAdd == null || userToAdd.UserGroups.All(x => x.IdUserGroupType != idGroup))
                 return InvalidResponse;
 
-            userToAdd.UserGroups.Remove(userToAdd.UserGroups.Single(x => x.IdUserGroupType == idGroup));
+            var grp = userToAdd.UserGroups.Single(x => x.IdUserGroupType == idGroup);
+            userToAdd.UserGroups.Remove(grp);
+            m_DbContext.UserGroups.Remove(grp);
 
             m_DbContext.SaveChanges();
 
