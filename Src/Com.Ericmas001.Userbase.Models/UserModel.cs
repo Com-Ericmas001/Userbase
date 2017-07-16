@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Com.Ericmas001.Userbase.Models.Responses;
 
 namespace Com.Ericmas001.Userbase.Models
 {
@@ -7,6 +8,6 @@ namespace Com.Ericmas001.Userbase.Models
         public int IdUser { get; set; }
         public string Username { get; set; }
         public string DisplayName { get; set; }
-        public Dictionary<int,string> Groups { get; set; }
+        public IEnumerable<GroupInfo> Groups { get; set; }
     }
 }

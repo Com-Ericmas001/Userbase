@@ -99,18 +99,18 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.Equal(Values.IdUserSpongeBob, result.Users.First().IdUser);
             Assert.Equal(Values.UsernameSpongeBob, result.Users.First().Username);
             Assert.Equal(Values.DisplayNameSpongeBob, result.Users.First().DisplayName);
-            Assert.Equal(2, result.Users.First().Groups.Count);
-            Assert.Equal(Values.GroupAdminId, result.Users.First().Groups.First().Key);
-            Assert.Equal(Values.GroupAdminName, result.Users.First().Groups.First().Value);
-            Assert.Equal(Values.GroupDummyId, result.Users.First().Groups.Last().Key);
-            Assert.Equal(Values.GroupDummyName, result.Users.First().Groups.Last().Value);
+            Assert.Equal(2, result.Users.First().Groups.Count());
+            Assert.Equal(Values.GroupAdminId, result.Users.First().Groups.First().Id);
+            Assert.Equal(Values.GroupAdminName, result.Users.First().Groups.First().Name);
+            Assert.Equal(Values.GroupDummyId, result.Users.First().Groups.Last().Id);
+            Assert.Equal(Values.GroupDummyName, result.Users.First().Groups.Last().Name);
 
             Assert.Equal(Values.IdUserDora, result.Users.Last().IdUser);
             Assert.Equal(Values.UsernameDora, result.Users.Last().Username);
             Assert.Equal(Values.DisplayNameDora, result.Users.Last().DisplayName);
-            Assert.Equal(1, result.Users.Last().Groups.Count);
-            Assert.Equal(Values.GroupDummyId, result.Users.Last().Groups.First().Key);
-            Assert.Equal(Values.GroupDummyName, result.Users.Last().Groups.First().Value);
+            Assert.Equal(1, result.Users.Last().Groups.Count());
+            Assert.Equal(Values.GroupDummyId, result.Users.Last().Groups.First().Id);
+            Assert.Equal(Values.GroupDummyName, result.Users.Last().Groups.First().Name);
         }
     }
 }

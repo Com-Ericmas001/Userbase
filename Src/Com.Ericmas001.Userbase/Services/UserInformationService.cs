@@ -35,7 +35,7 @@ namespace Com.Ericmas001.Userbase.Services
                     IdUser = x.IdUser,
                     Username = x.Name,
                     DisplayName = x.UserProfile.DisplayName,
-                    Groups = x.UserGroups.ToDictionary(g => g.IdUserGroupType, g => g.UserGroupType.Name)
+                    Groups = x.UserGroups.Select(g => new GroupInfo { Id = g.IdUserGroupType, Name = g.UserGroupType.Name }).ToArray()
                 })
             };
         }
