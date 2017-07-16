@@ -52,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Services
             if (u == null)
                 return InvalidSummaryResponse;
 
-            return new UserSummaryResponse { DisplayName = u.UserProfile.DisplayName, Success = true, Token = connection.Token, Groups = u.UserGroups.ToDictionary(x => x.IdUserGroupType, x => x.UserGroupType.Name) };
+            return new UserSummaryResponse {DisplayName = u.UserProfile.DisplayName, Success = true, Token = connection.Token, Groups = u.UserGroups.Select(x => new GroupInfo {Id = x.IdUserGroupType, Name = x.UserGroupType.Name}).ToArray()};
         }
 
         private ListUsersResponse InvalidListResponse => new ListUsersResponse
@@ -67,7 +67,7 @@ namespace Com.Ericmas001.Userbase.Services
             Token = null,
             Success = false,
             DisplayName = null,
-            Groups = new Dictionary<int, string>()
+            Groups = new GroupInfo[0]
         };
     }
 }

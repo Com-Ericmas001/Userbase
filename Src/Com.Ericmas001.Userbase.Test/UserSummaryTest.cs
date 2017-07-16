@@ -113,9 +113,9 @@ namespace Com.Ericmas001.Userbase.Test
             Assert.NotNull(result.Token);
             Assert.True(tok.Expiration > originalTime);
             Assert.Equal(Values.DisplayNameDora, result.DisplayName);
-            Assert.Equal(1, result.Groups.Count);
-            Assert.Equal(Values.GroupDummyId, result.Groups.First().Key);
-            Assert.Equal(Values.GroupDummyName, result.Groups.First().Value);
+            Assert.Equal(1, result.Groups.Count());
+            Assert.Equal(Values.GroupDummyId, result.Groups.First().Id);
+            Assert.Equal(Values.GroupDummyName, result.Groups.First().Name);
         }
     }
 }
