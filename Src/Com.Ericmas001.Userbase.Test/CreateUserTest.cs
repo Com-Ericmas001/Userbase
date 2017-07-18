@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -14,9 +16,8 @@ namespace Com.Ericmas001.Userbase.Test
             {
                 model.Users.Add(Values.UserDora);
             });
-
             // Act
-            var result = util.System.CreateUser(Values.UnregisteredDora);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(Values.UnregisteredDora);
             
             // Assert
             Assert.Null(result.Token);
@@ -35,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             userToRegister.Username = Values.UsernameTooShort;
 
             // Act
-            var result = util.System.CreateUser(userToRegister);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -54,7 +55,7 @@ namespace Com.Ericmas001.Userbase.Test
             userToRegister.Profile.DisplayName = Values.DisplayNameTooShort;
 
             // Act
-            var result = util.System.CreateUser(userToRegister);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -73,7 +74,7 @@ namespace Com.Ericmas001.Userbase.Test
             userToRegister.Authentication.Password = Values.PasswordInvalidChar;
 
             // Act
-            var result = util.System.CreateUser(userToRegister);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -92,7 +93,7 @@ namespace Com.Ericmas001.Userbase.Test
             userToRegister.Authentication.Email = Values.EmailNoArobas;
 
             // Act
-            var result = util.System.CreateUser(userToRegister);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -111,7 +112,7 @@ namespace Com.Ericmas001.Userbase.Test
             userToRegister.Authentication.Email = Values.EmailSpongeBob;
 
             // Act
-            var result = util.System.CreateUser(userToRegister);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
             Assert.Null(result.Token);
@@ -127,7 +128,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.CreateUser(Values.UnregisteredDora);
+            var result = util.Container.Resolve<IUserManagingService>().CreateUser(Values.UnregisteredDora);
 
             // Assert
             Assert.NotNull(result.Token);

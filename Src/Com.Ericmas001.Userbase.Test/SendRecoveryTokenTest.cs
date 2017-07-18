@@ -5,6 +5,7 @@ using System.Linq;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -29,7 +30,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate { });
 
             // Act
-            var result = util.System.SendRecoveryToken(Values.UsernameSpongeBob);
+            var result = util.Container.Resolve<IUserRecoveryService>().SendRecoveryToken(Values.UsernameSpongeBob);
 
             // Assert
             Assert.False(result);
@@ -45,7 +46,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.SendRecoveryToken(Values.UsernameSpongeBob);
+            var result = util.Container.Resolve<IUserRecoveryService>().SendRecoveryToken(Values.UsernameSpongeBob);
 
             // Assert
             Assert.True(result);

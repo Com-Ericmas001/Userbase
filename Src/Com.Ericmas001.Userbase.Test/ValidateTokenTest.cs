@@ -1,5 +1,7 @@
 ﻿using System;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -13,7 +15,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate { });
 
             // Act
-            var result = util.System.ValidateToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
             Assert.False(result.Success);
@@ -29,7 +31,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ValidateToken(Values.UsernameDora, Values.ValidToken.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameDora, Values.ValidToken.Token);
 
             // Assert
             Assert.False(result.Success);
@@ -44,7 +46,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ValidateToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
             Assert.False(result.Success);
@@ -61,7 +63,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ValidateToken(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.False(result.Success);
@@ -79,7 +81,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ValidateToken(Values.UsernameSpongeBob, tok.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
             Assert.False(result.Success);
@@ -98,7 +100,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ValidateToken(Values.UsernameSpongeBob, tok.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
             Assert.True(result.Success);

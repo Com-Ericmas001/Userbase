@@ -1,6 +1,8 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Models.Requests;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -14,7 +16,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate{});
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = Guid.NewGuid(),
@@ -35,7 +37,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = Guid.NewGuid(),
@@ -58,7 +60,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = Guid.NewGuid(),
@@ -82,7 +84,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,
@@ -109,7 +111,7 @@ namespace Com.Ericmas001.Userbase.Test
             creds.Password = Values.PasswordInvalidChar;
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,
@@ -136,7 +138,7 @@ namespace Com.Ericmas001.Userbase.Test
             creds.Email = Values.EmailNoArobas;
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,
@@ -164,7 +166,7 @@ namespace Com.Ericmas001.Userbase.Test
             creds.Email = Values.EmailDora;
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,
@@ -190,7 +192,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,
@@ -221,7 +223,7 @@ namespace Com.Ericmas001.Userbase.Test
             creds.Password = String.Empty;
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,
@@ -252,7 +254,7 @@ namespace Com.Ericmas001.Userbase.Test
             creds.Email = String.Empty;
 
             // Act
-            var result = util.System.ModifyCredentials(new ModifyCredentialsRequest
+            var result = util.Container.Resolve<IUserManagingService>().ModifyCredentials(new ModifyCredentialsRequest
             {
                 Username = Values.UsernameSpongeBob,
                 Token = tok.Token,

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -14,7 +16,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate { });
 
             // Act
-            var result = util.System.UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
+            var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
             Assert.Null(result.Token);
@@ -30,7 +32,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
+            var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
             Assert.Null(result.Token);
@@ -48,7 +50,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
+            var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
             Assert.Null(result.Token);
@@ -67,7 +69,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
+            var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
             Assert.Null(result.Token);
@@ -86,7 +88,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
+            var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
             Assert.Null(result.Token);
@@ -107,7 +109,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
+            var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
             Assert.NotNull(result.Token);

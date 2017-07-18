@@ -1,4 +1,6 @@
-﻿using Com.Ericmas001.Userbase.Test.Util;
+﻿using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
+using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -12,7 +14,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate{});
 
             // Act
-            var result = util.System.IdFromUsername(Values.UsernameSpongeBob);
+            var result = util.Container.Resolve<IUserObtentionService>().FromUsername(Values.UsernameSpongeBob);
 
             // Assert
             Assert.Equal(0, result);
@@ -28,7 +30,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.IdFromUsername(Values.UsernameDora);
+            var result = util.Container.Resolve<IUserObtentionService>().FromUsername(Values.UsernameDora);
 
             // Assert
             Assert.Equal(0, result);
@@ -43,7 +45,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.IdFromUsername(Values.UsernameSpongeBob);
+            var result = util.Container.Resolve<IUserObtentionService>().FromUsername(Values.UsernameSpongeBob);
 
             // Assert
             Assert.NotEqual(0, result);

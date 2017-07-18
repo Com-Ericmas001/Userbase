@@ -10,21 +10,21 @@ namespace Com.Ericmas001.Userbase.Test.Util
 {
     class UserbaseSystemUtil
     {
-        public UserbaseSystem System { get; }
+        public IUnityContainer Container { get; }
         public IUserbaseDbContext Model { get; }
         public SendRecoveryTokenTest.DummyEmailSender EmailSender { get; }
         public UserbaseSystemUtil(Action<IUserbaseDbContext> initDb)
         {
-            IUnityContainer container = new UnityContainer();
-            System = new UserbaseSystem(container, Values.Salt);
+            Container = new UnityContainer();
+            UserbaseUnityConfig.RegisterTypes(Container, Values.Salt);
 
             Model = new DummyUserbaseDbContext();
             initDb(Model);
             Model.SaveChanges();
-            container.RegisterInstance(Model);
+            Container.RegisterInstance(Model);
 
             EmailSender = new SendRecoveryTokenTest.DummyEmailSender();
-            container.RegisterInstance<ISendEmailService>(EmailSender);
+            Container.RegisterInstance<ISendEmailService>(EmailSender);
         }
     }
 }

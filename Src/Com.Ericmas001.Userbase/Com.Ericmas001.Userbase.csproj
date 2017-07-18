@@ -87,7 +87,7 @@
     <Compile Include="Services\UserObtentionService.cs" />
     <Compile Include="IUserbaseDbContext.cs" />
     <Compile Include="UserbaseDbContext.cs" />
-    <Compile Include="UserbaseSystem.cs" />
+    <Compile Include="UserbaseUnityConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Entities\UserRecoveryToken.cs" />

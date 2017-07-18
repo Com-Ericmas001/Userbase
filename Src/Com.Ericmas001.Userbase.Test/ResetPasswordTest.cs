@@ -1,5 +1,7 @@
 ﻿using System;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -13,7 +15,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate { });
 
             // Act
-            var result = util.System.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
+            var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);
@@ -29,7 +31,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
+            var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);
@@ -47,7 +49,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
+            var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);
@@ -66,7 +68,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
+            var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.Null(result.Token);
@@ -85,7 +87,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordInvalidChar);
+            var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordInvalidChar);
 
             // Assert
             Assert.Null(result.Token);
@@ -106,7 +108,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
+            var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
 
             // Assert
             Assert.NotNull(result.Token);

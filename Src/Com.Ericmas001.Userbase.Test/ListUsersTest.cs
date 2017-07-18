@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -14,7 +16,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate { });
 
             // Act
-            var result = util.System.ListUsers(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.Null(result.Token);
@@ -30,7 +32,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ListUsers(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.Null(result.Token);
@@ -48,7 +50,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ListUsers(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.Null(result.Token);
@@ -67,7 +69,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.ListUsers(Values.UsernameSpongeBob, tok.Token);
+            var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
             Assert.Null(result.Token);
@@ -89,7 +91,7 @@ namespace Com.Ericmas001.Userbase.Test
 
 
             // Act
-            var result = util.System.ListUsers(Values.UsernameSpongeBob, tok.Token);
+            var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
             Assert.NotNull(result.Token);

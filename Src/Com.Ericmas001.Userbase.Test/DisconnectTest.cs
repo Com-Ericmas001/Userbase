@@ -1,5 +1,7 @@
 ﻿using System;
+using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -13,7 +15,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate{});
 
             // Act
-            var result = util.System.Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.False(result);
@@ -28,7 +30,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.False(result);
@@ -45,7 +47,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
+            var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
             Assert.False(result);
@@ -63,7 +65,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.Disconnect(Values.UsernameSpongeBob, tok.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
             Assert.False(result);
@@ -82,7 +84,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.Disconnect(Values.UsernameSpongeBob, tok.Token);
+            var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
             Assert.True(result);

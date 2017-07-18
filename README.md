@@ -4,7 +4,7 @@
 
 DLL for managing user using SQL Server, Entity Framework and Unity Containers
 
-###Current Version: 0.6.6 *(2017-07-16)*
+###Current Version: 0.7.0 *(2017-07-17)*
 <table align="center" width="100%">
     <tbody>
         <tr>

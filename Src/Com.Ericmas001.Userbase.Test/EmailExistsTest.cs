@@ -1,4 +1,6 @@
-﻿using Com.Ericmas001.Userbase.Test.Util;
+﻿using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
+using Com.Ericmas001.Userbase.Test.Util;
+using Microsoft.Practices.Unity;
 using Xunit;
 
 namespace Com.Ericmas001.Userbase.Test
@@ -12,7 +14,7 @@ namespace Com.Ericmas001.Userbase.Test
             var util = new UserbaseSystemUtil(delegate { });
 
             // Act
-            var result = util.System.EmailExists(Values.EmailSpongeBob);
+            var result = util.Container.Resolve<IUserObtentionService>().EmailExists(Values.EmailSpongeBob);
 
             // Assert
             Assert.False(result);
@@ -28,7 +30,7 @@ namespace Com.Ericmas001.Userbase.Test
             });
 
             // Act
-            var result = util.System.EmailExists(Values.EmailDora);
+            var result = util.Container.Resolve<IUserObtentionService>().EmailExists(Values.EmailDora);
 
             // Assert
             Assert.False(result);
@@ -44,7 +46,7 @@ namespace Com.Ericmas001.Userbase.Test
 
 
             // Act
-            var result = util.System.EmailExists(Values.EmailSpongeBob);
+            var result = util.Container.Resolve<IUserObtentionService>().EmailExists(Values.EmailSpongeBob);
 
             // Assert
             Assert.True(result);
