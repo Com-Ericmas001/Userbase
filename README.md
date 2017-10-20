@@ -28,7 +28,7 @@ DLL for managing user using SQL Server, Entity Framework and Unity Containers
             <a href="https://www.nuget.org/packages/Com.Ericmas001.Userbase.Models/" target="_blank">
             Com.Ericmas001.Userbase.Models <br />
             <img src="https://raw.githubusercontent.com/NuGet/Home/master/resources/nuget.png" alt="NuGet" width=150 />
-            </a>
+            </a> <br />
 			(Included in Userbase)
             </td>
             <td align="left">
