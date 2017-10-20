@@ -1,8 +1,8 @@
-﻿using System;
-using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
+﻿using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Services;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
+using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
 
 namespace Com.Ericmas001.Userbase
 {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 

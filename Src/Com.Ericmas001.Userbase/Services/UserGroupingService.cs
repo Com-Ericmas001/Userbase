@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Com.Ericmas001.Userbase.Entities;
-using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.Requests;
 using Com.Ericmas001.Userbase.Models.Responses;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
