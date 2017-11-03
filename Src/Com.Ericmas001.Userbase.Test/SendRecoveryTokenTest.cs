@@ -5,6 +5,7 @@ using System.Linq;
 using Com.Ericmas001.Userbase.Models;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -35,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().SendRecoveryToken(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void ValidUsernameReturnsTrue()
@@ -51,17 +52,17 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().SendRecoveryToken(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.True(result);
-            Assert.Equal(1, user.UserRecoveryTokens.Count);
+            result.Should().BeTrue();
+            user.UserRecoveryTokens.Count.Should().Be(1);
             var token = user.UserRecoveryTokens.Single();
 
-            Assert.Equal(1, util.EmailSender.TokenSent.Count);
+            util.EmailSender.TokenSent.Count.Should().Be(1);
             var sended = util.EmailSender.TokenSent.Single();
 
-            Assert.Equal(token.Token, sended.Item1.Id);
-            Assert.Equal(token.Expiration, sended.Item1.ValidUntil);
-            Assert.Equal(user.Name, sended.Item2);
-            Assert.Equal(user.UserAuthentication.RecoveryEmail, sended.Item3);
+            sended.Item1.Id.Should().Be(token.Token);
+            sended.Item1.ValidUntil.Should().Be(token.Expiration);
+            sended.Item2.Should().Be(user.Name);
+            sended.Item3.Should().Be(user.UserAuthentication.RecoveryEmail);
         }
     }
 }

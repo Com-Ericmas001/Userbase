@@ -1,6 +1,7 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().Deactivate(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().Deactivate(Values.UsernameDora, Values.ValidToken.Token);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserNoTokensReturnsFalse()
@@ -51,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().Deactivate(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserInvalidTokenReturnsFalse()
@@ -68,7 +69,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().Deactivate(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserExpiredTokenReturnsFalse()
@@ -86,7 +87,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().Deactivate(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserValidTokenReturnsTrue()
@@ -104,8 +105,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().Deactivate(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.True(result);
-            Assert.False(u.Active);
+            result.Should().BeTrue();
+            u.Active.Should().BeFalse();
         }
     }
 }

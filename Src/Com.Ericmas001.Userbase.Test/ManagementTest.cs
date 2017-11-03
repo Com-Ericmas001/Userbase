@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -27,7 +28,7 @@ namespace Com.Ericmas001.Userbase.Test
             util.Container.Resolve<IManagementService>().PurgeConnectionTokens();
 
             // Assert
-            Assert.Equal(validToken, util.Model.UserTokens.Single());
+            util.Model.UserTokens.Single().Should().Be(validToken);
         }
 
         [Fact]
@@ -46,7 +47,7 @@ namespace Com.Ericmas001.Userbase.Test
             util.Container.Resolve<IManagementService>().PurgeRecoveryTokens();
 
             // Assert
-            Assert.Equal(validRecoveryToken, util.Model.UserRecoveryTokens.Single());
+            util.Model.UserRecoveryTokens.Single().Should().Be(validRecoveryToken);
         }
 
         [Fact]
@@ -66,7 +67,7 @@ namespace Com.Ericmas001.Userbase.Test
             util.Container.Resolve<IManagementService>().PurgeUsers();
 
             // Assert
-            Assert.Equal(activeUser, util.Model.Users.Single());
+            util.Model.Users.Single().Should().Be(activeUser);
         }
     }
 }

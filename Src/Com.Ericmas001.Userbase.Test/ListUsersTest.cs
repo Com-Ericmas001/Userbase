@@ -2,6 +2,7 @@
 using System.Linq;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -21,8 +22,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButNoTokenReturnsFalse()
@@ -37,8 +38,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
@@ -55,8 +56,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
@@ -74,8 +75,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameValidNotExpiredToken()
@@ -96,25 +97,25 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().ListAllUsers(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.NotNull(result.Token);
-            Assert.True(tok.Expiration > originalTime);
-            Assert.Equal(2, result.Users.Count());
+            result.Token.Should().NotBeNull();
+            tok.Expiration.Should().BeAfter(originalTime);
+            result.Users.Count().Should().Be(2);
 
-            Assert.Equal(Values.IdUserSpongeBob, result.Users.First().IdUser);
-            Assert.Equal(Values.UsernameSpongeBob, result.Users.First().Username);
-            Assert.Equal(Values.DisplayNameSpongeBob, result.Users.First().DisplayName);
-            Assert.Equal(2, result.Users.First().Groups.Count());
-            Assert.Equal(Values.GroupAdminId, result.Users.First().Groups.First().Id);
-            Assert.Equal(Values.GroupAdminName, result.Users.First().Groups.First().Name);
-            Assert.Equal(Values.GroupDummyId, result.Users.First().Groups.Last().Id);
-            Assert.Equal(Values.GroupDummyName, result.Users.First().Groups.Last().Name);
+            result.Users.First().IdUser.Should().Be(Values.IdUserSpongeBob);
+            result.Users.First().Username.Should().Be(Values.UsernameSpongeBob);
+            result.Users.First().DisplayName.Should().Be(Values.DisplayNameSpongeBob);
+            result.Users.First().Groups.Count().Should().Be(2);
+            result.Users.First().Groups.First().Id.Should().Be(Values.GroupAdminId);
+            result.Users.First().Groups.First().Name.Should().Be(Values.GroupAdminName);
+            result.Users.First().Groups.Last().Id.Should().Be(Values.GroupDummyId);
+            result.Users.First().Groups.Last().Name.Should().Be(Values.GroupDummyName);
 
-            Assert.Equal(Values.IdUserDora, result.Users.Last().IdUser);
-            Assert.Equal(Values.UsernameDora, result.Users.Last().Username);
-            Assert.Equal(Values.DisplayNameDora, result.Users.Last().DisplayName);
-            Assert.Equal(1, result.Users.Last().Groups.Count());
-            Assert.Equal(Values.GroupDummyId, result.Users.Last().Groups.First().Id);
-            Assert.Equal(Values.GroupDummyName, result.Users.Last().Groups.First().Name);
+            result.Users.Last().IdUser.Should().Be(Values.IdUserDora);
+            result.Users.Last().Username.Should().Be(Values.UsernameDora);
+            result.Users.Last().DisplayName.Should().Be(Values.DisplayNameDora);
+            result.Users.Last().Groups.Count().Should().Be(1);
+            result.Users.Last().Groups.First().Id.Should().Be(Values.GroupDummyId);
+            result.Users.Last().Groups.First().Name.Should().Be(Values.GroupDummyName);
         }
     }
 }

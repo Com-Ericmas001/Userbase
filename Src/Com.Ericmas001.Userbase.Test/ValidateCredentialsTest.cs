@@ -1,5 +1,6 @@
 ﻿using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -19,7 +20,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithPassword(Values.UsernameSpongeBob, Values.PasswordSpongeBob);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithPassword(Values.UsernameDora, Values.PasswordDora);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserWrongPasswordReturnsFalse()
@@ -50,7 +51,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithPassword(Values.UsernameSpongeBob, Values.PasswordDumb);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserValidPasswordReturnsTrue()
@@ -65,7 +66,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithPassword(Values.UsernameSpongeBob, Values.PasswordSpongeBob);
 
             // Assert
-            Assert.True(result.Success);
+            result.Success.Should().BeTrue();
         }
     }
 }

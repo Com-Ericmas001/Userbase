@@ -2,6 +2,7 @@
 using System.Linq;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -21,8 +22,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButNoTokenReturnsFalse()
@@ -37,8 +38,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
@@ -55,8 +56,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, Guid.NewGuid(), Values.UsernameDora);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
@@ -74,8 +75,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameValidNotExpiredTokenButInvalidRequestedUsernameReturnsFalse()
@@ -93,8 +94,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameValidNotExpiredToken()
@@ -114,12 +115,12 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserInformationService>().UserSummary(Values.UsernameSpongeBob, tok.Token, Values.UsernameDora);
 
             // Assert
-            Assert.NotNull(result.Token);
-            Assert.True(tok.Expiration > originalTime);
-            Assert.Equal(Values.DisplayNameDora, result.DisplayName);
-            Assert.Equal(1, result.Groups.Count());
-            Assert.Equal(Values.GroupDummyId, result.Groups.First().Id);
-            Assert.Equal(Values.GroupDummyName, result.Groups.First().Name);
+            result.Token.Should().NotBeNull();
+            tok.Expiration.Should().BeAfter(originalTime);
+            result.DisplayName.Should().Be(Values.DisplayNameDora);
+            result.Groups.Count().Should().Be(1);
+            result.Groups.First().Id.Should().Be(Values.GroupDummyId);
+            result.Groups.First().Name.Should().Be(Values.GroupDummyName);
         }
     }
 }

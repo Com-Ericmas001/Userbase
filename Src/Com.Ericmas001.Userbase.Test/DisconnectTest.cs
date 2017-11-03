@@ -1,6 +1,7 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButNoTokenReturnsFalse()
@@ -35,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButInvalidTokenReturnsFalse()
@@ -52,7 +53,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameButExpiredTokenReturnsFalse()
@@ -70,7 +71,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUsernameValidNotExpiredToken()
@@ -89,8 +90,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().Disconnect(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.True(result);
-            Assert.True(tok.Expiration < DateTime.Now);
+            result.Should().BeTrue();
+            tok.Expiration.Should().BeBefore(DateTime.Now);
         }
     }
 }

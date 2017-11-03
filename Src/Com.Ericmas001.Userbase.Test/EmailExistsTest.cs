@@ -1,5 +1,6 @@
 ﻿using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -19,7 +20,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserObtentionService>().EmailExists(Values.EmailSpongeBob);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserObtentionService>().EmailExists(Values.EmailDora);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserReturnsTrue()
@@ -51,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserObtentionService>().EmailExists(Values.EmailSpongeBob);
 
             // Assert
-            Assert.True(result);
+            result.Should().BeTrue();
         }
     }
 }

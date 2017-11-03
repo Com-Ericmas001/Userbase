@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -21,8 +22,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(Values.UnregisteredDora);
             
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithNotFoundUsernameButInvalidUsernameReturnsNull()
@@ -40,8 +41,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithNotFoundUsernameButInvalidDisplayNameReturnsNull()
@@ -59,8 +60,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithNotFoundUsernameButInvalidPasswordReturnsNull()
@@ -78,8 +79,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithNotFoundUsernameButInvalidEmailReturnsNull()
@@ -97,8 +98,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithNotFoundUsernameButExistingEmailReturnsNull()
@@ -116,8 +117,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(userToRegister);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithNotFoundUsername()
@@ -132,15 +133,17 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserManagingService>().CreateUser(Values.UnregisteredDora);
 
             // Assert
-            Assert.NotNull(result.Token);
-            Assert.True(result.Success);
-            Assert.Equal(2, util.Model.Users.Count());
-            var dora = util.Model.Users.SingleOrDefault(x => x.Name == Values.UsernameDora);
-            Assert.NotNull(dora);
-            Assert.Equal(Values.UsernameDora, dora.Name);
-            Assert.Equal(Values.DisplayNameDora, dora.UserProfile.DisplayName);
-            Assert.Equal(Values.EmailDora, dora.UserAuthentication.RecoveryEmail);
-            Assert.True(Values.VerifyPassword(Values.PasswordDora, dora));
+            result.Token.Should().NotBeNull();
+            result.Success.Should().BeTrue();
+            util.Model.Users.Should().NotBeEmpty().And.HaveCount(2);
+
+            var dora = util.Model.Users.Single(x => x.Name == Values.UsernameDora);
+
+            dora.Name.Should().BeEquivalentTo(Values.UsernameDora);
+            dora.UserProfile.DisplayName.Should().BeEquivalentTo(Values.DisplayNameDora);
+            dora.UserAuthentication.RecoveryEmail.Should().BeEquivalentTo(Values.EmailDora);
+
+            Values.VerifyPassword(Values.PasswordDora, dora).Should().BeTrue();
         }
     }
 }

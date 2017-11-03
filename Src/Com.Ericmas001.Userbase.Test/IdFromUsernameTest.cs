@@ -1,5 +1,6 @@
 ﻿using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -19,7 +20,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserObtentionService>().FromUsername(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.Equal(0, result);
+            result.Should().Be(0);
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserObtentionService>().FromUsername(Values.UsernameDora);
 
             // Assert
-            Assert.Equal(0, result);
+            result.Should().Be(0);
         }
         [Fact]
         public void WithValidUserReturnsId()
@@ -50,8 +51,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserObtentionService>().FromUsername(Values.UsernameSpongeBob);
 
             // Assert
-            Assert.NotEqual(0, result);
-            Assert.Equal(Values.UserSpongeBob.IdUser, result);
+            result.Should().Be(Values.UserSpongeBob.IdUser);
         }
     }
 }

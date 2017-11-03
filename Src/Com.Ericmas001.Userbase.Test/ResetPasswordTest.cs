@@ -1,6 +1,7 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -20,8 +21,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void ValidUsernameButNoTokenReturnsFalse()
@@ -36,8 +37,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void ValidUsernameButInvalidTokenReturnsFalse()
@@ -54,8 +55,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, Guid.NewGuid().ToString(), Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void ValidUsernameButExpiredTokenReturnsFalse()
@@ -73,8 +74,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void ValidUsernameValidNotExpiredTokenInvalidNewPasswordReturnsFalse()
@@ -92,8 +93,8 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordInvalidChar);
 
             // Assert
-            Assert.Null(result.Token);
-            Assert.False(result.Success);
+            result.Token.Should().BeNull();
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void ValidUsernameValidNotExpiredToken()
@@ -113,9 +114,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserRecoveryService>().ResetPassword(Values.UsernameSpongeBob, tok.Token, Values.PasswordSpongeBobNewOne);
 
             // Assert
-            Assert.NotNull(result.Token);
-            Assert.True(tok.Expiration < originalTime);
-            Assert.True(Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u));
+            result.Token.Should().NotBeNull();
+            tok.Expiration.Should().BeBefore(originalTime);
+            Values.VerifyPassword(Values.PasswordSpongeBobNewOne, u).Should().BeTrue();
         }
     }
 }

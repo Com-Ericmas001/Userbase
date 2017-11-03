@@ -1,6 +1,7 @@
 ﻿using System;
 using Com.Ericmas001.Userbase.Models.ServiceInterfaces;
 using Com.Ericmas001.Userbase.Test.Util;
+using FluentAssertions;
 using Unity;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameDora, Values.ValidToken.Token);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserNoTokensReturnsFalse()
@@ -51,7 +52,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, Values.ValidToken.Token);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserInvalidTokenReturnsFalse()
@@ -68,7 +69,7 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, Guid.NewGuid());
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserExpiredTokenReturnsFalse()
@@ -86,14 +87,14 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.False(result.Success);
+            result.Success.Should().BeFalse();
         }
         [Fact]
         public void WithValidUserValidTokenReturnsTrue()
         {
             // Arrange
             var tok = Values.ValidToken;
-            var expiration = tok.Expiration;
+            var originalExpiration = tok.Expiration;
             var util = new UserbaseSystemUtil(delegate (IUserbaseDbContext model)
             {
                 var u = Values.UserSpongeBob;
@@ -105,9 +106,9 @@ namespace Com.Ericmas001.Userbase.Test
             var result = util.Container.Resolve<IUserConnectionService>().ConnectWithToken(Values.UsernameSpongeBob, tok.Token);
 
             // Assert
-            Assert.True(result.Success);
-            Assert.Equal(tok.Token, result.Token.Id);
-            Assert.True(expiration < result.Token.ValidUntil);
+            result.Success.Should().BeTrue();
+            result.Token.Id.Should().Be(tok.Token);
+            result.Token.ValidUntil.Should().BeAfter(originalExpiration);
         }
     }
 }
